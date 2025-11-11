@@ -1,0 +1,240 @@
+entity_set_models:
+- entity_set_id: codealltag
+  corpus_name: CodE Alltag
+  corpus_doctypes:
+  - Email
+  corpus_description: CodE Alltag is a German-language email corpus
+  corpus_version: '2022'
+  corpus_languages:
+  - German
+  corpus_links:
+  - https://github.com/codealltag
+  entity_set_labels:
+  - id: CONTACT
+    description: >-
+      CONTACT encompasses EmailAddress (EMAIL), PhoneNumber (PHONE)
+      and URL (URL)
+    background_color: "#FF99FF"
+    border_color: "#CC7ACC"
+    fine_grained:
+    - id: EMAIL
+      description: Email addresses
+    - id: PHONE
+      description: Phone numbers, including fax numbers
+    - id: URL
+      description: URLs, as well as other forms of domain names
+  - id: DATE
+    description: >-
+      Date (DATE) includes all sorts of date descriptions, such as date of
+      birth, marriage, or death, starting and ending dates of contracts, etc.
+    background_color: "#FF8A80"
+    border_color: "#FF5252"
+    fine_grained:
+    - id: DATE
+      description: >-
+        Date includes all sorts of date descriptions, such as date of
+        birth, marriage, or death, starting and ending dates of contracts, etc.
+  - id: ID
+    description: >-
+      Identifier (ID) includes UniqueFormalIdentifier (UFID) and all kinds of
+      invented UserNames (USER) for IT systems and platforms
+    background_color: "#B2FF59"
+    border_color: "#76FF03"
+    fine_grained:
+    - id: UFID
+      description: >-
+        User-provided supplementary artificial name for all kinds of technical
+        appliances to represent persons (students, customers, employees,
+        members of social security systems (SSN), authors (ORCHID), etc.),
+        computer systems (IP addresses), or other artifacts (e.g., IBANs, DOIs)
+    - id: USER
+      description: >-
+        All kinds of invented UserNames for IT systems and platforms
+  - id: LOCATION
+    description: >-
+      The Location (LOCATION) category subsumes StreetName (STREET),
+      StreetNumber (STREETNO), ZipCode (ZIP), and CityName (CITY)
+    background_color: "#42A5F5"
+    border_color: "#2196F3"
+    fine_grained:
+    - id: CITY
+      description: >-
+        Stands for villages, towns, cities, larger metropolitan areas and
+        regions smaller than a state
+    - id: STREET
+      description: Street names
+    - id: STREETNO
+      description: Street numbers, house numbers
+    - id: ZIP
+      description: Zip codes
+  - id: NAME
+    description: >-
+      The Name (NAME) label represent linguistic references to human entities,
+      encompassing individual male and female names as well as collective
+      family names.
+    background_color: "#EEFF41"
+    border_color: "#C6FF00"
+    fine_grained:
+    - id: FAMILY
+      description: Family names
+    - id: FEMALE
+      description: Female given names
+    - id: MALE
+      description: Male given names
+  - id: ORGANIZATION
+    description: >-
+      The Organization (ORGANIZATION) category includes all types of legal
+      actors such as companies, brands, institutions and agencies, etc.
+    background_color: "#B388FF"
+    border_color: "#7C4DFF"
+    fine_grained:
+    - id: ORG
+      description: >-
+        The Organization (ORG) category includes all types of legal actors
+        such as companies, brands, institutions and agencies, etc.
+  sample_texts: []
+  supported_models_root_dir:
+  - models
+  - codealltag
+  supported_models:
+  - model_id: xlm-roberta-large
+    model_name: facebookai/xlm-roberta-large
+    model_description: >-
+      The XLM-RoBERTa large model fine-tuned on 105,000 email texts
+      (train-split of 175,000 email texts) of CodE Alltag corpus for Named
+      Entity Recognition (NER) downstream task.
+    model_links:
+    - https://github.com/calgo-lab/redakt-codealltag
+    model_type: NER
+    model_type_description: Named Entity Recognition
+    model_loading_strategy: local_disk_storage
+    model_directory_name:
+    - xlm-roberta-large
+    model_version: '1.0'
+    model_impl: SequenceTagger
+    model_system_requirements:
+    - flair==0.15.1
+- entity_set_id: ontonotes5
+  corpus_name: OntoNotes Release 5.0
+  corpus_doctypes:
+  - News
+  - Blog
+  - Dialogue
+  corpus_description: A large multilingual richly-annotated corpus
+  corpus_version: '2012'
+  corpus_languages:
+  - English
+  - Chinese
+  - Arabic
+  corpus_links:
+  - https://catalog.ldc.upenn.edu/LDC2013T19
+  - https://catalog.ldc.upenn.edu/docs/LDC2013T19/OntoNotes-Release-5.0.pdf
+  entity_set_labels:
+  - id: CARDINAL
+    description: Numerals that do not fall under another type
+    fine_grained:
+    - id: CARDINAL
+      description: Numerals that do not fall under another type
+  - id: DATE
+    description: Absolute or relative dates or periods
+    fine_grained:
+    - id: DATE
+      description: Absolute or relative dates or periods
+  - id: EVENT
+    description: Named hurricanes, battles, wars, sports events, etc.
+    fine_grained:
+    - id: EVENT
+      description: Named hurricanes, battles, wars, sports events, etc.
+  - id: FAC
+    description: Buildings, airports, highways, bridges, etc.
+    fine_grained:
+    - id: FAC
+      description: Buildings, airports, highways, bridges, etc.
+  - id: GPE
+    description: The Geo-Political Entity (GPE) category includes countries, cities, and states.
+    fine_grained:
+    - id: GPE
+      description: The Geo-Political Entity (GPE) category includes countries, cities, and states.
+  - id: LANGUAGE
+    description: Any named language
+    fine_grained:
+    - id: LANGUAGE
+      description: Any named language
+  - id: LAW
+    description: Named documents made into laws
+    fine_grained:
+    - id: LAW
+      description: Named documents made into laws
+  - id: LOCATION
+    description: Non-GPE locations, mountain ranges, bodies of water
+    fine_grained:
+    - id: LOCATION
+      description: Non-GPE locations, mountain ranges, bodies of water
+  - id: MONEY
+    description: Monetary values, including unit
+    fine_grained:
+    - id: MONEY
+      description: Monetary values, including unit
+  - id: NORP
+    description: Nationalities or religious or political groups
+    fine_grained:
+    - id: NORP
+      description: Nationalities or religious or political groups
+  - id: ORDINAL
+    description: "First, second, etc."
+    fine_grained:
+    - id: ORDINAL
+      description: "First, second, etc."
+  - id: ORG
+    description: Companies, agencies, institutions, etc.
+    fine_grained:
+    - id: ORG
+      description: Companies, agencies, institutions, etc.
+  - id: PERCENT
+    description: Percentage (including "%")
+    fine_grained:
+    - id: PERCENT
+      description: Percentage (including "%")
+  - id: PERSON
+    description: People, including fictional
+    fine_grained:
+    - id: PERSON
+      description: People, including fictional
+  - id: PRODUCT
+    description: Vehicles, weapons, foods, etc. (not services)
+    fine_grained:
+    - id: PRODUCT
+      description: Vehicles, weapons, foods, etc. (not services)
+  - id: QUANTITY
+    description: Measurements, as of weight or distance
+    fine_grained:
+    - id: QUANTITY
+      description: Measurements, as of weight or distance
+  - id: TIME
+    description: Times smaller than a day
+    fine_grained:
+    - id: TIME
+      description: Times smaller than a day
+  - id: WORK_OF_ART
+    description: Titles of books, songs, etc.
+    fine_grained:
+    - id: WORK_OF_ART
+      description: Titles of books, songs, etc.
+  sample_texts: []
+  supported_models_root_dir: []
+  supported_models:
+  - model_id: ner-english-ontonotes-large
+    model_name: flair/ner-english-ontonotes-large
+    model_description: >-
+      This is the large 18-class NER model for English that ships with Flair.
+      Based on document-level XLM-R embeddings and FLERT.
+    model_links:
+    - https://huggingface.co/flair/ner-english-ontonotes-large
+    model_type: NER
+    model_type_description: Named Entity Recognition
+    model_loading_strategy: huggingface_hub
+    model_directory_name: []
+    model_version: '1.0'
+    model_impl: SequenceTagger
+    model_system_requirements:
+    - flair==0.15.1

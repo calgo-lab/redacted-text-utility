@@ -1,0 +1,2762 @@
+[
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 33,
+    "end": 36,
+    "token": "one",
+    "row_idx": 2
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 269,
+    "end": 281,
+    "token": "three months",
+    "row_idx": 2
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 88,
+    "end": 97,
+    "token": "last year",
+    "row_idx": 3
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 152,
+    "end": 157,
+    "token": "first",
+    "row_idx": 4
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 52,
+    "end": 55,
+    "token": "dax",
+    "row_idx": 7
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 75,
+    "end": 78,
+    "token": "dax",
+    "row_idx": 7
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 77,
+    "end": 88,
+    "token": "two hundred",
+    "row_idx": 11
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 94,
+    "end": 100,
+    "token": "ninety",
+    "row_idx": 11
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 48,
+    "end": 71,
+    "token": "five hundred milligrams",
+    "row_idx": 14
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 147,
+    "end": 170,
+    "token": "five hundred milligrams",
+    "row_idx": 14
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 153,
+    "end": 158,
+    "token": "today",
+    "row_idx": 17
+  },
+  {
+    "token_id": "T2",
+    "label": "PRODUCT",
+    "start": 400,
+    "end": 407,
+    "token": "norvasc",
+    "row_idx": 17
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 408,
+    "end": 413,
+    "token": "today",
+    "row_idx": 17
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 44,
+    "end": 69,
+    "token": "about three or four weeks",
+    "row_idx": 18
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 170,
+    "end": 175,
+    "token": "today",
+    "row_idx": 18
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 5,
+    "token": "james",
+    "row_idx": 26
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 11,
+    "end": 22,
+    "token": "57-year-old",
+    "row_idx": 26
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 130,
+    "end": 135,
+    "token": "today",
+    "row_idx": 26
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 81,
+    "end": 94,
+    "token": "600 milligram",
+    "row_idx": 28
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 108,
+    "end": 113,
+    "token": "three",
+    "row_idx": 28
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 141,
+    "end": 147,
+    "token": "a week",
+    "row_idx": 28
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 81,
+    "end": 84,
+    "token": "one",
+    "row_idx": 33
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 99,
+    "end": 102,
+    "token": "two",
+    "row_idx": 33
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 39,
+    "end": 40,
+    "token": "2",
+    "row_idx": 39
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 48,
+    "end": 49,
+    "token": "6",
+    "row_idx": 39
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 108,
+    "end": 119,
+    "token": "a few weeks",
+    "row_idx": 40
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 58,
+    "end": 74,
+    "token": "three months ago",
+    "row_idx": 51
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 121,
+    "end": 130,
+    "token": "two weeks",
+    "row_idx": 52
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 31,
+    "end": 38,
+    "token": "a month",
+    "row_idx": 57
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 60,
+    "end": 66,
+    "token": "ashley",
+    "row_idx": 59
+  },
+  {
+    "token_id": "T1",
+    "label": "FAC",
+    "start": 136,
+    "end": 142,
+    "token": "lowe's",
+    "row_idx": 61
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 480,
+    "end": 485,
+    "token": "today",
+    "row_idx": 62
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 40,
+    "end": 45,
+    "token": "betty",
+    "row_idx": 65
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 228,
+    "end": 241,
+    "token": "about a month",
+    "row_idx": 68
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 30,
+    "end": 36,
+    "token": "fourth",
+    "row_idx": 69
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 114,
+    "end": 127,
+    "token": "20 milligrams",
+    "row_idx": 69
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 164,
+    "end": 172,
+    "token": "lawrence",
+    "row_idx": 69
+  },
+  {
+    "token_id": "T1",
+    "label": "FAC",
+    "start": 92,
+    "end": 98,
+    "token": "center",
+    "row_idx": 71
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 168,
+    "end": 169,
+    "token": "4",
+    "row_idx": 72
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 177,
+    "end": 178,
+    "token": "5",
+    "row_idx": 72
+  },
+  {
+    "token_id": "T3",
+    "label": "CARDINAL",
+    "start": 197,
+    "end": 198,
+    "token": "5",
+    "row_idx": 72
+  },
+  {
+    "token_id": "T4",
+    "label": "CARDINAL",
+    "start": 206,
+    "end": 207,
+    "token": "5",
+    "row_idx": 72
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 69,
+    "end": 73,
+    "token": "half",
+    "row_idx": 77
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 89,
+    "end": 98,
+    "token": "five days",
+    "row_idx": 77
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 92,
+    "end": 95,
+    "token": "one",
+    "row_idx": 82
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 96,
+    "end": 115,
+    "token": "twenty over seventy",
+    "row_idx": 82
+  },
+  {
+    "token_id": "T3",
+    "label": "PRODUCT",
+    "start": 141,
+    "end": 148,
+    "token": "norvasc",
+    "row_idx": 82
+  },
+  {
+    "token_id": "T4",
+    "label": "QUANTITY",
+    "start": 149,
+    "end": 164,
+    "token": "five milligrams",
+    "row_idx": 82
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 13,
+    "end": 16,
+    "token": "one",
+    "row_idx": 84
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 143,
+    "end": 158,
+    "token": "0.7 millimeters",
+    "row_idx": 85
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 162,
+    "end": 166,
+    "token": "less",
+    "row_idx": 85
+  },
+  {
+    "token_id": "T3",
+    "label": "QUANTITY",
+    "start": 227,
+    "end": 242,
+    "token": "0.7 millimeters",
+    "row_idx": 85
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 9,
+    "token": "mason",
+    "row_idx": 90
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 26,
+    "end": 31,
+    "token": "today",
+    "row_idx": 90
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 208,
+    "end": 213,
+    "token": "third",
+    "row_idx": 96
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 308,
+    "end": 317,
+    "token": "two days'",
+    "row_idx": 96
+  },
+  {
+    "token_id": "T3",
+    "label": "QUANTITY",
+    "start": 347,
+    "end": 360,
+    "token": "50 milligrams",
+    "row_idx": 96
+  },
+  {
+    "token_id": "T4",
+    "label": "TIME",
+    "start": 363,
+    "end": 378,
+    "token": "every six hours",
+    "row_idx": 96
+  },
+  {
+    "token_id": "T5",
+    "label": "CARDINAL",
+    "start": 420,
+    "end": 425,
+    "token": "eight",
+    "row_idx": 96
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 11,
+    "end": 22,
+    "token": "julia jones",
+    "row_idx": 100
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 39,
+    "end": 48,
+    "token": "5/16/1996",
+    "row_idx": 100
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 117,
+    "end": 122,
+    "token": "today",
+    "row_idx": 100
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 133,
+    "end": 141,
+    "token": "gonzalez",
+    "row_idx": 100
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 102,
+    "end": 119,
+    "token": "a couple of weeks",
+    "row_idx": 103
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 9,
+    "end": 15,
+    "token": "second",
+    "row_idx": 105
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 139,
+    "end": 152,
+    "token": "20 milligrams",
+    "row_idx": 105
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 96,
+    "end": 101,
+    "token": "today",
+    "row_idx": 111
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 104,
+    "end": 107,
+    "token": "156",
+    "row_idx": 111
+  },
+  {
+    "token_id": "T3",
+    "label": "CARDINAL",
+    "start": 113,
+    "end": 115,
+    "token": "94",
+    "row_idx": 111
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 238,
+    "end": 243,
+    "token": "first",
+    "row_idx": 113
+  },
+  {
+    "token_id": "T1",
+    "label": "TIME",
+    "start": 60,
+    "end": 81,
+    "token": "about fifteen minutes",
+    "row_idx": 114
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 328,
+    "end": 337,
+    "token": "two weeks",
+    "row_idx": 128
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 10,
+    "end": 14,
+    "token": "hill",
+    "row_idx": 134
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 51,
+    "end": 69,
+    "token": "a couple years ago",
+    "row_idx": 138
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 173,
+    "end": 177,
+    "token": "2019",
+    "row_idx": 138
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 191,
+    "end": 200,
+    "token": "last year",
+    "row_idx": 147
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 121,
+    "end": 127,
+    "token": "second",
+    "row_idx": 149
+  },
+  {
+    "token_id": "T2",
+    "label": "ORDINAL",
+    "start": 618,
+    "end": 623,
+    "token": "third",
+    "row_idx": 149
+  },
+  {
+    "token_id": "T3",
+    "label": "CARDINAL",
+    "start": 646,
+    "end": 651,
+    "token": "three",
+    "row_idx": 149
+  },
+  {
+    "token_id": "T1",
+    "label": "PRODUCT",
+    "start": 71,
+    "end": 78,
+    "token": "imitrex",
+    "row_idx": 151
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 166,
+    "end": 179,
+    "token": "40 milligrams",
+    "row_idx": 151
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 34,
+    "end": 47,
+    "token": "80 milligrams",
+    "row_idx": 152
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 95,
+    "end": 108,
+    "token": "25 milligrams",
+    "row_idx": 152
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 45,
+    "end": 50,
+    "token": "randy",
+    "row_idx": 158
+  },
+  {
+    "token_id": "T1",
+    "label": "GPE",
+    "start": 117,
+    "end": 127,
+    "token": "cincinnati",
+    "row_idx": 169
+  },
+  {
+    "token_id": "T2",
+    "label": "EVENT",
+    "start": 144,
+    "end": 158,
+    "token": "the super bowl",
+    "row_idx": 169
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 41,
+    "end": 46,
+    "token": "third",
+    "row_idx": 174
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 50,
+    "end": 63,
+    "token": "40 milligrams",
+    "row_idx": 176
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 10,
+    "end": 15,
+    "token": "first",
+    "row_idx": 185
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 65,
+    "end": 68,
+    "token": "dax",
+    "row_idx": 186
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 88,
+    "end": 91,
+    "token": "dax",
+    "row_idx": 186
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 48,
+    "end": 51,
+    "token": "dax",
+    "row_idx": 187
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 70,
+    "end": 73,
+    "token": "dax",
+    "row_idx": 187
+  },
+  {
+    "token_id": "T1",
+    "label": "TIME",
+    "start": 42,
+    "end": 50,
+    "token": "a second",
+    "row_idx": 188
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 81,
+    "end": 84,
+    "token": "one",
+    "row_idx": 192
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 242,
+    "end": 245,
+    "token": "two",
+    "row_idx": 192
+  },
+  {
+    "token_id": "T3",
+    "label": "CARDINAL",
+    "start": 281,
+    "end": 284,
+    "token": "one",
+    "row_idx": 192
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 0,
+    "end": 5,
+    "token": "seven",
+    "row_idx": 197
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 9,
+    "end": 14,
+    "token": "eight",
+    "row_idx": 197
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 17,
+    "end": 36,
+    "token": "about five days ago",
+    "row_idx": 200
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "dragon",
+    "row_idx": 202
+  },
+  {
+    "token_id": "T2",
+    "label": "ORDINAL",
+    "start": 52,
+    "end": 57,
+    "token": "third",
+    "row_idx": 202
+  },
+  {
+    "token_id": "T3",
+    "label": "QUANTITY",
+    "start": 147,
+    "end": 152,
+    "token": "10 mg",
+    "row_idx": 202
+  },
+  {
+    "token_id": "T4",
+    "label": "QUANTITY",
+    "start": 156,
+    "end": 161,
+    "token": "20 mg",
+    "row_idx": 202
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 53,
+    "end": 62,
+    "token": "stephanie",
+    "row_idx": 203
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 164,
+    "end": 177,
+    "token": "40 milligrams",
+    "row_idx": 204
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 233,
+    "end": 246,
+    "token": "50 milligrams",
+    "row_idx": 204
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 247,
+    "end": 252,
+    "token": "daily",
+    "row_idx": 204
+  },
+  {
+    "token_id": "T4",
+    "label": "QUANTITY",
+    "start": 303,
+    "end": 316,
+    "token": "10 milligrams",
+    "row_idx": 204
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 286,
+    "end": 305,
+    "token": "three to six months",
+    "row_idx": 205
+  },
+  {
+    "token_id": "T1",
+    "label": "PERCENT",
+    "start": 116,
+    "end": 120,
+    "token": "50 %",
+    "row_idx": 207
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 148,
+    "end": 157,
+    "token": "six weeks",
+    "row_idx": 211
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 330,
+    "end": 335,
+    "token": "three",
+    "row_idx": 211
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 143,
+    "end": 148,
+    "token": "first",
+    "row_idx": 212
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 97,
+    "end": 114,
+    "token": "the last few days",
+    "row_idx": 216
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 36,
+    "end": 45,
+    "token": "two weeks",
+    "row_idx": 219
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 102,
+    "end": 113,
+    "token": "next monday",
+    "row_idx": 219
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 11,
+    "end": 16,
+    "token": "dylan",
+    "row_idx": 220
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 0,
+    "end": 24,
+    "token": "two and a half weeks ago",
+    "row_idx": 221
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 10,
+    "token": "brian",
+    "row_idx": 223
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 16,
+    "end": 27,
+    "token": "58 year old",
+    "row_idx": 223
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 134,
+    "end": 139,
+    "token": "today",
+    "row_idx": 223
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 185,
+    "end": 190,
+    "token": "brian",
+    "row_idx": 223
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 217,
+    "end": 222,
+    "token": "julia",
+    "row_idx": 233
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 80,
+    "end": 85,
+    "token": "first",
+    "row_idx": 234
+  },
+  {
+    "token_id": "T1",
+    "label": "PRODUCT",
+    "start": 80,
+    "end": 90,
+    "token": "omeprazole",
+    "row_idx": 239
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 13,
+    "end": 17,
+    "token": "noah",
+    "row_idx": 241
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 68,
+    "end": 85,
+    "token": "a couple of weeks",
+    "row_idx": 257
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 271,
+    "end": 287,
+    "token": "one twenty seven",
+    "row_idx": 259
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 293,
+    "end": 299,
+    "token": "eighty",
+    "row_idx": 259
+  },
+  {
+    "token_id": "T3",
+    "label": "CARDINAL",
+    "start": 340,
+    "end": 351,
+    "token": "the sixties",
+    "row_idx": 259
+  },
+  {
+    "token_id": "T4",
+    "label": "CARDINAL",
+    "start": 542,
+    "end": 545,
+    "token": "two",
+    "row_idx": 259
+  },
+  {
+    "token_id": "T5",
+    "label": "CARDINAL",
+    "start": 553,
+    "end": 556,
+    "token": "six",
+    "row_idx": 259
+  },
+  {
+    "token_id": "T6",
+    "label": "CARDINAL",
+    "start": 724,
+    "end": 727,
+    "token": "two",
+    "row_idx": 259
+  },
+  {
+    "token_id": "T7",
+    "label": "QUANTITY",
+    "start": 731,
+    "end": 747,
+    "token": "three centimeter",
+    "row_idx": 259
+  },
+  {
+    "token_id": "T8",
+    "label": "ORDINAL",
+    "start": 800,
+    "end": 805,
+    "token": "fifth",
+    "row_idx": 259
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 24,
+    "end": 32,
+    "token": "30 miles",
+    "row_idx": 261
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 71,
+    "end": 76,
+    "token": "tyler",
+    "row_idx": 261
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 17,
+    "end": 22,
+    "token": "karen",
+    "row_idx": 264
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 10,
+    "token": "kenneth",
+    "row_idx": 266
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 25,
+    "end": 32,
+    "token": "his 40s",
+    "row_idx": 269
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 94,
+    "end": 96,
+    "token": "47",
+    "row_idx": 269
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 32,
+    "end": 35,
+    "token": "one",
+    "row_idx": 270
+  },
+  {
+    "token_id": "T2",
+    "label": "TIME",
+    "start": 43,
+    "end": 65,
+    "token": "about 30 to 45 minutes",
+    "row_idx": 270
+  },
+  {
+    "token_id": "T3",
+    "label": "ORDINAL",
+    "start": 104,
+    "end": 110,
+    "token": "second",
+    "row_idx": 270
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 22,
+    "token": "shirley taylor",
+    "row_idx": 271
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 39,
+    "end": 47,
+    "token": "5/4/1961",
+    "row_idx": 271
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 77,
+    "end": 88,
+    "token": "60 year old",
+    "row_idx": 271
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 137,
+    "end": 147,
+    "token": "jacob ward",
+    "row_idx": 271
+  },
+  {
+    "token_id": "T5",
+    "label": "CARDINAL",
+    "start": 290,
+    "end": 291,
+    "token": "2",
+    "row_idx": 271
+  },
+  {
+    "token_id": "T6",
+    "label": "CARDINAL",
+    "start": 294,
+    "end": 296,
+    "token": "21",
+    "row_idx": 271
+  },
+  {
+    "token_id": "T7",
+    "label": "PERSON",
+    "start": 376,
+    "end": 382,
+    "token": "taylor",
+    "row_idx": 271
+  },
+  {
+    "token_id": "T8",
+    "label": "TIME",
+    "start": 403,
+    "end": 415,
+    "token": "this morning",
+    "row_idx": 271
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 360,
+    "end": 369,
+    "token": "two weeks",
+    "row_idx": 276
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 243,
+    "end": 253,
+    "token": "seven days",
+    "row_idx": 280
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 75,
+    "end": 78,
+    "token": "one",
+    "row_idx": 288
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 11,
+    "token": "cheryl",
+    "row_idx": 289
+  },
+  {
+    "token_id": "T1",
+    "label": "PRODUCT",
+    "start": 73,
+    "end": 80,
+    "token": "fosamax",
+    "row_idx": 291
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 49,
+    "end": 54,
+    "token": "first",
+    "row_idx": 297
+  },
+  {
+    "token_id": "T2",
+    "label": "PRODUCT",
+    "start": 147,
+    "end": 154,
+    "token": "xeljanz",
+    "row_idx": 297
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 12,
+    "token": "lawrence",
+    "row_idx": 300
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 61,
+    "end": 76,
+    "token": "over a year ago",
+    "row_idx": 303
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 32,
+    "end": 71,
+    "token": "about a hundred and twenty over seventy",
+    "row_idx": 320
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 159,
+    "end": 161,
+    "token": "30",
+    "row_idx": 322
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 237,
+    "end": 239,
+    "token": "27",
+    "row_idx": 322
+  },
+  {
+    "token_id": "T3",
+    "label": "CARDINAL",
+    "start": 333,
+    "end": 335,
+    "token": "27",
+    "row_idx": 322
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 325
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 46,
+    "end": 59,
+    "token": "25 milligrams",
+    "row_idx": 325
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 56,
+    "end": 59,
+    "token": "two",
+    "row_idx": 326
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 71,
+    "end": 74,
+    "token": "one",
+    "row_idx": 326
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 21,
+    "end": 26,
+    "token": "today",
+    "row_idx": 327
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 40,
+    "end": 53,
+    "token": "february 2020",
+    "row_idx": 335
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 84,
+    "end": 93,
+    "token": "two weeks",
+    "row_idx": 342
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 15,
+    "end": 18,
+    "token": "one",
+    "row_idx": 343
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 17,
+    "end": 22,
+    "token": "reyes",
+    "row_idx": 346
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 94,
+    "end": 97,
+    "token": "one",
+    "row_idx": 348
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 101,
+    "end": 104,
+    "token": "two",
+    "row_idx": 348
+  },
+  {
+    "token_id": "T3",
+    "label": "CARDINAL",
+    "start": 129,
+    "end": 132,
+    "token": "two",
+    "row_idx": 348
+  },
+  {
+    "token_id": "T1",
+    "label": "TIME",
+    "start": 23,
+    "end": 31,
+    "token": "a second",
+    "row_idx": 350
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 16,
+    "token": "phillips",
+    "row_idx": 352
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 563,
+    "end": 569,
+    "token": "second",
+    "row_idx": 355
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 697,
+    "end": 714,
+    "token": "twenty milligrams",
+    "row_idx": 355
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 179,
+    "end": 187,
+    "token": "1,000 mg",
+    "row_idx": 360
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 252,
+    "end": 264,
+    "token": "three months",
+    "row_idx": 360
+  },
+  {
+    "token_id": "T3",
+    "label": "CARDINAL",
+    "start": 399,
+    "end": 402,
+    "token": "two",
+    "row_idx": 360
+  },
+  {
+    "token_id": "T4",
+    "label": "TIME",
+    "start": 416,
+    "end": 439,
+    "token": "every four to six hours",
+    "row_idx": 360
+  },
+  {
+    "token_id": "T5",
+    "label": "CARDINAL",
+    "start": 478,
+    "end": 481,
+    "token": "two",
+    "row_idx": 360
+  },
+  {
+    "token_id": "T6",
+    "label": "DATE",
+    "start": 511,
+    "end": 517,
+    "token": "summer",
+    "row_idx": 360
+  },
+  {
+    "token_id": "T7",
+    "label": "PRODUCT",
+    "start": 665,
+    "end": 671,
+    "token": "zoloft",
+    "row_idx": 360
+  },
+  {
+    "token_id": "T8",
+    "label": "QUANTITY",
+    "start": 679,
+    "end": 684,
+    "token": "25 mg",
+    "row_idx": 360
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 87,
+    "end": 90,
+    "token": "9.9",
+    "row_idx": 362
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 125,
+    "end": 140,
+    "token": "four milligrams",
+    "row_idx": 362
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 11,
+    "token": "william",
+    "row_idx": 368
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 17,
+    "token": "christine",
+    "row_idx": 374
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 8,
+    "token": "anna",
+    "row_idx": 385
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 25,
+    "end": 30,
+    "token": "today",
+    "row_idx": 385
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 93,
+    "end": 98,
+    "token": "today",
+    "row_idx": 387
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 158,
+    "end": 163,
+    "token": "today",
+    "row_idx": 387
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 99,
+    "end": 102,
+    "token": "200",
+    "row_idx": 388
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 392
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 42,
+    "end": 48,
+    "token": "500 mg",
+    "row_idx": 392
+  },
+  {
+    "token_id": "T3",
+    "label": "ORDINAL",
+    "start": 74,
+    "end": 79,
+    "token": "third",
+    "row_idx": 392
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 26,
+    "end": 34,
+    "token": "the 24th",
+    "row_idx": 394
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 42,
+    "end": 55,
+    "token": "50 milligrams",
+    "row_idx": 395
+  },
+  {
+    "token_id": "T2",
+    "label": "TIME",
+    "start": 66,
+    "end": 81,
+    "token": "every six hours",
+    "row_idx": 395
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 4,
+    "end": 12,
+    "token": "november",
+    "row_idx": 405
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 17,
+    "end": 25,
+    "token": "december",
+    "row_idx": 405
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 88,
+    "end": 104,
+    "token": "this five pounds",
+    "row_idx": 406
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 90,
+    "end": 95,
+    "token": "first",
+    "row_idx": 408
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 9,
+    "token": "gloria",
+    "row_idx": 414
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 15,
+    "end": 27,
+    "token": "46 -year-old",
+    "row_idx": 414
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 35,
+    "end": 40,
+    "token": "today",
+    "row_idx": 414
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 97,
+    "end": 102,
+    "token": "today",
+    "row_idx": 414
+  },
+  {
+    "token_id": "T5",
+    "label": "PERSON",
+    "start": 158,
+    "end": 164,
+    "token": "gloria",
+    "row_idx": 414
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 66,
+    "end": 71,
+    "token": "three",
+    "row_idx": 420
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 197,
+    "end": 202,
+    "token": "today",
+    "row_idx": 420
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 32,
+    "end": 37,
+    "token": "three",
+    "row_idx": 423
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 41,
+    "end": 45,
+    "token": "four",
+    "row_idx": 423
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 113,
+    "end": 129,
+    "token": "about six months",
+    "row_idx": 423
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 49,
+    "end": 62,
+    "token": "40 milligrams",
+    "row_idx": 431
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 260,
+    "end": 267,
+    "token": "madison",
+    "row_idx": 434
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 67,
+    "end": 77,
+    "token": "four weeks",
+    "row_idx": 447
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 69,
+    "end": 90,
+    "token": "a thousand milligrams",
+    "row_idx": 451
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 19,
+    "end": 25,
+    "token": "hannah",
+    "row_idx": 452
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 145,
+    "end": 153,
+    "token": "may 17th",
+    "row_idx": 454
+  },
+  {
+    "token_id": "T2",
+    "label": "ORDINAL",
+    "start": 163,
+    "end": 168,
+    "token": "first",
+    "row_idx": 454
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 62,
+    "end": 65,
+    "token": "dax",
+    "row_idx": 458
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 85,
+    "end": 88,
+    "token": "dax",
+    "row_idx": 458
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 412,
+    "end": 421,
+    "token": "two weeks",
+    "row_idx": 460
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 36,
+    "end": 41,
+    "token": "today",
+    "row_idx": 461
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 0,
+    "end": 5,
+    "token": "today",
+    "row_idx": 464
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 17,
+    "end": 33,
+    "token": "christina cooper",
+    "row_idx": 464
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 57,
+    "end": 67,
+    "token": "07/01/1954",
+    "row_idx": 464
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 79,
+    "end": 85,
+    "token": "cooper",
+    "row_idx": 464
+  },
+  {
+    "token_id": "T5",
+    "label": "PERSON",
+    "start": 123,
+    "end": 135,
+    "token": "diane nelson",
+    "row_idx": 464
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 12,
+    "token": "carolyn",
+    "row_idx": 469
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 138,
+    "end": 153,
+    "token": "2000 milligrams",
+    "row_idx": 471
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 195,
+    "end": 210,
+    "token": "1500 milligrams",
+    "row_idx": 471
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 7,
+    "end": 16,
+    "token": "christina",
+    "row_idx": 473
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 11,
+    "end": 14,
+    "token": "lee",
+    "row_idx": 479
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 9,
+    "token": "dylan",
+    "row_idx": 492
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 56,
+    "end": 88,
+    "token": "approximately six to eight weeks",
+    "row_idx": 494
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 17,
+    "end": 20,
+    "token": "dax",
+    "row_idx": 496
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 107,
+    "end": 111,
+    "token": "zero",
+    "row_idx": 498
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 115,
+    "end": 118,
+    "token": "ten",
+    "row_idx": 498
+  },
+  {
+    "token_id": "T3",
+    "label": "CARDINAL",
+    "start": 119,
+    "end": 122,
+    "token": "ten",
+    "row_idx": 498
+  },
+  {
+    "token_id": "T1",
+    "label": "PRODUCT",
+    "start": 40,
+    "end": 50,
+    "token": "lisinopril",
+    "row_idx": 503
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 51,
+    "end": 64,
+    "token": "20 milligrams",
+    "row_idx": 503
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 178,
+    "end": 192,
+    "token": "a couple weeks",
+    "row_idx": 503
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 52,
+    "end": 55,
+    "token": "200",
+    "row_idx": 511
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 61,
+    "end": 64,
+    "token": "300",
+    "row_idx": 511
+  },
+  {
+    "token_id": "T1",
+    "label": "EVENT",
+    "start": 46,
+    "end": 60,
+    "token": "the super bowl",
+    "row_idx": 512
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 61,
+    "end": 73,
+    "token": "last weekend",
+    "row_idx": 512
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 302,
+    "end": 307,
+    "token": "seven",
+    "row_idx": 518
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 314,
+    "end": 317,
+    "token": "two",
+    "row_idx": 518
+  },
+  {
+    "token_id": "T3",
+    "label": "QUANTITY",
+    "start": 401,
+    "end": 424,
+    "token": "five hundred milligrams",
+    "row_idx": 518
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 425,
+    "end": 430,
+    "token": "daily",
+    "row_idx": 518
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 0,
+    "end": 5,
+    "token": "first",
+    "row_idx": 520
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 223,
+    "end": 226,
+    "token": "one",
+    "row_idx": 523
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 230,
+    "end": 244,
+    "token": "two centimeter",
+    "row_idx": 523
+  },
+  {
+    "token_id": "T3",
+    "label": "QUANTITY",
+    "start": 245,
+    "end": 253,
+    "token": "two inch",
+    "row_idx": 523
+  },
+  {
+    "token_id": "T4",
+    "label": "ORDINAL",
+    "start": 345,
+    "end": 350,
+    "token": "fifth",
+    "row_idx": 523
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 42,
+    "end": 51,
+    "token": "last week",
+    "row_idx": 527
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 85,
+    "end": 94,
+    "token": "last week",
+    "row_idx": 527
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 66,
+    "end": 69,
+    "token": "one",
+    "row_idx": 530
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 70,
+    "end": 88,
+    "token": "twenty over eighty",
+    "row_idx": 530
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "logan",
+    "row_idx": 532
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 31,
+    "end": 35,
+    "token": "2019",
+    "row_idx": 534
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 9,
+    "token": "john",
+    "row_idx": 535
+  },
+  {
+    "token_id": "T1",
+    "label": "EVENT",
+    "start": 52,
+    "end": 58,
+    "token": "easter",
+    "row_idx": 536
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 56,
+    "end": 80,
+    "token": "the next couple of weeks",
+    "row_idx": 544
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 135,
+    "end": 153,
+    "token": "the next two weeks",
+    "row_idx": 544
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 31,
+    "end": 39,
+    "token": "thompson",
+    "row_idx": 545
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 45,
+    "end": 56,
+    "token": "43 year old",
+    "row_idx": 545
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 23,
+    "end": 28,
+    "token": "third",
+    "row_idx": 557
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 96,
+    "end": 113,
+    "token": "twenty milligrams",
+    "row_idx": 557
+  },
+  {
+    "token_id": "T3",
+    "label": "ORDINAL",
+    "start": 231,
+    "end": 237,
+    "token": "fourth",
+    "row_idx": 557
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 21,
+    "end": 26,
+    "token": "susan",
+    "row_idx": 559
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 150,
+    "end": 164,
+    "token": "six months ago",
+    "row_idx": 560
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 191,
+    "end": 213,
+    "token": "one twenty over eighty",
+    "row_idx": 564
+  },
+  {
+    "token_id": "T2",
+    "label": "PERCENT",
+    "start": 258,
+    "end": 278,
+    "token": "ninety eight percent",
+    "row_idx": 564
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 556,
+    "end": 561,
+    "token": "first",
+    "row_idx": 568
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 571
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 33,
+    "end": 47,
+    "token": "500 milligrams",
+    "row_idx": 571
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 30,
+    "end": 33,
+    "token": "one",
+    "row_idx": 579
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 110,
+    "end": 141,
+    "token": "twenty three hundred milligrams",
+    "row_idx": 579
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 134,
+    "end": 137,
+    "token": "two",
+    "row_idx": 585
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 145,
+    "end": 148,
+    "token": "six",
+    "row_idx": 585
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 230,
+    "end": 235,
+    "token": "about",
+    "row_idx": 593
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 236,
+    "end": 239,
+    "token": "one",
+    "row_idx": 593
+  },
+  {
+    "token_id": "T3",
+    "label": "CARDINAL",
+    "start": 240,
+    "end": 252,
+    "token": "twenty seven",
+    "row_idx": 593
+  },
+  {
+    "token_id": "T4",
+    "label": "CARDINAL",
+    "start": 258,
+    "end": 264,
+    "token": "eighty",
+    "row_idx": 593
+  },
+  {
+    "token_id": "T5",
+    "label": "CARDINAL",
+    "start": 476,
+    "end": 481,
+    "token": "three",
+    "row_idx": 593
+  },
+  {
+    "token_id": "T6",
+    "label": "CARDINAL",
+    "start": 489,
+    "end": 492,
+    "token": "six",
+    "row_idx": 593
+  },
+  {
+    "token_id": "T7",
+    "label": "CARDINAL",
+    "start": 595,
+    "end": 598,
+    "token": "one",
+    "row_idx": 593
+  },
+  {
+    "token_id": "T8",
+    "label": "PERSON",
+    "start": 665,
+    "end": 669,
+    "token": "jose",
+    "row_idx": 593
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 36,
+    "end": 47,
+    "token": "sixty eight",
+    "row_idx": 594
+  },
+  {
+    "token_id": "T2",
+    "label": "PERCENT",
+    "start": 80,
+    "end": 99,
+    "token": "ninety five percent",
+    "row_idx": 594
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 104,
+    "end": 113,
+    "token": "yesterday",
+    "row_idx": 597
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 206,
+    "end": 211,
+    "token": "today",
+    "row_idx": 597
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 10,
+    "end": 25,
+    "token": "about five days",
+    "row_idx": 600
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 15,
+    "end": 18,
+    "token": "one",
+    "row_idx": 601
+  },
+  {
+    "token_id": "T2",
+    "label": "PRODUCT",
+    "start": 46,
+    "end": 52,
+    "token": "wixela",
+    "row_idx": 601
+  },
+  {
+    "token_id": "T3",
+    "label": "CARDINAL",
+    "start": 273,
+    "end": 276,
+    "token": "two",
+    "row_idx": 601
+  },
+  {
+    "token_id": "T4",
+    "label": "CARDINAL",
+    "start": 334,
+    "end": 337,
+    "token": "one",
+    "row_idx": 601
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "elijah",
+    "row_idx": 606
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "tyler",
+    "row_idx": 607
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 14,
+    "end": 26,
+    "token": "56 -year-old",
+    "row_idx": 607
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 45,
+    "end": 50,
+    "token": "today",
+    "row_idx": 607
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 158,
+    "end": 163,
+    "token": "tyler",
+    "row_idx": 607
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 47,
+    "end": 51,
+    "token": "week",
+    "row_idx": 608
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 10,
+    "token": "gregory",
+    "row_idx": 612
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 51,
+    "end": 60,
+    "token": "two weeks",
+    "row_idx": 616
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 257,
+    "end": 262,
+    "token": "today",
+    "row_idx": 623
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 146,
+    "end": 157,
+    "token": "two hundred",
+    "row_idx": 628
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 163,
+    "end": 169,
+    "token": "ninety",
+    "row_idx": 628
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 99,
+    "end": 104,
+    "token": "today",
+    "row_idx": 631
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 124,
+    "end": 127,
+    "token": "one",
+    "row_idx": 631
+  },
+  {
+    "token_id": "T3",
+    "label": "CARDINAL",
+    "start": 128,
+    "end": 140,
+    "token": "twenty eight",
+    "row_idx": 631
+  },
+  {
+    "token_id": "T4",
+    "label": "CARDINAL",
+    "start": 146,
+    "end": 157,
+    "token": "seventy two",
+    "row_idx": 631
+  },
+  {
+    "token_id": "T5",
+    "label": "CARDINAL",
+    "start": 315,
+    "end": 318,
+    "token": "two",
+    "row_idx": 631
+  },
+  {
+    "token_id": "T6",
+    "label": "CARDINAL",
+    "start": 326,
+    "end": 329,
+    "token": "six",
+    "row_idx": 631
+  },
+  {
+    "token_id": "T7",
+    "label": "DATE",
+    "start": 525,
+    "end": 546,
+    "token": "a couple of years ago",
+    "row_idx": 631
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 30,
+    "end": 48,
+    "token": "christopher watson",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 65,
+    "end": 75,
+    "token": "04/12/1934",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 83,
+    "end": 89,
+    "token": "watson",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 100,
+    "end": 111,
+    "token": "86-year-old",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T5",
+    "label": "ORDINAL",
+    "start": 180,
+    "end": 185,
+    "token": "first",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T6",
+    "label": "DATE",
+    "start": 244,
+    "end": 261,
+    "token": "august 1st , 2020",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T7",
+    "label": "PERSON",
+    "start": 285,
+    "end": 291,
+    "token": "watson",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T8",
+    "label": "DATE",
+    "start": 298,
+    "end": 309,
+    "token": "may of 2020",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T9",
+    "label": "ORDINAL",
+    "start": 318,
+    "end": 323,
+    "token": "first",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T10",
+    "label": "DATE",
+    "start": 339,
+    "end": 357,
+    "token": "eight to ten years",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T11",
+    "label": "DATE",
+    "start": 530,
+    "end": 539,
+    "token": "june 2020",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T12",
+    "label": "DATE",
+    "start": 576,
+    "end": 593,
+    "token": "august 1st , 2020",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T13",
+    "label": "CARDINAL",
+    "start": 704,
+    "end": 707,
+    "token": "2.0",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T14",
+    "label": "PERSON",
+    "start": 741,
+    "end": 747,
+    "token": "watson",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T15",
+    "label": "DATE",
+    "start": 789,
+    "end": 794,
+    "token": "today",
+    "row_idx": 635
+  },
+  {
+    "token_id": "T1",
+    "label": "QUANTITY",
+    "start": 53,
+    "end": 57,
+    "token": "dime",
+    "row_idx": 637
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 90,
+    "end": 111,
+    "token": "about a week week old",
+    "row_idx": 637
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 15,
+    "end": 22,
+    "token": "theresa",
+    "row_idx": 638
+  },
+  {
+    "token_id": "T1",
+    "label": "ORDINAL",
+    "start": 650,
+    "end": 655,
+    "token": "first",
+    "row_idx": 640
+  },
+  {
+    "token_id": "T2",
+    "label": "QUANTITY",
+    "start": 952,
+    "end": 986,
+    "token": "six hundred six hundred milligrams",
+    "row_idx": 640
+  },
+  {
+    "token_id": "T1",
+    "label": "CARDINAL",
+    "start": 126,
+    "end": 127,
+    "token": "2",
+    "row_idx": 644
+  },
+  {
+    "token_id": "T2",
+    "label": "CARDINAL",
+    "start": 135,
+    "end": 136,
+    "token": "6",
+    "row_idx": 644
+  }
+]

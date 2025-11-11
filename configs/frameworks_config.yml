@@ -1,0 +1,2 @@
+flair:
+  cache_root: "{PROJECT_ROOT}/flair_cache_root"
