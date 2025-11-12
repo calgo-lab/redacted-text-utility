@@ -1,9 +1,9 @@
 from __future__ import annotations
 from pathlib import Path
+from pydantic import BaseModel, Field, ValidationError
 from typing import Any, Dict, List, Optional
 
 import yaml
-from pydantic import BaseModel, Field, ValidationError
 
 
 class SupportedModel(BaseModel):
@@ -57,7 +57,7 @@ class EntitySetModelsConfigHandler:
     """
 
     DEFAULT_CONFIG_PATH = (
-        Path(__file__).resolve().parent.parent.parent / "configs/entity_set_models_config.yml"
+        Path(__file__).resolve().parent.parent.parent / "configs" / "entity_set_models_config.yml"
     )
 
     def __init__(self, entity_sets: List[EntitySetModel]):
@@ -67,8 +67,12 @@ class EntitySetModelsConfigHandler:
     @classmethod
     def load_from_file(cls, path: Optional[Path] = None) -> "EntitySetModelsConfigHandler":
         """
-        Load configuration from YAML file. If path is not provided, DEFAULT_CONFIG_PATH is used.
-        Raises FileNotFoundError if file missing, ValidationError if YAML structure invalid.
+        Load configuration from YAML file.
+
+        :param path: Optional path to the configuration file. If not provided, DEFAULT_CONFIG_PATH is used.
+        :return: An instance of EntitySetModelsConfigHandler with the loaded configuration.
+        :raises FileNotFoundError: If the configuration file does not exist.
+        :raises ValidationError: If the YAML structure is invalid.
         """
         cfg_path = Path(path) if path else cls.DEFAULT_CONFIG_PATH
         if not cfg_path.exists():
@@ -105,15 +109,28 @@ class EntitySetModelsConfigHandler:
 
     @property
     def entity_sets(self) -> List[EntitySetModel]:
+        """
+        Get a list of all entity sets.
+
+        :return: List of all entity sets.
+        """
         return list(self._entity_sets)
 
     @property
     def entity_set_ids(self) -> List[str]:
+        """
+        Get a list of all entity set IDs.
+
+        :return: List of all entity set IDs.
+        """
         return [es.entity_set_id for es in self._entity_sets]
 
     def get_entity_set(self, entity_set_id: str) -> Optional[EntitySetModel]:
         """
         Return the EntitySetModel for the given id or None if not found.
+
+        :param entity_set_id: The id of the entity set.
+        :return: EntitySetModel object or None.
         """
         return self._by_id.get(entity_set_id)
     

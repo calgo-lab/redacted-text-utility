@@ -14,8 +14,6 @@ entity_set_models:
     description: >-
       CONTACT encompasses EmailAddress (EMAIL), PhoneNumber (PHONE)
       and URL (URL)
-    background_color: "#FF99FF"
-    border_color: "#CC7ACC"
     fine_grained:
     - id: EMAIL
       description: Email addresses
@@ -27,8 +25,6 @@ entity_set_models:
     description: >-
       Date (DATE) includes all sorts of date descriptions, such as date of
       birth, marriage, or death, starting and ending dates of contracts, etc.
-    background_color: "#FF8A80"
-    border_color: "#FF5252"
     fine_grained:
     - id: DATE
       description: >-
@@ -38,8 +34,6 @@ entity_set_models:
     description: >-
       Identifier (ID) includes UniqueFormalIdentifier (UFID) and all kinds of
       invented UserNames (USER) for IT systems and platforms
-    background_color: "#B2FF59"
-    border_color: "#76FF03"
     fine_grained:
     - id: UFID
       description: >-
@@ -54,8 +48,6 @@ entity_set_models:
     description: >-
       The Location (LOCATION) category subsumes StreetName (STREET),
       StreetNumber (STREETNO), ZipCode (ZIP), and CityName (CITY)
-    background_color: "#42A5F5"
-    border_color: "#2196F3"
     fine_grained:
     - id: CITY
       description: >-
@@ -72,8 +64,6 @@ entity_set_models:
       The Name (NAME) label represent linguistic references to human entities,
       encompassing individual male and female names as well as collective
       family names.
-    background_color: "#EEFF41"
-    border_color: "#C6FF00"
     fine_grained:
     - id: FAMILY
       description: Family names
@@ -85,8 +75,6 @@ entity_set_models:
     description: >-
       The Organization (ORGANIZATION) category includes all types of legal
       actors such as companies, brands, institutions and agencies, etc.
-    background_color: "#B388FF"
-    border_color: "#7C4DFF"
     fine_grained:
     - id: ORG
       description: >-

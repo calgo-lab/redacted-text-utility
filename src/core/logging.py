@@ -21,12 +21,13 @@ def configure_logging(log_level: str = "INFO",
     :param log_level: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     :param log_to_file: Whether to log to files
     :param json_format: Whether to use JSON format (for production)
+    :param file_prefix: Prefix for log files
     :return: None
     """
     global _is_configured
     
     if _is_configured:
-        logger.warning("Logging already configured, skipping")
+        logger.info("Logging setup is already configured, skipping ...")
         return
     
     logger.remove()
@@ -57,7 +58,7 @@ def configure_logging(log_level: str = "INFO",
     
     if log_to_file:
         if json_format:
-            logger.add(LOGS_DIR / "{file_prefix}_{time:YYYY-MM-DD}.json",
+            logger.add(LOGS_DIR / f"{file_prefix}_{{time:YYYY-MM-DD}}.json",
                        rotation="00:00",
                        retention="30 days",
                        level=log_level,
@@ -66,7 +67,7 @@ def configure_logging(log_level: str = "INFO",
                        serialize=True,
                        enqueue=True)
         else:
-            logger.add(LOGS_DIR / "{file_prefix}_{time:YYYY-MM-DD}.log",
+            logger.add(LOGS_DIR / f"{file_prefix}_{{time:YYYY-MM-DD}}.log",
                    rotation="00:00",
                    retention="30 days",
                    level=log_level,

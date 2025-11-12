@@ -1,2 +1,4 @@
 flair:
-  cache_root: "{PROJECT_ROOT}/flair_cache_root"
+  cache_root_dir:
+  - "{PROJECT_ROOT}"
+  - "flair_cache_root"

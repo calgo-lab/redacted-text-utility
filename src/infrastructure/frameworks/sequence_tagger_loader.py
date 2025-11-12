@@ -1,8 +1,8 @@
-from flair.models import SequenceTagger
-from pathlib import Path
 from core.exceptions import ModelLoadError
 from core.logging import get_logger
+from flair.models import SequenceTagger
 from infrastructure.frameworks.cached_model_loader import CachedModelLoader
+from pathlib import Path
 
 import flair
 

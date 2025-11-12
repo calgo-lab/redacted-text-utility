@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-
 from infrastructure.frameworks.model_loader import ModelLoader
 from typing import Any
 

@@ -1,7 +1,7 @@
-from flair.data import Sentence
 from core.logging import get_logger
-from infrastructure.frameworks.sentence_with_boundary import SentenceWithBoundary
+from flair.data import Sentence
 from infrastructure.frameworks.model_inference_maker import ModelInferenceMaker
+from infrastructure.frameworks.sentence_with_boundary import SentenceWithBoundary
 from infrastructure.frameworks.sequence_tagger_loader import SequenceTaggerLoader
 from infrastructure.frameworks.somajo_tokenizer import SoMaJoTokenizer
 from typing import Any, Dict, List, Tuple

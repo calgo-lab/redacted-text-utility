@@ -1,17 +1,17 @@
-from packaging.requirements import Requirement
-from packaging.version import InvalidVersion, Version
-from pathlib import Path
-from core.logging import get_logger, log_exception
+from config_handlers.entity_set_models_config_handler import EntitySetModelsConfigHandler
+from config_handlers.frameworks_config_handler import FrameworksConfigHandler
 from core.exceptions import EntitySetNotFoundError, ModelNotFoundError, UnsupportedModelLoadingStrategyError, UnsupportedModelImplTypeError
-from infrastructure.frameworks.model_loader import ModelLoader
+from core.logging import get_logger
 from infrastructure.frameworks.model_inference_maker import ModelInferenceMaker
+from infrastructure.frameworks.model_loader import ModelLoader
 from infrastructure.frameworks.sequence_tagger_inference_maker import SequenceTaggerInferenceMaker
 from infrastructure.frameworks.sequence_tagger_loader import SequenceTaggerLoader
 from infrastructure.services.model_service import ModelService
-from config_handlers.entity_set_models_config_handler import EntitySetModelsConfigHandler
-from config_handlers.frameworks_config_handler import FrameworksConfigHandler
-from utils.project_utils import ProjectUtils
+from packaging.requirements import Requirement
+from packaging.version import InvalidVersion, Version
+from pathlib import Path
 from typing import Any, Dict, List, Tuple
+from utils.project_utils import ProjectUtils
 
 import importlib.metadata
 
@@ -22,6 +22,7 @@ class ModelServiceImpl(ModelService):
     This service manages the loading and retrieval of models based on entity sets and model IDs.
     It uses the AppInfo utility to load application configuration and supported models.
     """
+
     _models_registry: Dict[str, Dict[str, Tuple[ModelLoader, ModelInferenceMaker]]] = dict()
     def __init__(self):
         self.logger = get_logger(__name__)
@@ -33,11 +34,13 @@ class ModelServiceImpl(ModelService):
         )
         self._load_model_registry()
     
-    def _load_model_registry(self):
+    def _load_model_registry(self) -> None:
         """
         Load the model registry from the entity set models configuration.
         This method initializes the _models_registry dictionary with models from the entity set models configuration.
         It clears any existing models and reloads them based on the current configuration.
+
+        :return: None
         """
         self._models_registry.clear()
         for entity_set_cfg in self._entity_set_models_config_handler.entity_sets:
@@ -51,6 +54,7 @@ class ModelServiceImpl(ModelService):
     def _load(self, entity_set_cfg, model_cfg) -> Tuple[ModelLoader, ModelInferenceMaker]:
         """
         Load a model based on the entity set configuration and model configuration.
+        
         :param entity_set_cfg: The configuration for the entity set.
         :param model_cfg: The configuration for the model.
         :return: A tuple containing the ModelLoader and ModelInferenceMaker instances.
@@ -98,6 +102,7 @@ class ModelServiceImpl(ModelService):
         """
         Check if all given requirements (like in requirements.txt format)
         are installed in the current environment.
+        
         :param requirements: List of requirement strings, e.g. ["flair==0.11.1", "torch>=2.0"]
         :return: True if all requirements are satisfied, False otherwise.
         """
@@ -122,6 +127,7 @@ class ModelServiceImpl(ModelService):
     def _get_model_path(self, entity_set_cfg, model_cfg) -> Path:
         """
         Construct the path to the model based on the entity set configuration and model configuration.
+        
         :param entity_set_cfg: The configuration for the entity set.
         :param model_cfg: The configuration for the model.
         :return: The path to the model.
@@ -137,6 +143,7 @@ class ModelServiceImpl(ModelService):
     def get_model_inference_maker(self, entity_set_id: str, model_id: str) -> ModelInferenceMaker:
         """
         Retrieve the ModelInferenceMaker for the specified entity set and model ID.
+        
         :param entity_set_id: The ID of the entity set for which the model is requested.
         :param model_id: The ID of the model to be used for inference.
         :return: An instance of ModelInferenceMaker for the specified model.
@@ -152,6 +159,7 @@ class ModelServiceImpl(ModelService):
     def list_models(self, entity_set_id: str) -> Dict[str, str]:
         """
         List available models for a given entity set.
+        
         :param entity_set_id: The ID of the entity set for which models are listed.
         :return: A dictionary mapping model IDs to model types.
         """
@@ -163,6 +171,7 @@ class ModelServiceImpl(ModelService):
     def get_entity_set_labels(self, entity_set_id) -> List[str]:
         """
         Get the labels for the entities in the specified entity set.
+        
         :param entity_set_id: The ID of the entity set for which labels are requested.
         :return: A list of entity labels.
         """
@@ -178,6 +187,7 @@ class ModelServiceImpl(ModelService):
     def get_model_config(self, entity_set_id: str, model_id: str) -> Dict[str, Any]:
         """
         Get configuration for a specific model.
+        
         :param entity_set_id: The ID of the entity set for which the model configuration is requested.
         :param model_id: The ID of the model for which the configuration is requested.
         :return: A dictionary containing the model configuration.
@@ -197,6 +207,7 @@ class ModelServiceImpl(ModelService):
         """
         Reload the model registry from the application configuration.
         This method should be called to refresh the model registry, typically after configuration changes.
+        
         :return: None
         """
         self._models_registry = self._load_model_registry()
