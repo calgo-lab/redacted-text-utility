@@ -2,7 +2,7 @@ from pathlib import Path
 import sys
 sys.path.append(str(Path(__file__).resolve().parent))
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Set
 
 from IPython.display import display
 
@@ -43,20 +43,22 @@ if __name__ == "__main__":
         df_dict[file_name.split("-")[0]] = df
         logger.info(f"Loaded dataframe for file '{file_name}' with {df.shape[0]} rows.")
 
-    """ 
     ### If we decide to use translation service, we need an estimate of total characters to estimate costs
-    
+    """
     # Count total number of characters in all the texts from all rows of 'text' column in the train dataframe
     total_characters: int = df_dict["train"]["text"].str.len().sum()
     logger.info(f"Total number of characters in the 'text' column of the training dataframe: {total_characters}")
+    # 721,816
 
     # Count total number of characters in all the texts from all rows of 'text' column in the test dataframe
     total_characters_test: int = df_dict["test"]["text"].str.len().sum()
     logger.info(f"Total number of characters in the 'text' column of the test dataframe: {total_characters_test}")
+    # 103,734
 
     # Count total number of characters in all the texts from all rows of 'text' column in the validation dataframe
     total_characters_val: int = df_dict["validation"]["text"].str.len().sum()
     logger.info(f"Total number of characters in the 'text' column of the validation dataframe: {total_characters_val}")
+    # 86,937
     """
 
     ### Log specific row text for checking
@@ -66,6 +68,7 @@ if __name__ == "__main__":
     logger.info(f"df_dict['{split_name}'].row[{row_id}].text:\n{df_dict[split_name].iloc[row_id].text}")
     """
 
+    raw_data_dir: Path = project_root / "data" / "raw" / "data"
     processed_data_dir: Path = project_root / "data" / "processed"
     processed_data_dir.mkdir(parents=True, exist_ok=True)
 
@@ -164,4 +167,48 @@ if __name__ == "__main__":
     redacted_text = ne_df.iloc[row_idx]["text_redacted_with_generic_mask"]
     logger.info(f"pe_redacted_df_{split_name}.row[{row_idx}].original_text:\n{original_text}\n")
     logger.info(f"pe_redacted_df_{split_name}.row[{row_idx}].redacted_text:\n{redacted_text}\n")
+    """
+
+    ### Calulate statistics on private entities per split
+    """
+    pe_stats: Dict[str, Dict[str, Any]] = dict()
+    for data_split in ["train", "validation", "test"]:
+        
+        raw_data_file: str = f"{data_split}-00000-of-00001.parquet"
+        raw_df: pd.DataFrame = pd.read_parquet(raw_data_dir / raw_data_file)
+        total_rows: int = raw_df.shape[0]
+        
+        with open(processed_data_dir / f"private_entities_{data_split}.json", "r", encoding="utf-8") as f:
+            private_entities: List[Dict[str, Any]] = json.load(f)
+        
+        total_private_entities: int = len(private_entities)
+        
+        total_rows_with_private_entities: int = len(set(pe['row_idx'] for pe in private_entities))
+        
+        private_entities_by_label: Dict[str, int] = dict()
+        for pe in private_entities:
+            label = pe['label']
+            private_entities_by_label[label] = private_entities_by_label.get(label, 0) + 1
+        
+        valid_labels: Set[str] = {"PERSON", "DATE", "GPE", "ORG"}
+        for label in valid_labels:
+            if label not in private_entities_by_label:
+                private_entities_by_label[label] = 0
+        
+        private_entities_by_label = dict(
+            sorted(
+                private_entities_by_label.items(), key=lambda item: item[1], reverse=True
+            )
+        )
+        
+        pe_stats[raw_data_file] = {
+            "T-Rows": total_rows,
+            "T-Rows-PE": total_rows_with_private_entities,
+            "T-PE": total_private_entities,
+            **{f"{label}": count for label, count in private_entities_by_label.items()}
+        }
+
+    pe_stats_df = pd.DataFrame.from_dict(pe_stats, orient="index")
+    pe_stats_df.index.name = "Data File"
+    logger.info(f"\n{pe_stats_df.to_markdown()}")
     """

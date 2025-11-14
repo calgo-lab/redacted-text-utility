@@ -64,3 +64,11 @@ miss lhyZXSX is here for evaluation of facial pain this is a vejE4fPRUxkG male
 ```
 miss XXXX is here for evaluation of facial pain this is a XXXX male
 ```
+
+Following are the statistics of (T)otal found (P)rivate (E)ntities in the raw dataset:
+
+| Data File                         |   T-Rows |   T-Rows-PE |   T-PE |   PERSON |   DATE |   GPE |   ORG |
+|:----------------------------------|---------:|------------:|-------:|---------:|-------:|------:|------:|
+| train-00000-of-00001.parquet      |     3886 |         396 |    642 |      460 |    151 |    16 |    15 |
+| validation-00000-of-00001.parquet |      646 |          57 |     88 |       66 |     21 |     1 |     0 |
+| test-00000-of-00001.parquet       |      760 |          72 |    117 |       93 |     23 |     0 |     1 |
