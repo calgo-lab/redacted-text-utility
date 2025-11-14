@@ -1,31 +1,40 @@
-from core.logging import get_logger
+from typing import Any, Dict, List, Tuple
+
 from flair.data import Sentence
+
+from core.logging import get_logger
 from infrastructure.frameworks.model_inference_maker import ModelInferenceMaker
 from infrastructure.frameworks.sentence_with_boundary import SentenceWithBoundary
 from infrastructure.frameworks.sequence_tagger_loader import SequenceTaggerLoader
 from infrastructure.frameworks.somajo_tokenizer import SoMaJoTokenizer
-from typing import Any, Dict, List, Tuple
 
 import json
 import re
 
+
 class SequenceTaggerInferenceMaker(ModelInferenceMaker):
     """
-    This class implements the infer method to return the inference result with a Flair SequenceTagger model.
+    This class implements the infer method to return the inference result with 
+    a Flair SequenceTagger model.
     """
+    
     _somajo_tokenizer: SoMaJoTokenizer = None
 
     def __init__(self, model_loader: SequenceTaggerLoader):
         """
-        :param model_loader: The SequenceTaggerLoader instance with the model object.
+        Initialize the SequenceTaggerInferenceMaker with a model loader.
+        
+        :param model_loader: The SequenceTaggerLoader instance to load the model.
         """
         super().__init__(model_loader)
         self.logger = get_logger(__name__)
         self._load_somajo_tokenizer()
     
-    def _load_somajo_tokenizer(self):
+    def _load_somajo_tokenizer(self) -> None:
         """
         Load the SoMaJo tokenizer.
+
+        :return: None
         """
         if self._somajo_tokenizer is None:
             self._somajo_tokenizer = SoMaJoTokenizer()
@@ -38,7 +47,6 @@ class SequenceTaggerInferenceMaker(ModelInferenceMaker):
         :param **kwargs: Additional keyword arguments for inference.
         :return: The inference result as a list of entity dict objects.
         """
-        
         tagger = self.model_loader.load()
         sentences: List[SentenceWithBoundary] = self._get_sentences_with_boundaries(input_text)
         flair_sentences = [swb.sentence for swb in sentences]
@@ -48,12 +56,24 @@ class SequenceTaggerInferenceMaker(ModelInferenceMaker):
     def _get_sentences_with_boundaries(self, original_text: str, buffer: int = 15) -> List[SentenceWithBoundary]:
         """
         Get flair sentences built with SoMaJo tokens along with sentence boundaries in the original text.
+        
         :param original_text: The original text to process.
         :param buffer: The buffer size to use for sentence boundary detection.
         :return: List of SentenceWithBoundary objects
         """
-
         sentences_with_boundaries: List[SentenceWithBoundary] = list()
+
+        ### Replace tab characters with a unique placeholder to prevent tokenization issues.
+        
+        ### Example scenario:
+        
+        ### Janina Parkinson MD Msc		Dr.med. Veronica Kugic		Prof. Dr.Dr. Konstantin Lauterbach
+        ### Stationsärztin			    Oberärztin			        Chefarzt
+        
+        ### This is a typical ending of a clinical note where tab characters are used for alignment.
+        ### Any whitespace character (including tab) is treated same in SoMaJo tokenizer
+        ### In this particular case, MD Msc Dr. would be tokenized as a single token which is undesirable.
+
         text_for_tokenization = original_text.replace('\t', '!!!')
         sentences = self._somajo_tokenizer.tokenizer.tokenize_text([text_for_tokenization])
         offset: int = 0
@@ -110,10 +130,8 @@ class SequenceTaggerInferenceMaker(ModelInferenceMaker):
         :param somajo_tokenized_sentence: The SoMaJo tokenized sentence as a single string.
         :param offset: The offset to start searching from.
         :param buffer: Additional buffer length to consider when searching for the end token.
-
         :return: A tuple (start_index, end_index) representing the sentence boundaries.
         """
-
         tokens = [token for token in somajo_tokenized_sentence.split(' ') if token]
         if not tokens:
             return offset, offset
@@ -154,16 +172,17 @@ class SequenceTaggerInferenceMaker(ModelInferenceMaker):
                                                         model_output: List[SentenceWithBoundary]) -> List[Dict[str, Any]]:
         """
         Convert SentenceWithBoundary objects to aggregated list of entity dict objects.
+        
         :param input_text: The original input text.
         :param model_output: The model output containing SentenceWithBoundary objects.
         :return: A list of entity dict objects.
         """
-
         items: List[Dict[str, Any]] = list()
         token_id = 0
         for swb in model_output:
             next_cursor = swb.start
             sentence = swb.sentence
+            self.logger.info(f'{sentence.to_tagged_string()}')
             labels = sentence.get_labels()
             for label in labels:
                 text = label.data_point.text
@@ -223,5 +242,5 @@ class SequenceTaggerInferenceMaker(ModelInferenceMaker):
                         'token': text
                     })
 
-        # self.logger.info(json.dumps([item for item in items], indent=2, ensure_ascii=False))
+        self.logger.info(json.dumps(items, indent=2, ensure_ascii=False))
         return items

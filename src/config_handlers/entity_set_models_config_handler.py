@@ -1,12 +1,17 @@
 from __future__ import annotations
 from pathlib import Path
-from pydantic import BaseModel, Field, ValidationError
 from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel, Field, ValidationError
 
 import yaml
 
 
 class SupportedModel(BaseModel):
+    """
+    Model supported for an entity set.
+    """
+    
     model_id: str
     model_name: str
     model_description: str = ""
@@ -23,6 +28,10 @@ class SupportedModel(BaseModel):
 
 
 class FineGrainedLabel(BaseModel):
+    """
+    Fine-grained label within an entity set label.
+    """
+
     id: str
     description: str = ""
     background_color: Optional[str] = None
@@ -30,6 +39,10 @@ class FineGrainedLabel(BaseModel):
 
 
 class EntitySetLabel(BaseModel):
+    """
+    Label within an entity set.
+    """
+
     id: str
     description: str = ""
     background_color: Optional[str] = None
@@ -38,6 +51,10 @@ class EntitySetLabel(BaseModel):
 
 
 class EntitySetModel(BaseModel):
+    """
+    Entity set source information and model configuration for an entity set.
+    """
+    
     entity_set_id: str
     corpus_name: str
     corpus_doctypes: List[str] = Field(default_factory=list)
@@ -61,6 +78,11 @@ class EntitySetModelsConfigHandler:
     )
 
     def __init__(self, entity_sets: List[EntitySetModel]):
+        """
+        Initializes the EntitySetModelsConfigHandler with a list of entity sets.
+        
+        :param entity_sets: List of EntitySetModel instances.
+        """
         self._entity_sets: List[EntitySetModel] = entity_sets
         self._by_id: Dict[str, EntitySetModel] = {es.entity_set_id: es for es in entity_sets}
 

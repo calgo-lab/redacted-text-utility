@@ -2,10 +2,11 @@ from pathlib import Path
 from typing import Any, Dict, List, Set, Tuple
 
 import json
-import pandas as pd
 import random
 import re
 import string
+
+import pandas as pd
 
 class TokenTreatmentUtils:
 
@@ -136,7 +137,6 @@ class TokenTreatmentUtils:
                (3) "generic_mask" or (e.g. "maria martin" -> XXXX)
         :return: The redacted text.
         """
-
         redacted_text: str = input_text
         offset: int = 0
         for entity in sorted(private_entities, key=lambda x: x['start']):
@@ -180,7 +180,6 @@ class TokenTreatmentUtils:
                (3) "generic_mask" or (e.g. "maria martin" -> XXXX)
         :return: The path to the exported redacted DataFrame.
         """
-
         redacted_ne_df = ne_df.copy()
         for strategy in replacement_strategies:
             redacted_column_name = f"{text_column}_redacted_with_{strategy}"

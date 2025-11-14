@@ -1,17 +1,35 @@
 from __future__ import annotations
 from pathlib import Path
-from pydantic import BaseModel, Field, ValidationError
 from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel, Field, ValidationError
 
 import yaml
 
 
 class SafeDict(dict):
+    """
+    A dictionary that returns the placeholder string for missing keys.
+    Used for safe string formatting where missing keys should remain unchanged.
+    """
     def __missing__(self, key: str) -> str:
+        """
+        Return the placeholder string for missing keys.
+        
+        :param key: The missing key.
+        :return: The placeholder string in the format "{key}".
+        """
         return "{" + key + "}"
 
 
 def _replace_placeholders(obj: Any, replacements: Dict[str, str]) -> Any:
+    """
+    Recursively replace placeholders in strings within the given object.
+    
+    :param obj: The object to process (can be a string, dict, list, etc.).
+    :param replacements: Dictionary of placeholder replacements.
+    :return: The object with placeholders replaced.
+    """
     if isinstance(obj, str):
         return obj.format_map(SafeDict(replacements))
     if isinstance(obj, dict):
@@ -40,10 +58,18 @@ def _normalize_replacements(replacements: Optional[Dict[str, Any]]) -> Dict[str,
 
 
 class FlairConfig(BaseModel):
+    """
+    Configuration for the Flair framework.
+    """
+
     cache_root_dir: List[str] = Field(..., description="Path components to Flair cache root; may contain placeholders")
 
 
 class FrameworksConfig(BaseModel):
+    """
+    Configuration for various NLP or other machine learning frameworks.
+    """
+
     flair: Optional[FlairConfig] = None
 
 
@@ -58,6 +84,12 @@ class FrameworksConfigHandler:
     )
 
     def __init__(self, raw: Dict[str, Any], config: FrameworksConfig):
+        """
+        Initialize the FrameworksConfigHandler.
+        
+        :param raw: The raw configuration dictionary.
+        :param config: The FrameworksConfig instance.
+        """
         self._raw = raw
         self._config = config
 
@@ -77,7 +109,7 @@ class FrameworksConfigHandler:
         if not cfg_path.exists():
             raise FileNotFoundError(f"Config file not found: {cfg_path}")
 
-        raw = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) or {}
+        raw = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) or dict()
         if replacements:
             normalized = _normalize_replacements(replacements)
             raw = _replace_placeholders(raw, normalized)

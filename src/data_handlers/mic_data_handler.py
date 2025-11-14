@@ -1,14 +1,18 @@
-from core.logging import get_logger
-from huggingface_hub import hf_hub_download
 from pathlib import Path
 from typing import Dict, List
 
+from huggingface_hub import hf_hub_download
+
+from core.logging import get_logger
+
 import pandas as pd
+
 
 class MicDataHandler:
     """
     Data handler for Medical Intent Classification (MIC) dataset from DATEXIS.
     """
+
     def __init__(self, project_root: Path, data_dir: Path = None):
         """
         Initializes the MicDataHandler.
@@ -36,6 +40,8 @@ class MicDataHandler:
         """
         Loads the MIC dataset.
         First checks if the data files exist locally; if not, downloads them from Hugging Face Hub.
+
+        :return: None
         """
         for filename in self.hf_files:
             local_file_path = self.data_dir / "raw" / "data" / filename

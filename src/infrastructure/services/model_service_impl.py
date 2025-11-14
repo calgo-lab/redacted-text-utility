@@ -1,16 +1,22 @@
+from packaging.requirements import Requirement
+from packaging.version import InvalidVersion, Version
+from pathlib import Path
+from typing import Any, Dict, List, Tuple
+
 from config_handlers.entity_set_models_config_handler import EntitySetModelsConfigHandler
 from config_handlers.frameworks_config_handler import FrameworksConfigHandler
-from core.exceptions import EntitySetNotFoundError, ModelNotFoundError, UnsupportedModelLoadingStrategyError, UnsupportedModelImplTypeError
+from core.exceptions import (
+    EntitySetNotFoundException,
+    ModelNotFoundException,
+    UnsupportedModelLoadingStrategyException,
+    UnsupportedModelImplTypeException
+)
 from core.logging import get_logger
 from infrastructure.frameworks.model_inference_maker import ModelInferenceMaker
 from infrastructure.frameworks.model_loader import ModelLoader
 from infrastructure.frameworks.sequence_tagger_inference_maker import SequenceTaggerInferenceMaker
 from infrastructure.frameworks.sequence_tagger_loader import SequenceTaggerLoader
 from infrastructure.services.model_service import ModelService
-from packaging.requirements import Requirement
-from packaging.version import InvalidVersion, Version
-from pathlib import Path
-from typing import Any, Dict, List, Tuple
 from utils.project_utils import ProjectUtils
 
 import importlib.metadata
@@ -20,11 +26,16 @@ class ModelServiceImpl(ModelService):
     """
     Implementation of the ModelService interface.
     This service manages the loading and retrieval of models based on entity sets and model IDs.
-    It uses the AppInfo utility to load application configuration and supported models.
+    It uses different configuration handlers to load models according to the configuration.
     """
 
     _models_registry: Dict[str, Dict[str, Tuple[ModelLoader, ModelInferenceMaker]]] = dict()
+    
     def __init__(self):
+        """
+        Initialize the ModelServiceImpl.
+        This constructor loads the model registry.
+        """
         self.logger = get_logger(__name__)
         self._entity_set_models_config_handler = EntitySetModelsConfigHandler.load_from_file()
         self._frameworks_config_handler = FrameworksConfigHandler.load_from_file(
@@ -71,17 +82,17 @@ class ModelServiceImpl(ModelService):
         
         if model_cfg.model_loading_strategy not in ["local_disk_storage", "huggingface_hub"]:
             self.logger.error(f"Unsupported model loading strategy {model_cfg.model_loading_strategy} for model '{model_cfg.model_id}' in entity set '{entity_set_cfg.entity_set_id}'")
-            raise UnsupportedModelLoadingStrategyError(entity_set_cfg.entity_set_id, model_cfg.model_id, model_cfg.model_loading_strategy)
+            raise UnsupportedModelLoadingStrategyException(entity_set_cfg.entity_set_id, model_cfg.model_id, model_cfg.model_loading_strategy)
         
         if model_cfg.model_impl not in ["SequenceTagger"]:
             self.logger.error(f"Unsupported model impl type {model_cfg.model_impl} for model '{model_cfg.model_id}' in entity set '{entity_set_cfg.entity_set_id}'")
-            raise UnsupportedModelImplTypeError(entity_set_cfg.entity_set_id, model_cfg.model_id, model_cfg.model_impl)
+            raise UnsupportedModelImplTypeException(entity_set_cfg.entity_set_id, model_cfg.model_id, model_cfg.model_impl)
         
         if model_cfg.model_loading_strategy == "local_disk_storage":
             model_path = self._get_model_path(entity_set_cfg, model_cfg)
             if model_cfg.model_impl == "SequenceTagger":
                 model_loader = SequenceTaggerLoader(
-                    model_name_or_path=model_path, 
+                    model_name_or_path=str(model_path), 
                     cache_root=self._frameworks_config_handler.get_flair_cache_root(), 
                     loading_strategy=model_cfg.model_loading_strategy
                 )
@@ -149,9 +160,9 @@ class ModelServiceImpl(ModelService):
         :return: An instance of ModelInferenceMaker for the specified model.
         """
         if entity_set_id not in self._models_registry:
-            raise EntitySetNotFoundError(entity_set_id)
+            raise EntitySetNotFoundException(entity_set_id)
         if model_id not in self._models_registry[entity_set_id]:
-            raise ModelNotFoundError(entity_set_id, model_id)
+            raise ModelNotFoundException(entity_set_id, model_id)
         
         _, model_inference_maker = self._models_registry[entity_set_id][model_id]
         return model_inference_maker
@@ -165,7 +176,7 @@ class ModelServiceImpl(ModelService):
         """
         return {
             m.model_id: m.model_type
-            for m in self._app_info.get_entity_set(entity_set_id).supported_models
+            for m in self._entity_set_models_config_handler.get_entity_set(entity_set_id).supported_models
         }
 
     def get_entity_set_labels(self, entity_set_id) -> List[str]:
@@ -175,7 +186,7 @@ class ModelServiceImpl(ModelService):
         :param entity_set_id: The ID of the entity set for which labels are requested.
         :return: A list of entity labels.
         """
-        entity_set_labels = self._app_info.get_entity_set(entity_set_id).entity_set_labels
+        entity_set_labels = self._entity_set_models_config_handler.get_entity_set(entity_set_id).entity_set_labels
         labels: List[str] = list()
         for label in entity_set_labels:
             if not label.fine_grained:
@@ -192,15 +203,15 @@ class ModelServiceImpl(ModelService):
         :param model_id: The ID of the model for which the configuration is requested.
         :return: A dictionary containing the model configuration.
         """
-        entity_set = self._app_info.get_entity_set(entity_set_id)
+        entity_set = self._entity_set_models_config_handler.get_entity_set(entity_set_id)
         if not entity_set:
-            raise EntitySetNotFoundError(entity_set_id)
+            raise EntitySetNotFoundException(entity_set_id)
         model_config = next(
             (m for m in entity_set.supported_models if m.model_id == model_id), 
             None
         )
         if not model_config:
-            raise ModelNotFoundError(entity_set_id, model_id)
+            raise ModelNotFoundException(entity_set_id, model_id)
         return model_config.model_dump()
 
     def reload_model_registry(self) -> None:

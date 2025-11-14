@@ -1,5 +1,6 @@
 from somajo import SoMaJo
 
+
 class SoMaJoTokenizer:
     """
     This class provides access to instances of the SoMaJo tokenizer.
@@ -11,6 +12,7 @@ class SoMaJoTokenizer:
                  split_sentences: bool = True):
         """
         Initialize the SoMaJo tokenizer.
+        
         :param language: The language model to use for tokenization.
         :param split_camel_case: Whether to split camel case words.
         :param split_sentences: Whether to split sentences.
@@ -23,6 +25,7 @@ class SoMaJoTokenizer:
     def tokenizer(self) -> SoMaJo:
         """
         Get the SoMaJo tokenizer instance.
+        
         :return: The SoMaJo tokenizer instance.
         """
         return self._tokenizer

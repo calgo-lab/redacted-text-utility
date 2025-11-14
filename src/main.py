@@ -2,15 +2,18 @@ from pathlib import Path
 import sys
 sys.path.append(str(Path(__file__).resolve().parent))
 
+from typing import Any, Dict, List
+
+from IPython.display import display
+
 from core.logging import configure_logging, get_logger
 from data_handlers.mic_data_handler import MicDataHandler
 from infrastructure.services.entity_prediction_service import EntityPredictionService
-from IPython.display import display
-from typing import Any, Dict, List
 from utils.project_utils import ProjectUtils
 from utils.token_treatment_utils import TokenTreatmentUtils
 
 import json
+
 import pandas as pd
 
 

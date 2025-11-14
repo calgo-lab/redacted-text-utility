@@ -1,10 +1,13 @@
+from pathlib import Path
+
+from tqdm import tqdm
+
 from core.logging import get_logger
 from infrastructure.services.model_service import ModelService
 from infrastructure.services.model_service_impl import ModelServiceImpl
-from pathlib import Path
-from tqdm import tqdm
 
 import json
+
 import pandas as pd
 
 
@@ -14,6 +17,9 @@ class EntityPredictionService:
     """
 
     def __init__(self):
+        """
+        Initializes the EntityPredictionService with a ModelService instance.
+        """
         self.logger = get_logger(__name__)
         self._model_service: ModelService = ModelServiceImpl()
     

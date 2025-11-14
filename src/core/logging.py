@@ -1,6 +1,7 @@
-from loguru import logger
 from pathlib import Path
 from typing import Optional
+
+from loguru import logger
 
 import sys
 
@@ -9,7 +10,6 @@ LOGS_DIR = Path("logs")
 LOGS_DIR.mkdir(exist_ok=True)
 
 _is_configured = False
-
 
 def configure_logging(log_level: str = "INFO",
                       json_format: bool = False,
@@ -96,7 +96,6 @@ def get_logger(name: Optional[str] = None):
     if name:
         return logger.bind(module=name)
     return logger
-
 
 def log_exception(message: str, **kwargs):
     """
