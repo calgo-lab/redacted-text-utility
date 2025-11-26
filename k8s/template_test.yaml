@@ -1,0 +1,84 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ experiment }}
+  labels:
+    app: {{ experiment }}
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: {{ experiment }}
+    spec:
+      containers:
+        - name: {{ experiment }}
+          image: {{ image }}
+          command: [ "python", "infrastructure/frameworks/task_model/task_main.py",
+            "{{ mode }}", 
+            "--trainer.accelerator=gpu",
+            "--trainer.devices=auto",
+            "--trainer.precision=bf16-mixed",
+            "--trainer.default_root_dir={{ root_dir }}",
+            "--trainer.callbacks+=EarlyStopping",
+            "--trainer.callbacks.patience=5",
+            "--trainer.callbacks.mode=max",
+            "--trainer.callbacks.monitor=Val/F1_macro",
+            "--trainer.callbacks+=ModelCheckpoint",
+            "--trainer.callbacks.dirpath={{ root_dir }}",
+            "--trainer.callbacks.filename=checkpoint",
+            "--trainer.callbacks.save_top_k=1",
+            "--trainer.callbacks.monitor=Val/F1_macro",
+            "--trainer.num_sanity_val_steps=1",
+            "--data.num_workers=8",
+            "--data.eval_batch_size={{ batch_size }}",
+            "--data.batch_size={{ batch_size }}",
+            "--data.tokenizer={{ model_name }}",
+            "--model.encoder_model_name={{ model_name }}",
+            "--model.num_classes=20",
+            "--model.warmup_steps={{ warmup_steps }}",    
+            "--model.device=cuda",
+            "--model.eval_treshold=0.5",
+            "--model.lr={{ lr }}",
+            "--model.hidden_dim={{ hidden_dim }}",
+            "--seed_everything={{ seed }}",
+            "--data.dataset_path={{ dataset_path }}",
+            "--data.dataset_stem={{ dataset_stem }}",
+            "--data.redaction_type={{ redaction_type }}",
+            "--model.save_scores= {{ save_scores }}",
+            "--model.test_out={{ test_out }}",
+            "--ckpt_path={{ ckpt }}",
+          ]
+          env:
+            - name: LANG
+              value: 'C.UTF-8'
+            - name: TOKENIZERS_PARALLELISM
+              value: 'true'
+            - name: NCCL_DEBUG
+              value: 'INFO'
+            - name: HF_HOME
+              value: "/pvc/huggingface_cache"
+          resources:
+            requests:
+              cpu: "1"
+            limits:
+              nvidia.com/gpu: "1"
+              memory: 15Gi
+          volumeMounts:
+            - name: text-redact-pvc
+              mountPath: /pvc
+            - name: dshm
+              mountPath: /dev/shm
+      nodeSelector:
+        #kubernetes.io/hostname: cl-worker24
+        gpu: a100
+      volumes:
+        - name: text-redact-pvc
+          persistentVolumeClaim:
+            claimName: text-redact-pvc
+        - name: dshm
+          emptyDir:
+            medium: Memory
+      imagePullSecrets:
+        - name: private-registry-auth
+      restartPolicy: Never

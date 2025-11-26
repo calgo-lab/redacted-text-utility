@@ -1,0 +1,84 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: 42-none-test-random-mask
+  labels:
+    app: 42-none-test-random-mask
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: 42-none-test-random-mask
+    spec:
+      containers:
+        - name: 42-none-test-random-mask
+          image: registry.datexis.com/troehr/text_redact
+          command: [ "python", "infrastructure/frameworks/task_model/task_main.py",
+            "test", 
+            "--trainer.accelerator=gpu",
+            "--trainer.devices=auto",
+            "--trainer.precision=bf16-mixed",
+            "--trainer.default_root_dir=/pvc/logs/biomedbert/42-biomedbert-none-on-text_redacted_with_random_mask",
+            "--trainer.callbacks+=EarlyStopping",
+            "--trainer.callbacks.patience=5",
+            "--trainer.callbacks.mode=max",
+            "--trainer.callbacks.monitor=Val/F1_macro",
+            "--trainer.callbacks+=ModelCheckpoint",
+            "--trainer.callbacks.dirpath=/pvc/logs/biomedbert/42-biomedbert-none-on-text_redacted_with_random_mask",
+            "--trainer.callbacks.filename=checkpoint",
+            "--trainer.callbacks.save_top_k=1",
+            "--trainer.callbacks.monitor=Val/F1_macro",
+            "--trainer.num_sanity_val_steps=1",
+            "--data.num_workers=8",
+            "--data.eval_batch_size=8",
+            "--data.batch_size=8",
+            "--data.tokenizer=microsoft/BiomedNLP-biomedbert-base-uncased-abstract-fulltext",
+            "--model.encoder_model_name=microsoft/BiomedNLP-biomedbert-base-uncased-abstract-fulltext",
+            "--model.num_classes=20",
+            "--model.warmup_steps=100",    
+            "--model.device=cuda",
+            "--model.eval_treshold=0.5",
+            "--model.lr=2e-05",
+            "--model.hidden_dim=768",
+            "--seed_everything=42",
+            "--data.dataset_path=/pvc/data/processed",
+            "--data.dataset_stem=-00000-of-00001_ne_redacted.parquet",
+            "--data.redaction_type=text_redacted_with_random_mask",
+            "--model.save_scores= True",
+            "--model.test_out=/pvc/experiments/42-biomedbert-none-on-text_redacted_with_random_mask",
+            "--ckpt_path=/pvc/logs/biomedbert/42-biomedbert-none/checkpoint.ckpt",
+          ]
+          env:
+            - name: LANG
+              value: 'C.UTF-8'
+            - name: TOKENIZERS_PARALLELISM
+              value: 'true'
+            - name: NCCL_DEBUG
+              value: 'INFO'
+            - name: HF_HOME
+              value: "/pvc/huggingface_cache"
+          resources:
+            requests:
+              cpu: "1"
+            limits:
+              nvidia.com/gpu: "1"
+              memory: 15Gi
+          volumeMounts:
+            - name: text-redact-pvc
+              mountPath: /pvc
+            - name: dshm
+              mountPath: /dev/shm
+      nodeSelector:
+        #kubernetes.io/hostname: cl-worker24
+        gpu: a100
+      volumes:
+        - name: text-redact-pvc
+          persistentVolumeClaim:
+            claimName: text-redact-pvc
+        - name: dshm
+          emptyDir:
+            medium: Memory
+      imagePullSecrets:
+        - name: private-registry-auth
+      restartPolicy: Never
