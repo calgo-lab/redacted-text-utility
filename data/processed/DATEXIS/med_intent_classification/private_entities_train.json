@@ -1,0 +1,5138 @@
+[
+  {
+    "token_id": "T1",
+    "label": "GPE",
+    "start": 118,
+    "end": 125,
+    "token": "georgia",
+    "row_idx": 9
+  },
+  {
+    "token_id": "T2",
+    "label": "GPE",
+    "start": 131,
+    "end": 138,
+    "token": "alabama",
+    "row_idx": 9
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 18,
+    "end": 29,
+    "token": "diana scott",
+    "row_idx": 11
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 48,
+    "end": 57,
+    "token": "12/8/1920",
+    "row_idx": 11
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 83,
+    "end": 91,
+    "token": "7/9/2021",
+    "row_idx": 11
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 10,
+    "token": "matthew",
+    "row_idx": 13
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 48,
+    "end": 55,
+    "token": "carolyn",
+    "row_idx": 14
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "zarbee",
+    "row_idx": 36
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 83,
+    "end": 87,
+    "token": "wood",
+    "row_idx": 42
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 9,
+    "token": "anna",
+    "row_idx": 54
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 13,
+    "end": 20,
+    "token": "theresa",
+    "row_idx": 59
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 33,
+    "end": 42,
+    "token": "christine",
+    "row_idx": 71
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 53,
+    "end": 64,
+    "token": "63-year-old",
+    "row_idx": 71
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 9,
+    "token": "betty",
+    "row_idx": 74
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 105,
+    "end": 111,
+    "token": "cooper",
+    "row_idx": 92
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 12,
+    "token": "lawrence",
+    "row_idx": 116
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 64,
+    "end": 71,
+    "token": "sanchez",
+    "row_idx": 120
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 74,
+    "end": 79,
+    "token": "karen",
+    "row_idx": 121
+  },
+  {
+    "token_id": "T1",
+    "label": "ORG",
+    "start": 77,
+    "end": 83,
+    "token": "goodrx",
+    "row_idx": 124
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 35,
+    "end": 46,
+    "token": "jason tatum",
+    "row_idx": 131
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 51,
+    "end": 63,
+    "token": "jaylen brown",
+    "row_idx": 131
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 104,
+    "end": 110,
+    "token": "miller",
+    "row_idx": 134
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 7,
+    "end": 16,
+    "token": "hernandez",
+    "row_idx": 135
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 23,
+    "end": 29,
+    "token": "fisher",
+    "row_idx": 135
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 18,
+    "token": "betty hill",
+    "row_idx": 137
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 43,
+    "end": 52,
+    "token": "2/21/1968",
+    "row_idx": 137
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 331,
+    "end": 335,
+    "token": "hill",
+    "row_idx": 137
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 48,
+    "end": 51,
+    "token": "dax",
+    "row_idx": 141
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 71,
+    "end": 74,
+    "token": "dax",
+    "row_idx": 141
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 12,
+    "token": "elizabeth",
+    "row_idx": 150
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 18,
+    "end": 30,
+    "token": "53 -year-old",
+    "row_idx": 150
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 144,
+    "end": 153,
+    "token": "elizabeth",
+    "row_idx": 150
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 9,
+    "token": "linda",
+    "row_idx": 185
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 73,
+    "end": 80,
+    "token": "sanchez",
+    "row_idx": 209
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "bryan",
+    "row_idx": 214
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 14,
+    "end": 25,
+    "token": "55-year-old",
+    "row_idx": 214
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 129,
+    "end": 134,
+    "token": "bryan",
+    "row_idx": 214
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 13,
+    "token": "david",
+    "row_idx": 215
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 10,
+    "token": "susan",
+    "row_idx": 266
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 16,
+    "end": 27,
+    "token": "26-year-old",
+    "row_idx": 266
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 74,
+    "end": 79,
+    "token": "susan",
+    "row_idx": 266
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 34,
+    "end": 40,
+    "token": "angela",
+    "row_idx": 269
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 11,
+    "token": "hannah",
+    "row_idx": 271
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 14,
+    "token": "alexander",
+    "row_idx": 301
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 20,
+    "end": 31,
+    "token": "62-year-old",
+    "row_idx": 301
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 150,
+    "end": 159,
+    "token": "alexander",
+    "row_idx": 301
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 12,
+    "end": 18,
+    "token": "andrew",
+    "row_idx": 308
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 24,
+    "end": 35,
+    "token": "62-year-old",
+    "row_idx": 308
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 191,
+    "end": 197,
+    "token": "andrew",
+    "row_idx": 308
+  },
+  {
+    "token_id": "T1",
+    "label": "GPE",
+    "start": 30,
+    "end": 37,
+    "token": "florida",
+    "row_idx": 331
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 31,
+    "end": 43,
+    "token": "january 2021",
+    "row_idx": 346
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 64,
+    "end": 67,
+    "token": "dax",
+    "row_idx": 352
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 87,
+    "end": 90,
+    "token": "dax",
+    "row_idx": 352
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 13,
+    "end": 19,
+    "token": "sharon",
+    "row_idx": 410
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "sophia",
+    "row_idx": 418
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 16,
+    "end": 22,
+    "token": "ashley",
+    "row_idx": 429
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 106,
+    "end": 125,
+    "token": "december 5th , 2019",
+    "row_idx": 431
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 6,
+    "token": "martha",
+    "row_idx": 432
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 12,
+    "end": 23,
+    "token": "50-year-old",
+    "row_idx": 432
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 170,
+    "end": 176,
+    "token": "martha",
+    "row_idx": 432
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 11,
+    "token": "matthew",
+    "row_idx": 443
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 10,
+    "token": "gregory",
+    "row_idx": 451
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 14,
+    "end": 18,
+    "token": "mark",
+    "row_idx": 452
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 14,
+    "end": 26,
+    "token": "82 -year-old",
+    "row_idx": 459
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 221,
+    "end": 226,
+    "token": "kevin",
+    "row_idx": 459
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 12,
+    "end": 17,
+    "token": "karen",
+    "row_idx": 468
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 14,
+    "end": 19,
+    "token": "keith",
+    "row_idx": 481
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 25,
+    "end": 36,
+    "token": "58-year-old",
+    "row_idx": 481
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "frank",
+    "row_idx": 508
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 28,
+    "end": 34,
+    "token": "hannah",
+    "row_idx": 512
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 13,
+    "end": 18,
+    "token": "julie",
+    "row_idx": 556
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 11,
+    "token": "matthew",
+    "row_idx": 580
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 51,
+    "end": 59,
+    "token": "anderson",
+    "row_idx": 591
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 64,
+    "end": 76,
+    "token": "44-years-old",
+    "row_idx": 591
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "dragon",
+    "row_idx": 601
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 52,
+    "end": 57,
+    "token": "james",
+    "row_idx": 602
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 16,
+    "token": "brittany edwards",
+    "row_idx": 603
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 19,
+    "end": 28,
+    "token": "07 , 1898",
+    "row_idx": 603
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 118,
+    "end": 125,
+    "token": "edwards",
+    "row_idx": 603
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 142,
+    "end": 153,
+    "token": "32-year-old",
+    "row_idx": 603
+  },
+  {
+    "token_id": "T5",
+    "label": "DATE",
+    "start": 182,
+    "end": 196,
+    "token": "august of 2019",
+    "row_idx": 603
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 61,
+    "end": 67,
+    "token": "watson",
+    "row_idx": 610
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 48,
+    "end": 58,
+    "token": "april 10th",
+    "row_idx": 657
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 10,
+    "token": "abigail",
+    "row_idx": 662
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 9,
+    "token": "john",
+    "row_idx": 666
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 10,
+    "token": "susan",
+    "row_idx": 696
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 5,
+    "token": "diane",
+    "row_idx": 703
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 11,
+    "end": 22,
+    "token": "28 year old",
+    "row_idx": 703
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 153,
+    "end": 158,
+    "token": "diane",
+    "row_idx": 703
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 32,
+    "end": 38,
+    "token": "miller",
+    "row_idx": 704
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 17,
+    "end": 20,
+    "token": "dax",
+    "row_idx": 720
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 36,
+    "end": 40,
+    "token": "jack",
+    "row_idx": 721
+  },
+  {
+    "token_id": "T1",
+    "label": "GPE",
+    "start": 63,
+    "end": 71,
+    "token": "new york",
+    "row_idx": 723
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 20,
+    "end": 26,
+    "token": "philip",
+    "row_idx": 731
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 21,
+    "end": 28,
+    "token": "carolyn",
+    "row_idx": 745
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "keith",
+    "row_idx": 758
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 9,
+    "token": "teresa",
+    "row_idx": 762
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 11,
+    "token": "martha",
+    "row_idx": 764
+  },
+  {
+    "token_id": "T1",
+    "label": "ORG",
+    "start": 7,
+    "end": 15,
+    "token": "mcdonald",
+    "row_idx": 798
+  },
+  {
+    "token_id": "T2",
+    "label": "ORG",
+    "start": 152,
+    "end": 160,
+    "token": "mcdonald",
+    "row_idx": 798
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 801
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 820
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 8,
+    "token": "jose",
+    "row_idx": 833
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 12,
+    "end": 21,
+    "token": "elizabeth",
+    "row_idx": 837
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 27,
+    "end": 38,
+    "token": "66-year-old",
+    "row_idx": 837
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 159,
+    "end": 168,
+    "token": "elizabeth",
+    "row_idx": 837
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 14,
+    "end": 26,
+    "token": "37 -year-old",
+    "row_idx": 863
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 11,
+    "end": 16,
+    "token": "david",
+    "row_idx": 865
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 407,
+    "end": 421,
+    "token": "january , 2021",
+    "row_idx": 925
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "betty",
+    "row_idx": 939
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 9,
+    "token": "jeremy",
+    "row_idx": 946
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 43,
+    "end": 46,
+    "token": "dax",
+    "row_idx": 950
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 70,
+    "end": 73,
+    "token": "dax",
+    "row_idx": 950
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 10,
+    "token": "russell",
+    "row_idx": 953
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 77,
+    "end": 96,
+    "token": "november 3rd , 2019",
+    "row_idx": 959
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 21,
+    "end": 24,
+    "token": "roy",
+    "row_idx": 963
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 30,
+    "end": 41,
+    "token": "50-year-old",
+    "row_idx": 963
+  },
+  {
+    "token_id": "T1",
+    "label": "GPE",
+    "start": 59,
+    "end": 65,
+    "token": "boston",
+    "row_idx": 986
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 8,
+    "token": "alan",
+    "row_idx": 989
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 13,
+    "token": "michelle king",
+    "row_idx": 996
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 30,
+    "end": 40,
+    "token": "01/05/1986",
+    "row_idx": 996
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 169,
+    "end": 173,
+    "token": "king",
+    "row_idx": 996
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 13,
+    "end": 21,
+    "token": "anderson",
+    "row_idx": 997
+  },
+  {
+    "token_id": "T1",
+    "label": "GPE",
+    "start": 11,
+    "end": 18,
+    "token": "alabama",
+    "row_idx": 1003
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 13,
+    "token": "karen",
+    "row_idx": 1006
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 10,
+    "token": "brian",
+    "row_idx": 1021
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 24,
+    "end": 33,
+    "token": "hernandez",
+    "row_idx": 1022
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 39,
+    "end": 50,
+    "token": "48-year-old",
+    "row_idx": 1022
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "logan",
+    "row_idx": 1030
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 11,
+    "token": "matthew",
+    "row_idx": 1051
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 37,
+    "end": 54,
+    "token": "jacqueline miller",
+    "row_idx": 1060
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 122,
+    "end": 132,
+    "token": "jacqueline",
+    "row_idx": 1060
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 20,
+    "end": 34,
+    "token": "matthew rogers",
+    "row_idx": 1068
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 51,
+    "end": 60,
+    "token": "5/24/2007",
+    "row_idx": 1068
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 183,
+    "end": 189,
+    "token": "3/3/21",
+    "row_idx": 1068
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 12,
+    "token": "karen nelson",
+    "row_idx": 1082
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 18,
+    "end": 29,
+    "token": "3 -year-old",
+    "row_idx": 1082
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 132,
+    "end": 137,
+    "token": "karen",
+    "row_idx": 1082
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 170,
+    "end": 175,
+    "token": "karen",
+    "row_idx": 1082
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 13,
+    "end": 20,
+    "token": "sanchez",
+    "row_idx": 1084
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 16,
+    "end": 30,
+    "token": "sophia jackson",
+    "row_idx": 1089
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 54,
+    "end": 65,
+    "token": "57 year old",
+    "row_idx": 1089
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 262,
+    "end": 269,
+    "token": "jackson",
+    "row_idx": 1089
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 11,
+    "token": "albert",
+    "row_idx": 1101
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 11,
+    "token": "edward",
+    "row_idx": 1103
+  },
+  {
+    "token_id": "T1",
+    "label": "ORG",
+    "start": 25,
+    "end": 35,
+    "token": "mcdonald's",
+    "row_idx": 1108
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 514,
+    "end": 520,
+    "token": "alexis",
+    "row_idx": 1117
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 61,
+    "end": 64,
+    "token": "dax",
+    "row_idx": 1132
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 83,
+    "end": 86,
+    "token": "dax",
+    "row_idx": 1132
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 6,
+    "token": "cheryl",
+    "row_idx": 1151
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 12,
+    "end": 23,
+    "token": "34-year-old",
+    "row_idx": 1151
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 126,
+    "end": 132,
+    "token": "cheryl",
+    "row_idx": 1151
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 15,
+    "token": "patrick allen .",
+    "row_idx": 1168
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 32,
+    "end": 40,
+    "token": "7/7/1977",
+    "row_idx": 1168
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 183,
+    "end": 192,
+    "token": "1/23/2020",
+    "row_idx": 1168
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 262,
+    "end": 267,
+    "token": "allen",
+    "row_idx": 1168
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 9,
+    "token": "pamela",
+    "row_idx": 1202
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 12,
+    "token": "raymond",
+    "row_idx": 1205
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 41,
+    "end": 46,
+    "token": "jerry",
+    "row_idx": 1208
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 10,
+    "token": "beverly",
+    "row_idx": 1211
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 16,
+    "end": 28,
+    "token": "53 -year-old",
+    "row_idx": 1211
+  },
+  {
+    "token_id": "T5",
+    "label": "GPE",
+    "start": 323,
+    "end": 330,
+    "token": "beverly",
+    "row_idx": 1211
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 14,
+    "token": "stephanie",
+    "row_idx": 1217
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 15,
+    "token": "russell ramirez",
+    "row_idx": 1237
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 21,
+    "end": 33,
+    "token": "45 -year-old",
+    "row_idx": 1237
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 134,
+    "end": 149,
+    "token": "twenty eighteen",
+    "row_idx": 1237
+  },
+  {
+    "token_id": "T5",
+    "label": "PERSON",
+    "start": 404,
+    "end": 411,
+    "token": "russell",
+    "row_idx": 1237
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 33,
+    "end": 48,
+    "token": "twenty eighteen",
+    "row_idx": 1242
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 467,
+    "end": 469,
+    "token": "74",
+    "row_idx": 1262
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 10,
+    "token": "james",
+    "row_idx": 1300
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "logan",
+    "row_idx": 1302
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 14,
+    "end": 25,
+    "token": "58 year old",
+    "row_idx": 1302
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 71,
+    "end": 74,
+    "token": "dax",
+    "row_idx": 1322
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 94,
+    "end": 97,
+    "token": "dax",
+    "row_idx": 1322
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 11,
+    "token": "brandon",
+    "row_idx": 1324
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 37,
+    "end": 40,
+    "token": "dax",
+    "row_idx": 1325
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 60,
+    "end": 63,
+    "token": "dax",
+    "row_idx": 1325
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 126,
+    "end": 132,
+    "token": "nelson",
+    "row_idx": 1347
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 44,
+    "end": 50,
+    "token": "ashley",
+    "row_idx": 1351
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 13,
+    "end": 19,
+    "token": "dragon",
+    "row_idx": 1358
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 27,
+    "end": 40,
+    "token": "sharon brooks",
+    "row_idx": 1358
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 46,
+    "end": 57,
+    "token": "48 year old",
+    "row_idx": 1358
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 9,
+    "token": "dennis",
+    "row_idx": 1362
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 15,
+    "end": 27,
+    "token": "57 -year-old",
+    "row_idx": 1362
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 157,
+    "end": 163,
+    "token": "dennis",
+    "row_idx": 1362
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 51,
+    "end": 55,
+    "token": "ward",
+    "row_idx": 1382
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 75,
+    "end": 86,
+    "token": "52-year-old",
+    "row_idx": 1382
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 29,
+    "end": 34,
+    "token": "karen",
+    "row_idx": 1385
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 11,
+    "token": "andrew",
+    "row_idx": 1388
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 11,
+    "end": 17,
+    "token": "dragon",
+    "row_idx": 1398
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 6,
+    "token": "howard",
+    "row_idx": 1412
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 9,
+    "token": "evelyn",
+    "row_idx": 1421
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 14,
+    "end": 20,
+    "token": "abc123",
+    "row_idx": 1425
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 39,
+    "end": 57,
+    "token": "january 1st , 1960",
+    "row_idx": 1425
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 73,
+    "end": 84,
+    "token": "60 year old",
+    "row_idx": 1425
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 9,
+    "token": "anna",
+    "row_idx": 1431
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 74,
+    "end": 78,
+    "token": "ward",
+    "row_idx": 1438
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 54,
+    "end": 61,
+    "token": "deborah",
+    "row_idx": 1452
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 49,
+    "end": 52,
+    "token": "dax",
+    "row_idx": 1456
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 104,
+    "end": 107,
+    "token": "dax",
+    "row_idx": 1456
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 30,
+    "end": 34,
+    "token": "hill",
+    "row_idx": 1457
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 45,
+    "end": 56,
+    "token": "41-year-old",
+    "row_idx": 1457
+  },
+  {
+    "token_id": "T1",
+    "label": "GPE",
+    "start": 174,
+    "end": 182,
+    "token": "kennesaw",
+    "row_idx": 1463
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 57,
+    "end": 60,
+    "token": "dax",
+    "row_idx": 1490
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 80,
+    "end": 83,
+    "token": "dax",
+    "row_idx": 1490
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 15,
+    "end": 21,
+    "token": "alexis",
+    "row_idx": 1500
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 116,
+    "end": 127,
+    "token": "fitzpatrick",
+    "row_idx": 1536
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 60,
+    "end": 69,
+    "token": "gutierrez",
+    "row_idx": 1537
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 16,
+    "end": 31,
+    "token": "randy gutierrez",
+    "row_idx": 1545
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 50,
+    "end": 59,
+    "token": "8/10/2020",
+    "row_idx": 1545
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 10,
+    "token": "james",
+    "row_idx": 1546
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 26,
+    "end": 32,
+    "token": "taylor",
+    "row_idx": 1550
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 175,
+    "end": 187,
+    "token": "ninety seven",
+    "row_idx": 1575
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 9,
+    "token": "rachel",
+    "row_idx": 1596
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 15,
+    "end": 26,
+    "token": "48-year-old",
+    "row_idx": 1596
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 39,
+    "end": 44,
+    "token": "randy",
+    "row_idx": 1604
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 12,
+    "token": "elizabeth",
+    "row_idx": 1607
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 5,
+    "token": "karen",
+    "row_idx": 1609
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 11,
+    "end": 23,
+    "token": "34 -year-old",
+    "row_idx": 1609
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 134,
+    "end": 139,
+    "token": "karen",
+    "row_idx": 1609
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 24,
+    "end": 29,
+    "token": "joyce",
+    "row_idx": 1633
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 13,
+    "token": "lawrence",
+    "row_idx": 1652
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 19,
+    "end": 30,
+    "token": "62-year-old",
+    "row_idx": 1652
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 210,
+    "end": 218,
+    "token": "lawrence",
+    "row_idx": 1652
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 10,
+    "token": "louis",
+    "row_idx": 1659
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 63,
+    "end": 68,
+    "token": "jerry",
+    "row_idx": 1667
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 84,
+    "end": 92,
+    "token": "thompson",
+    "row_idx": 1667
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 28,
+    "end": 32,
+    "token": "cook",
+    "row_idx": 1671
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 5,
+    "token": "james",
+    "row_idx": 1690
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 11,
+    "end": 22,
+    "token": "57 year old",
+    "row_idx": 1690
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 148,
+    "end": 153,
+    "token": "james",
+    "row_idx": 1690
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 111,
+    "end": 119,
+    "token": "10 years",
+    "row_idx": 1692
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 7,
+    "token": "john",
+    "row_idx": 1693
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 13,
+    "end": 24,
+    "token": "55-year-old",
+    "row_idx": 1693
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 144,
+    "end": 148,
+    "token": "john",
+    "row_idx": 1693
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "logan",
+    "row_idx": 1722
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 165,
+    "end": 171,
+    "token": "ashley",
+    "row_idx": 1726
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 1731
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 11,
+    "token": "gregory",
+    "row_idx": 1736
+  },
+  {
+    "token_id": "T1",
+    "label": "GPE",
+    "start": 8,
+    "end": 15,
+    "token": "detroit",
+    "row_idx": 1753
+  },
+  {
+    "token_id": "T2",
+    "label": "ORG",
+    "start": 38,
+    "end": 51,
+    "token": "the red wings",
+    "row_idx": 1753
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 9,
+    "token": "diana",
+    "row_idx": 1784
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 7,
+    "end": 14,
+    "token": "vincent",
+    "row_idx": 1790
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 20,
+    "end": 31,
+    "token": "56-year-old",
+    "row_idx": 1790
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 108,
+    "end": 115,
+    "token": "vincent",
+    "row_idx": 1790
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 63,
+    "end": 68,
+    "token": "karen",
+    "row_idx": 1793
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 16,
+    "end": 31,
+    "token": "emily hernandez",
+    "row_idx": 1825
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 50,
+    "end": 63,
+    "token": "march 26 2001",
+    "row_idx": 1825
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 76,
+    "end": 87,
+    "token": "20 year old",
+    "row_idx": 1825
+  },
+  {
+    "token_id": "T5",
+    "label": "DATE",
+    "start": 249,
+    "end": 259,
+    "token": "april 2020",
+    "row_idx": 1825
+  },
+  {
+    "token_id": "T12",
+    "label": "PERSON",
+    "start": 680,
+    "end": 685,
+    "token": "emily",
+    "row_idx": 1825
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 7,
+    "token": "crestor",
+    "row_idx": 1832
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 10,
+    "end": 17,
+    "token": "rebecca",
+    "row_idx": 1837
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 23,
+    "end": 34,
+    "token": "27-year-old",
+    "row_idx": 1837
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 60,
+    "end": 67,
+    "token": "russell",
+    "row_idx": 1848
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 9,
+    "token": "andrea",
+    "row_idx": 1853
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 13,
+    "token": "julia",
+    "row_idx": 1863
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 109,
+    "end": 124,
+    "token": "twenty eighteen",
+    "row_idx": 1863
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 26,
+    "end": 40,
+    "token": "jordan roberts",
+    "row_idx": 1887
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 59,
+    "end": 67,
+    "token": "3/2/1972",
+    "row_idx": 1887
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 77,
+    "end": 88,
+    "token": "49 year old",
+    "row_idx": 1887
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 181,
+    "end": 197,
+    "token": "march 1st , 2021",
+    "row_idx": 1887
+  },
+  {
+    "token_id": "T5",
+    "label": "PERSON",
+    "start": 210,
+    "end": 217,
+    "token": "roberts",
+    "row_idx": 1887
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 37,
+    "end": 40,
+    "token": "dax",
+    "row_idx": 1891
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 60,
+    "end": 63,
+    "token": "dax",
+    "row_idx": 1891
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 11,
+    "token": "joseph",
+    "row_idx": 1894
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 134,
+    "end": 147,
+    "token": "martha rivera",
+    "row_idx": 1895
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 760,
+    "end": 765,
+    "token": "billy",
+    "row_idx": 1901
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 99,
+    "end": 104,
+    "token": "moore",
+    "row_idx": 1903
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 213,
+    "end": 228,
+    "token": "twenty eighteen",
+    "row_idx": 1903
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 11,
+    "token": "hannah",
+    "row_idx": 1904
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 24,
+    "end": 35,
+    "token": "52-year-old",
+    "row_idx": 1904
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 92,
+    "end": 98,
+    "token": "hannah",
+    "row_idx": 1904
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 13,
+    "end": 19,
+    "token": "dragon",
+    "row_idx": 1913
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 72,
+    "end": 79,
+    "token": "matthew",
+    "row_idx": 1914
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "bruce",
+    "row_idx": 1930
+  },
+  {
+    "token_id": "T2",
+    "label": "GPE",
+    "start": 17,
+    "end": 24,
+    "token": "beverly",
+    "row_idx": 1935
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "billy",
+    "row_idx": 1944
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 33,
+    "end": 38,
+    "token": "karen",
+    "row_idx": 1957
+  },
+  {
+    "token_id": "T1",
+    "label": "GPE",
+    "start": 5,
+    "end": 15,
+    "token": "washington",
+    "row_idx": 1981
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 55,
+    "end": 60,
+    "token": "kevin",
+    "row_idx": 1999
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 107,
+    "end": 119,
+    "token": "october 2019",
+    "row_idx": 2016
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 14,
+    "token": "sophia brown .",
+    "row_idx": 2018
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 31,
+    "end": 40,
+    "token": "3/17/1946",
+    "row_idx": 2018
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 183,
+    "end": 188,
+    "token": "brown",
+    "row_idx": 2018
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "wayne",
+    "row_idx": 2021
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 65,
+    "end": 71,
+    "token": "ashley",
+    "row_idx": 2048
+  },
+  {
+    "token_id": "T1",
+    "label": "ORG",
+    "start": 23,
+    "end": 28,
+    "token": "apple",
+    "row_idx": 2060
+  },
+  {
+    "token_id": "T3",
+    "label": "ORG",
+    "start": 83,
+    "end": 88,
+    "token": "apple",
+    "row_idx": 2060
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 13,
+    "end": 16,
+    "token": "joe",
+    "row_idx": 2063
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 2064
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 37,
+    "end": 45,
+    "token": "martinez",
+    "row_idx": 2064
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 56,
+    "end": 67,
+    "token": "43-year-old",
+    "row_idx": 2064
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "joshua",
+    "row_idx": 2071
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 67,
+    "end": 73,
+    "token": "brenda",
+    "row_idx": 2071
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 6,
+    "token": "edward",
+    "row_idx": 2081
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 12,
+    "end": 23,
+    "token": "59 year old",
+    "row_idx": 2081
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 186,
+    "end": 192,
+    "token": "edward",
+    "row_idx": 2081
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 23,
+    "end": 29,
+    "token": "age 67",
+    "row_idx": 2083
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 12,
+    "token": "donna torres",
+    "row_idx": 2094
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 31,
+    "end": 41,
+    "token": "08/01/1980",
+    "row_idx": 2094
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 66,
+    "end": 69,
+    "token": "dax",
+    "row_idx": 2102
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 89,
+    "end": 92,
+    "token": "dax",
+    "row_idx": 2102
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 12,
+    "token": "edwards",
+    "row_idx": 2106
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 61,
+    "end": 73,
+    "token": "54 -year-old",
+    "row_idx": 2106
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 16,
+    "end": 21,
+    "token": "karen",
+    "row_idx": 2110
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 15,
+    "end": 22,
+    "token": "matthew",
+    "row_idx": 2120
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 10,
+    "end": 15,
+    "token": "james",
+    "row_idx": 2131
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 13,
+    "token": "wayne",
+    "row_idx": 2137
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 12,
+    "token": "michael",
+    "row_idx": 2145
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 8,
+    "token": "jean",
+    "row_idx": 2158
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 12,
+    "token": "vincent",
+    "row_idx": 2159
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 13,
+    "end": 20,
+    "token": "carolyn",
+    "row_idx": 2187
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "philip",
+    "row_idx": 2188
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 9,
+    "token": "alan",
+    "row_idx": 2192
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 15,
+    "end": 26,
+    "token": "61-year-old",
+    "row_idx": 2192
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 83,
+    "end": 87,
+    "token": "alan",
+    "row_idx": 2192
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 9,
+    "token": "elizabeth",
+    "row_idx": 2205
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 23,
+    "end": 35,
+    "token": "ashley james",
+    "row_idx": 2208
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 52,
+    "end": 62,
+    "token": "12/27/2006",
+    "row_idx": 2208
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 65,
+    "end": 71,
+    "token": "ashley",
+    "row_idx": 2208
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 77,
+    "end": 88,
+    "token": "14-year-old",
+    "row_idx": 2208
+  },
+  {
+    "token_id": "T5",
+    "label": "PERSON",
+    "start": 239,
+    "end": 245,
+    "token": "ashley",
+    "row_idx": 2208
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 41,
+    "end": 46,
+    "token": "james",
+    "row_idx": 2252
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 57,
+    "end": 68,
+    "token": "42-year-old",
+    "row_idx": 2252
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 16,
+    "end": 23,
+    "token": "sanchez",
+    "row_idx": 2255
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 50,
+    "end": 53,
+    "token": "dax",
+    "row_idx": 2281
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 73,
+    "end": 76,
+    "token": "dax",
+    "row_idx": 2281
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 10,
+    "token": "judy gomez",
+    "row_idx": 2293
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 42,
+    "end": 54,
+    "token": "5 , 7 , 1961",
+    "row_idx": 2293
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 135,
+    "end": 139,
+    "token": "judy",
+    "row_idx": 2293
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 366,
+    "end": 372,
+    "token": "ashley",
+    "row_idx": 2319
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 9,
+    "token": "jeremy",
+    "row_idx": 2323
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 105,
+    "end": 114,
+    "token": "catherine",
+    "row_idx": 2339
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 153,
+    "end": 164,
+    "token": "julia jones",
+    "row_idx": 2339
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 170,
+    "end": 181,
+    "token": "25 year old",
+    "row_idx": 2339
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 16,
+    "end": 23,
+    "token": "sanchez",
+    "row_idx": 2341
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "billy",
+    "row_idx": 2348
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 10,
+    "end": 20,
+    "token": "jacqueline",
+    "row_idx": 2361
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 5,
+    "token": "jerry",
+    "row_idx": 2373
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 11,
+    "end": 22,
+    "token": "54 year old",
+    "row_idx": 2373
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 147,
+    "end": 152,
+    "token": "jerry",
+    "row_idx": 2373
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "george",
+    "row_idx": 2377
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 150,
+    "end": 165,
+    "token": "twenty eighteen",
+    "row_idx": 2401
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 5,
+    "token": "roger",
+    "row_idx": 2409
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 11,
+    "end": 22,
+    "token": "62 year old",
+    "row_idx": 2409
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 89,
+    "end": 94,
+    "token": "roger",
+    "row_idx": 2409
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 10,
+    "token": "richard",
+    "row_idx": 2427
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "dragon",
+    "row_idx": 2478
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 23,
+    "end": 29,
+    "token": "elijah",
+    "row_idx": 2506
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 26,
+    "end": 37,
+    "token": "ninety nine",
+    "row_idx": 2516
+  },
+  {
+    "token_id": "T2",
+    "label": "ORG",
+    "start": 25,
+    "end": 36,
+    "token": "nba playoff",
+    "row_idx": 2518
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 16,
+    "end": 26,
+    "token": "grace ross",
+    "row_idx": 2524
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 43,
+    "end": 50,
+    "token": "8-23-97",
+    "row_idx": 2524
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 57,
+    "end": 61,
+    "token": "ross",
+    "row_idx": 2524
+  },
+  {
+    "token_id": "T5",
+    "label": "PERSON",
+    "start": 521,
+    "end": 525,
+    "token": "ross",
+    "row_idx": 2524
+  },
+  {
+    "token_id": "T6",
+    "label": "PERSON",
+    "start": 536,
+    "end": 540,
+    "token": "diaz",
+    "row_idx": 2524
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 60,
+    "end": 63,
+    "token": "dax",
+    "row_idx": 2539
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "logan",
+    "row_idx": 2552
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 14,
+    "end": 25,
+    "token": "57-year-old",
+    "row_idx": 2552
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 194,
+    "end": 199,
+    "token": "logan",
+    "row_idx": 2552
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 155,
+    "end": 167,
+    "token": "ninety seven",
+    "row_idx": 2553
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 387,
+    "end": 389,
+    "token": "50",
+    "row_idx": 2556
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 7,
+    "token": "anna",
+    "row_idx": 2570
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 221,
+    "end": 226,
+    "token": "julia",
+    "row_idx": 2581
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 11,
+    "token": "larry",
+    "row_idx": 2588
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 57,
+    "end": 63,
+    "token": "harris",
+    "row_idx": 2606
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 2617
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 15,
+    "end": 22,
+    "token": "abigail",
+    "row_idx": 2638
+  },
+  {
+    "token_id": "T1",
+    "label": "ORG",
+    "start": 5,
+    "end": 35,
+    "token": "the american heart association",
+    "row_idx": 2663
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 21,
+    "end": 26,
+    "token": "bryan",
+    "row_idx": 2664
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "angela",
+    "row_idx": 2670
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 18,
+    "end": 23,
+    "token": "emily",
+    "row_idx": 2679
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 10,
+    "end": 15,
+    "token": "sarah",
+    "row_idx": 2681
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 21,
+    "end": 32,
+    "token": "27-year-old",
+    "row_idx": 2681
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 73,
+    "end": 78,
+    "token": "sarah",
+    "row_idx": 2681
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 23,
+    "end": 30,
+    "token": "edwards",
+    "row_idx": 2710
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "dragon",
+    "row_idx": 2729
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 72,
+    "end": 79,
+    "token": "10 days",
+    "row_idx": 2729
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 9,
+    "end": 15,
+    "token": "brooks",
+    "row_idx": 2732
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 26,
+    "end": 31,
+    "token": "baker",
+    "row_idx": 2732
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 10,
+    "token": "carolyn",
+    "row_idx": 2733
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 16,
+    "end": 27,
+    "token": "49-year-old",
+    "row_idx": 2733
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 105,
+    "end": 112,
+    "token": "carolyn",
+    "row_idx": 2733
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 24,
+    "end": 29,
+    "token": "allen",
+    "row_idx": 2746
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 9,
+    "end": 17,
+    "token": "thompson",
+    "row_idx": 2750
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 28,
+    "end": 33,
+    "token": "moore",
+    "row_idx": 2750
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 14,
+    "token": "teresa",
+    "row_idx": 2756
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 10,
+    "token": "julie cruz",
+    "row_idx": 2761
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 16,
+    "end": 28,
+    "token": "17 -year-old",
+    "row_idx": 2761
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 198,
+    "end": 203,
+    "token": "julie",
+    "row_idx": 2761
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "steven",
+    "row_idx": 2773
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 31,
+    "end": 37,
+    "token": "ashley",
+    "row_idx": 2780
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 449,
+    "end": 454,
+    "token": "karen",
+    "row_idx": 2799
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 51,
+    "end": 54,
+    "token": "dax",
+    "row_idx": 2803
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 74,
+    "end": 77,
+    "token": "dax",
+    "row_idx": 2803
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 17,
+    "end": 24,
+    "token": "barbara",
+    "row_idx": 2807
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 30,
+    "end": 42,
+    "token": "31 -year-old",
+    "row_idx": 2807
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 147,
+    "end": 154,
+    "token": "barbara",
+    "row_idx": 2807
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 2815
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 59,
+    "end": 63,
+    "token": "manu",
+    "row_idx": 2818
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 11,
+    "token": "michelle",
+    "row_idx": 2850
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 2855
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 65,
+    "end": 73,
+    "token": "10 years",
+    "row_idx": 2862
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 14,
+    "token": "evelyn",
+    "row_idx": 2865
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 2876
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 10,
+    "token": "barbara",
+    "row_idx": 2881
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 9,
+    "token": "evelyn",
+    "row_idx": 2889
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 15,
+    "end": 26,
+    "token": "56-year-old",
+    "row_idx": 2889
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 193,
+    "end": 199,
+    "token": "evelyn",
+    "row_idx": 2889
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 52,
+    "end": 55,
+    "token": "dax",
+    "row_idx": 2898
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 77,
+    "end": 80,
+    "token": "dax",
+    "row_idx": 2898
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 20,
+    "end": 27,
+    "token": "edwards",
+    "row_idx": 2900
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 13,
+    "token": "eugene walker",
+    "row_idx": 2903
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 33,
+    "end": 42,
+    "token": "4/14/1960",
+    "row_idx": 2903
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 52,
+    "end": 63,
+    "token": "61-year-old",
+    "row_idx": 2903
+  },
+  {
+    "token_id": "T5",
+    "label": "DATE",
+    "start": 253,
+    "end": 262,
+    "token": "1/22/2013",
+    "row_idx": 2903
+  },
+  {
+    "token_id": "T6",
+    "label": "DATE",
+    "start": 295,
+    "end": 304,
+    "token": "4/10/2021",
+    "row_idx": 2903
+  },
+  {
+    "token_id": "T14",
+    "label": "PERSON",
+    "start": 656,
+    "end": 662,
+    "token": "walker",
+    "row_idx": 2903
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "jerry",
+    "row_idx": 2915
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 5,
+    "token": "louis",
+    "row_idx": 2960
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 11,
+    "end": 22,
+    "token": "58-year-old",
+    "row_idx": 2960
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 83,
+    "end": 88,
+    "token": "louis",
+    "row_idx": 2960
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 9,
+    "end": 15,
+    "token": "rachel",
+    "row_idx": 2964
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 23,
+    "end": 27,
+    "token": "anna",
+    "row_idx": 2966
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 14,
+    "end": 21,
+    "token": "sanders",
+    "row_idx": 2973
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 2975
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 13,
+    "end": 20,
+    "token": "beverly",
+    "row_idx": 2982
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 25,
+    "end": 36,
+    "token": "24 year old",
+    "row_idx": 2982
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 11,
+    "end": 22,
+    "token": "pamela cook",
+    "row_idx": 2993
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 67,
+    "end": 78,
+    "token": "36-year-old",
+    "row_idx": 2993
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "ralph",
+    "row_idx": 3005
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 14,
+    "end": 25,
+    "token": "62-year-old",
+    "row_idx": 3005
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 172,
+    "end": 177,
+    "token": "ralph",
+    "row_idx": 3005
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 322,
+    "end": 329,
+    "token": "his 40s",
+    "row_idx": 3013
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 17,
+    "end": 20,
+    "token": "dax",
+    "row_idx": 3015
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 338,
+    "end": 344,
+    "token": "jeremy",
+    "row_idx": 3022
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 16,
+    "end": 35,
+    "token": "christine hernandez",
+    "row_idx": 3023
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 60,
+    "end": 79,
+    "token": "january 13th , 1982",
+    "row_idx": 3023
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 93,
+    "end": 102,
+    "token": "christine",
+    "row_idx": 3023
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 12,
+    "token": "dragon",
+    "row_idx": 3025
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 14,
+    "end": 20,
+    "token": "watson",
+    "row_idx": 3026
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 30,
+    "end": 40,
+    "token": "jose james",
+    "row_idx": 3027
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 62,
+    "end": 71,
+    "token": "9/29/1957",
+    "row_idx": 3027
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 79,
+    "end": 84,
+    "token": "james",
+    "row_idx": 3027
+  },
+  {
+    "token_id": "T6",
+    "label": "PERSON",
+    "start": 243,
+    "end": 248,
+    "token": "james",
+    "row_idx": 3027
+  },
+  {
+    "token_id": "T7",
+    "label": "PERSON",
+    "start": 262,
+    "end": 270,
+    "token": "isabella",
+    "row_idx": 3027
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 28,
+    "end": 33,
+    "token": "gomez",
+    "row_idx": 3034
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 11,
+    "token": "charles",
+    "row_idx": 3035
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 70,
+    "end": 73,
+    "token": "dax",
+    "row_idx": 3038
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 93,
+    "end": 96,
+    "token": "dax",
+    "row_idx": 3038
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 54,
+    "end": 57,
+    "token": "dax",
+    "row_idx": 3040
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 77,
+    "end": 80,
+    "token": "dax",
+    "row_idx": 3040
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 11,
+    "token": "andrea",
+    "row_idx": 3047
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 17,
+    "end": 28,
+    "token": "52-year-old",
+    "row_idx": 3047
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 180,
+    "end": 186,
+    "token": "andrea",
+    "row_idx": 3047
+  },
+  {
+    "token_id": "T1",
+    "label": "ORG",
+    "start": 124,
+    "end": 149,
+    "token": "the denver denver nuggets",
+    "row_idx": 3050
+  },
+  {
+    "token_id": "T2",
+    "label": "ORG",
+    "start": 205,
+    "end": 208,
+    "token": "nba",
+    "row_idx": 3050
+  },
+  {
+    "token_id": "T3",
+    "label": "ORG",
+    "start": 249,
+    "end": 263,
+    "token": "denver nuggets",
+    "row_idx": 3050
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 7,
+    "end": 12,
+    "token": "bobby",
+    "row_idx": 3065
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 29,
+    "end": 36,
+    "token": "russell",
+    "row_idx": 3071
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 47,
+    "end": 58,
+    "token": "39-year-old",
+    "row_idx": 3071
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 9,
+    "token": "betty",
+    "row_idx": 3082
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 67,
+    "end": 72,
+    "token": "reyes",
+    "row_idx": 3084
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 87,
+    "end": 98,
+    "token": "56-year-old",
+    "row_idx": 3084
+  },
+  {
+    "token_id": "T8",
+    "label": "PERSON",
+    "start": 287,
+    "end": 292,
+    "token": "reyes",
+    "row_idx": 3084
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "dragon",
+    "row_idx": 3109
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 46,
+    "end": 52,
+    "token": "dragon",
+    "row_idx": 3109
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 57,
+    "end": 62,
+    "token": "reyes",
+    "row_idx": 3141
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 16,
+    "end": 29,
+    "token": "nicole miller",
+    "row_idx": 3152
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 49,
+    "end": 59,
+    "token": "09/18/1949",
+    "row_idx": 3152
+  },
+  {
+    "token_id": "T13",
+    "label": "PERSON",
+    "start": 729,
+    "end": 735,
+    "token": "miller",
+    "row_idx": 3152
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 11,
+    "token": "albert",
+    "row_idx": 3161
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 17,
+    "end": 28,
+    "token": "62-year-old",
+    "row_idx": 3161
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 9,
+    "token": "anna",
+    "row_idx": 3164
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 15,
+    "end": 26,
+    "token": "44-year-old",
+    "row_idx": 3164
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 174,
+    "end": 178,
+    "token": "anna",
+    "row_idx": 3164
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 58,
+    "end": 64,
+    "token": "ashley",
+    "row_idx": 3174
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 43,
+    "end": 49,
+    "token": "howard",
+    "row_idx": 3203
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 51,
+    "end": 70,
+    "token": "january 20th , 2020",
+    "row_idx": 3213
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 7,
+    "end": 14,
+    "token": "jackson",
+    "row_idx": 3241
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 20,
+    "end": 32,
+    "token": "45 -year-old",
+    "row_idx": 3241
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 9,
+    "token": "sophia",
+    "row_idx": 3243
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 14,
+    "token": "andrea",
+    "row_idx": 3250
+  },
+  {
+    "token_id": "T1",
+    "label": "GPE",
+    "start": 38,
+    "end": 48,
+    "token": "pittsburgh",
+    "row_idx": 3274
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 10,
+    "token": "james",
+    "row_idx": 3279
+  },
+  {
+    "token_id": "T1",
+    "label": "GPE",
+    "start": 54,
+    "end": 62,
+    "token": "brooklyn",
+    "row_idx": 3282
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 7,
+    "token": "carolyn",
+    "row_idx": 3300
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 18,
+    "end": 24,
+    "token": "joseph",
+    "row_idx": 3315
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 7,
+    "token": "kyle",
+    "row_idx": 3316
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 18,
+    "end": 31,
+    "token": "michelle king",
+    "row_idx": 3326
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 50,
+    "end": 60,
+    "token": "05/07/1982",
+    "row_idx": 3326
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 139,
+    "end": 149,
+    "token": "06/29/2021",
+    "row_idx": 3326
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 174,
+    "end": 184,
+    "token": "07/02/2021",
+    "row_idx": 3326
+  },
+  {
+    "token_id": "T5",
+    "label": "DATE",
+    "start": 204,
+    "end": 215,
+    "token": "39-year-old",
+    "row_idx": 3326
+  },
+  {
+    "token_id": "T8",
+    "label": "PERSON",
+    "start": 978,
+    "end": 986,
+    "token": "michelle",
+    "row_idx": 3326
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 3,
+    "end": 7,
+    "token": "2020",
+    "row_idx": 3329
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 11,
+    "token": "virginia",
+    "row_idx": 3333
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 10,
+    "end": 20,
+    "token": "bruce ward",
+    "row_idx": 3340
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 37,
+    "end": 46,
+    "token": "5/21/1969",
+    "row_idx": 3340
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 98,
+    "end": 109,
+    "token": "52-year-old",
+    "row_idx": 3340
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 218,
+    "end": 230,
+    "token": "henry howard",
+    "row_idx": 3340
+  },
+  {
+    "token_id": "T5",
+    "label": "PERSON",
+    "start": 273,
+    "end": 277,
+    "token": "ward",
+    "row_idx": 3340
+  },
+  {
+    "token_id": "T6",
+    "label": "PERSON",
+    "start": 323,
+    "end": 329,
+    "token": "howard",
+    "row_idx": 3340
+  },
+  {
+    "token_id": "T7",
+    "label": "DATE",
+    "start": 335,
+    "end": 341,
+    "token": "3/1/21",
+    "row_idx": 3340
+  },
+  {
+    "token_id": "T9",
+    "label": "DATE",
+    "start": 666,
+    "end": 672,
+    "token": "3/3/21",
+    "row_idx": 3340
+  },
+  {
+    "token_id": "T10",
+    "label": "DATE",
+    "start": 928,
+    "end": 934,
+    "token": "3/4/21",
+    "row_idx": 3340
+  },
+  {
+    "token_id": "T11",
+    "label": "PERSON",
+    "start": 1119,
+    "end": 1123,
+    "token": "ward",
+    "row_idx": 3340
+  },
+  {
+    "token_id": "T12",
+    "label": "PERSON",
+    "start": 1153,
+    "end": 1159,
+    "token": "flores",
+    "row_idx": 3340
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 57,
+    "end": 63,
+    "token": "cooper",
+    "row_idx": 3354
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 6,
+    "end": 13,
+    "token": "zachary",
+    "row_idx": 3406
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 14,
+    "end": 22,
+    "token": "peterson",
+    "row_idx": 3410
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 142,
+    "end": 147,
+    "token": "reyes",
+    "row_idx": 3412
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 26,
+    "end": 33,
+    "token": "gregory",
+    "row_idx": 3416
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 25,
+    "end": 31,
+    "token": "watson",
+    "row_idx": 3417
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 17,
+    "end": 22,
+    "token": "joyce",
+    "row_idx": 3424
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 28,
+    "end": 39,
+    "token": "50 year old",
+    "row_idx": 3424
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 184,
+    "end": 189,
+    "token": "joyce",
+    "row_idx": 3424
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 26,
+    "end": 32,
+    "token": "gloria",
+    "row_idx": 3434
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 8,
+    "token": "sean",
+    "row_idx": 3439
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 17,
+    "end": 20,
+    "token": "dax",
+    "row_idx": 3444
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 17,
+    "end": 22,
+    "token": "bobby",
+    "row_idx": 3449
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 11,
+    "end": 20,
+    "token": "christina",
+    "row_idx": 3477
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 13,
+    "token": "scott",
+    "row_idx": 3506
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 268,
+    "end": 274,
+    "token": "wilson",
+    "row_idx": 3527
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 302,
+    "end": 307,
+    "token": "james",
+    "row_idx": 3537
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 7,
+    "end": 19,
+    "token": "maria martin",
+    "row_idx": 3547
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 36,
+    "end": 46,
+    "token": "03/05/1946",
+    "row_idx": 3547
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 151,
+    "end": 156,
+    "token": "maria",
+    "row_idx": 3547
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 135,
+    "end": 141,
+    "token": "watson",
+    "row_idx": 3552
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "dragon",
+    "row_idx": 3554
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 29,
+    "end": 32,
+    "token": "lee",
+    "row_idx": 3554
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 70,
+    "end": 81,
+    "token": "40-year-old",
+    "row_idx": 3554
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 17,
+    "end": 24,
+    "token": "natalie",
+    "row_idx": 3557
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 30,
+    "end": 41,
+    "token": "39-year-old",
+    "row_idx": 3557
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 60,
+    "end": 63,
+    "token": "roy",
+    "row_idx": 3565
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 141,
+    "end": 144,
+    "token": "roy",
+    "row_idx": 3565
+  },
+  {
+    "token_id": "T1",
+    "label": "DATE",
+    "start": 144,
+    "end": 159,
+    "token": "twenty eighteen",
+    "row_idx": 3584
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 7,
+    "token": "alan",
+    "row_idx": 3596
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 5,
+    "end": 10,
+    "token": "roger",
+    "row_idx": 3606
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 12,
+    "token": "jaqueline",
+    "row_idx": 3610
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "joyce",
+    "row_idx": 3623
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 3,
+    "end": 8,
+    "token": "jerry",
+    "row_idx": 3625
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 14,
+    "end": 26,
+    "token": "45 -year-old",
+    "row_idx": 3625
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 71,
+    "end": 76,
+    "token": "jerry",
+    "row_idx": 3625
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 16,
+    "token": "brittany",
+    "row_idx": 3632
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 67,
+    "end": 75,
+    "token": "michelle",
+    "row_idx": 3648
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 71,
+    "end": 74,
+    "token": "dax",
+    "row_idx": 3654
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 94,
+    "end": 97,
+    "token": "dax",
+    "row_idx": 3654
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 712,
+    "end": 719,
+    "token": "vincent",
+    "row_idx": 3673
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 12,
+    "end": 18,
+    "token": "dragon",
+    "row_idx": 3674
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 8,
+    "end": 24,
+    "token": "philip gutierrez",
+    "row_idx": 3675
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 41,
+    "end": 48,
+    "token": "1/12/71",
+    "row_idx": 3675
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 59,
+    "end": 70,
+    "token": "50-year-old",
+    "row_idx": 3675
+  },
+  {
+    "token_id": "T6",
+    "label": "PERSON",
+    "start": 441,
+    "end": 452,
+    "token": "alice davis",
+    "row_idx": 3675
+  },
+  {
+    "token_id": "T7",
+    "label": "DATE",
+    "start": 792,
+    "end": 801,
+    "token": "4/24/2021",
+    "row_idx": 3675
+  },
+  {
+    "token_id": "T10",
+    "label": "PERSON",
+    "start": 1357,
+    "end": 1366,
+    "token": "gutierrez",
+    "row_idx": 3675
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 12,
+    "end": 21,
+    "token": "gutierrez",
+    "row_idx": 3677
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 243,
+    "end": 252,
+    "token": "gutierrez",
+    "row_idx": 3677
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 16,
+    "end": 28,
+    "token": "paul edwards",
+    "row_idx": 3678
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 48,
+    "end": 65,
+    "token": "january 15th 1962",
+    "row_idx": 3678
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 78,
+    "end": 89,
+    "token": "59 year old",
+    "row_idx": 3678
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 162,
+    "end": 180,
+    "token": "november 24th 2020",
+    "row_idx": 3678
+  },
+  {
+    "token_id": "T7",
+    "label": "DATE",
+    "start": 241,
+    "end": 254,
+    "token": "every 10 days",
+    "row_idx": 3678
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 186,
+    "end": 192,
+    "token": "martin",
+    "row_idx": 3680
+  },
+  {
+    "token_id": "T4",
+    "label": "ORG",
+    "start": 219,
+    "end": 243,
+    "token": "county surgical services",
+    "row_idx": 3680
+  },
+  {
+    "token_id": "T5",
+    "label": "ORG",
+    "start": 277,
+    "end": 291,
+    "token": "valley medical",
+    "row_idx": 3680
+  },
+  {
+    "token_id": "T6",
+    "label": "GPE",
+    "start": 312,
+    "end": 323,
+    "token": "springfield",
+    "row_idx": 3680
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 95,
+    "end": 101,
+    "token": "walker",
+    "row_idx": 3684
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 255,
+    "end": 270,
+    "token": "vincent sanchez",
+    "row_idx": 3684
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 583,
+    "end": 592,
+    "token": "1/20/2013",
+    "row_idx": 3687
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 739,
+    "end": 754,
+    "token": "vincent sanchez",
+    "row_idx": 3687
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 252,
+    "end": 265,
+    "token": "june 3rd 2021",
+    "row_idx": 3691
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 1097,
+    "end": 1104,
+    "token": "carolyn",
+    "row_idx": 3702
+  },
+  {
+    "token_id": "T5",
+    "label": "PERSON",
+    "start": 548,
+    "end": 555,
+    "token": "russell",
+    "row_idx": 3721
+  },
+  {
+    "token_id": "T6",
+    "label": "PERSON",
+    "start": 809,
+    "end": 816,
+    "token": "russell",
+    "row_idx": 3721
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 161,
+    "end": 167,
+    "token": "flores",
+    "row_idx": 3736
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 28,
+    "end": 44,
+    "token": "christina cooper",
+    "row_idx": 3737
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 56,
+    "end": 67,
+    "token": "65 year old",
+    "row_idx": 3737
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 124,
+    "end": 131,
+    "token": "12-2019",
+    "row_idx": 3737
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 206,
+    "end": 214,
+    "token": "01/20/20",
+    "row_idx": 3737
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 415,
+    "end": 419,
+    "token": "ward",
+    "row_idx": 3738
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 262,
+    "end": 271,
+    "token": "katherine",
+    "row_idx": 3741
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 277,
+    "end": 289,
+    "token": "22-month-old",
+    "row_idx": 3741
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 297,
+    "end": 314,
+    "token": "34 and 3-week-old",
+    "row_idx": 3741
+  },
+  {
+    "token_id": "T5",
+    "label": "GPE",
+    "start": 714,
+    "end": 720,
+    "token": "dallas",
+    "row_idx": 3741
+  },
+  {
+    "token_id": "T6",
+    "label": "GPE",
+    "start": 723,
+    "end": 730,
+    "token": "georgia",
+    "row_idx": 3741
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 588,
+    "end": 593,
+    "token": "wayne",
+    "row_idx": 3744
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 83,
+    "end": 100,
+    "token": "megan david david",
+    "row_idx": 3749
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 263,
+    "end": 270,
+    "token": "russell",
+    "row_idx": 3750
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 164,
+    "end": 171,
+    "token": "richard",
+    "row_idx": 3752
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 4,
+    "end": 10,
+    "token": "dragon",
+    "row_idx": 3754
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 10,
+    "token": "kayla ward",
+    "row_idx": 3759
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 29,
+    "end": 36,
+    "token": "4/28/07",
+    "row_idx": 3759
+  },
+  {
+    "token_id": "T7",
+    "label": "PERSON",
+    "start": 615,
+    "end": 620,
+    "token": "kayla",
+    "row_idx": 3759
+  },
+  {
+    "token_id": "T8",
+    "label": "PERSON",
+    "start": 631,
+    "end": 641,
+    "token": "juan price",
+    "row_idx": 3759
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 12,
+    "token": "kelly wood .",
+    "row_idx": 3761
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 29,
+    "end": 49,
+    "token": "february 15th , 1979",
+    "row_idx": 3761
+  },
+  {
+    "token_id": "T14",
+    "label": "PERSON",
+    "start": 700,
+    "end": 704,
+    "token": "wood",
+    "row_idx": 3761
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 268,
+    "end": 272,
+    "token": "wood",
+    "row_idx": 3762
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 461,
+    "end": 466,
+    "token": "diana",
+    "row_idx": 3764
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 408,
+    "end": 418,
+    "token": "jacqueline",
+    "row_idx": 3771
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 509,
+    "end": 514,
+    "token": "larry",
+    "row_idx": 3779
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 269,
+    "end": 276,
+    "token": "kenneth",
+    "row_idx": 3781
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 47,
+    "end": 52,
+    "token": "tyler",
+    "row_idx": 3784
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 11,
+    "end": 17,
+    "token": "dragon",
+    "row_idx": 3799
+  },
+  {
+    "token_id": "T3",
+    "label": "PERSON",
+    "start": 59,
+    "end": 65,
+    "token": "dragon",
+    "row_idx": 3799
+  },
+  {
+    "token_id": "T4",
+    "label": "PERSON",
+    "start": 108,
+    "end": 114,
+    "token": "dragon",
+    "row_idx": 3799
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 12,
+    "end": 19,
+    "token": "roberts",
+    "row_idx": 3803
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 161,
+    "end": 177,
+    "token": "brittany edwards",
+    "row_idx": 3804
+  },
+  {
+    "token_id": "T8",
+    "label": "PERSON",
+    "start": 680,
+    "end": 686,
+    "token": "watson",
+    "row_idx": 3805
+  },
+  {
+    "token_id": "T33",
+    "label": "DATE",
+    "start": 2006,
+    "end": 2016,
+    "token": "10/15/2020",
+    "row_idx": 3805
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 0,
+    "end": 13,
+    "token": "amanda taylor",
+    "row_idx": 3806
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 27,
+    "end": 44,
+    "token": "october 31st 1949",
+    "row_idx": 3806
+  },
+  {
+    "token_id": "T3",
+    "label": "DATE",
+    "start": 60,
+    "end": 71,
+    "token": "72 year old",
+    "row_idx": 3806
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 227,
+    "end": 237,
+    "token": "april 16th",
+    "row_idx": 3806
+  },
+  {
+    "token_id": "T10",
+    "label": "PERSON",
+    "start": 488,
+    "end": 494,
+    "token": "taylor",
+    "row_idx": 3806
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 74,
+    "end": 80,
+    "token": "taylor",
+    "row_idx": 3807
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 13,
+    "end": 19,
+    "token": "taylor",
+    "row_idx": 3808
+  },
+  {
+    "token_id": "T4",
+    "label": "DATE",
+    "start": 631,
+    "end": 639,
+    "token": "may 17th",
+    "row_idx": 3808
+  },
+  {
+    "token_id": "T9",
+    "label": "DATE",
+    "start": 1041,
+    "end": 1050,
+    "token": "june 14th",
+    "row_idx": 3808
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 277,
+    "end": 281,
+    "token": "ross",
+    "row_idx": 3809
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 571,
+    "end": 575,
+    "token": "ross",
+    "row_idx": 3809
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 178,
+    "end": 182,
+    "token": "nita",
+    "row_idx": 3814
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 69,
+    "end": 75,
+    "token": "dennis",
+    "row_idx": 3821
+  },
+  {
+    "token_id": "T6",
+    "label": "PERSON",
+    "start": 721,
+    "end": 726,
+    "token": "kevin",
+    "row_idx": 3832
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 529,
+    "end": 536,
+    "token": "gregory",
+    "row_idx": 3833
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 136,
+    "end": 141,
+    "token": "julie",
+    "row_idx": 3834
+  },
+  {
+    "token_id": "T3",
+    "label": "ORG",
+    "start": 801,
+    "end": 835,
+    "token": "the american academy of pediatrics",
+    "row_idx": 3834
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 22,
+    "end": 31,
+    "token": "elizabeth",
+    "row_idx": 3836
+  },
+  {
+    "token_id": "T2",
+    "label": "DATE",
+    "start": 334,
+    "end": 341,
+    "token": "10 days",
+    "row_idx": 3846
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 73,
+    "end": 79,
+    "token": "dragon",
+    "row_idx": 3853
+  },
+  {
+    "token_id": "T7",
+    "label": "PERSON",
+    "start": 754,
+    "end": 759,
+    "token": "tinel",
+    "row_idx": 3855
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 141,
+    "end": 147,
+    "token": "ashley",
+    "row_idx": 3864
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 240,
+    "end": 250,
+    "token": "jacqueline",
+    "row_idx": 3867
+  },
+  {
+    "token_id": "T7",
+    "label": "PERSON",
+    "start": 805,
+    "end": 810,
+    "token": "betty",
+    "row_idx": 3869
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 469,
+    "end": 474,
+    "token": "karen",
+    "row_idx": 3872
+  },
+  {
+    "token_id": "T7",
+    "label": "PERSON",
+    "start": 1386,
+    "end": 1391,
+    "token": "karen",
+    "row_idx": 3872
+  },
+  {
+    "token_id": "T5",
+    "label": "PERSON",
+    "start": 935,
+    "end": 940,
+    "token": "karen",
+    "row_idx": 3873
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 76,
+    "end": 81,
+    "token": "jerry",
+    "row_idx": 3876
+  },
+  {
+    "token_id": "T1",
+    "label": "PERSON",
+    "start": 325,
+    "end": 329,
+    "token": "ruth",
+    "row_idx": 3877
+  },
+  {
+    "token_id": "T2",
+    "label": "PERSON",
+    "start": 484,
+    "end": 488,
+    "token": "ruth",
+    "row_idx": 3878
+  }
+]

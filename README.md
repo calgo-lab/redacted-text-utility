@@ -14,7 +14,7 @@ xlm-roberta-large) fine-tuned on OntoNotes 5.0 from HuggingFace is used for
 redaction:
 https://huggingface.co/flair/ner-english-ontonotes-large
 
-Redacted datasets can be found at [here](data/processed/):
+Redacted datasets can be found at [here](data/processed/DATEXIS/med_intent_classification/):
 <br>
 (1) train-00000-of-00001.parquet > train-00000-of-00001_ne_redacted.parquet
 <br>
@@ -29,7 +29,7 @@ short for Geo-Political Entity which includes locations).
 Moreover, we also filter out some unusual DATE and PERSON entities.
 Details of the implementation can be found [here](src/utils/token_treatment_utils.py).
 
-For transperency, we keep a separate list of excluded date entities which can be found [here](data/processed/).
+For transperency, we keep a separate list of excluded date entities which can be found [here](data/processed/DATEXIS/med_intent_classification/).
 
 In the redacted datasets, 3 new columns are added in regards to 3 different redaction strategies:
 <br>

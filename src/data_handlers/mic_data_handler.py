@@ -44,7 +44,7 @@ class MicDataHandler:
         :return: None
         """
         for filename in self.hf_files:
-            local_file_path = self.data_dir / "raw" / "data" / filename
+            local_file_path = self.data_dir / "raw" / "DATEXIS" / "med_intent_classification" / "data" / filename
             if not local_file_path.exists():
                 self.logger.info(f"File {filename} not found locally. Downloading from Hugging Face Hub...")
                 local_file_path.parent.mkdir(parents=True, exist_ok=True)

@@ -7,6 +7,7 @@ from typing import Any, Dict, List, Set
 from IPython.display import display
 
 from core.logging import configure_logging, get_logger
+from data_handlers.echr_data_handler import EchrDataHandler
 from data_handlers.mic_data_handler import MicDataHandler
 from infrastructure.services.entity_prediction_service import EntityPredictionService
 from utils.project_utils import ProjectUtils
@@ -23,10 +24,12 @@ if __name__ == "__main__":
     
     logger = get_logger(__name__)
     project_root: Path = ProjectUtils.get_project_root()
-    data_handler: MicDataHandler = MicDataHandler(project_root)
     
-    raw_file_names: List[str] = data_handler.get_available_raw_files()
-    logger.info(f"Available raw data files: \n{json.dumps(raw_file_names, indent=2)}")
+    """
+    mic_data_handler: MicDataHandler = MicDataHandler(project_root)
+    mic_raw_file_names: List[str] = mic_data_handler.get_available_raw_files()
+    logger.info(f"Available mic raw data files: \n{json.dumps(mic_raw_file_names, indent=2)}")
+    """
     
     ### Data files available:
     """
@@ -37,27 +40,29 @@ if __name__ == "__main__":
     ]
     """
 
+    """
     df_dict: Dict[str, pd.DataFrame] = dict()
-    for file_name in raw_file_names:
-        df = data_handler.get_dataframe_for_file(file_name)
+    for file_name in mic_raw_file_names:
+        df = mic_data_handler.get_dataframe_for_file(file_name)
         df_dict[file_name.split("-")[0]] = df
-        logger.info(f"Loaded dataframe for file '{file_name}' with {df.shape[0]} rows.")
+        logger.info(f"Loaded mic dataframe for file '{file_name}' with {df.shape[0]} rows.")
+    """
 
     ### If we decide to use translation service, we need an estimate of total characters to estimate costs
     """
-    # Count total number of characters in all the texts from all rows of 'text' column in the train dataframe
+    # Count total number of characters in all the texts from all rows of 'text' column in the mic train dataframe
     total_characters: int = df_dict["train"]["text"].str.len().sum()
-    logger.info(f"Total number of characters in the 'text' column of the training dataframe: {total_characters}")
+    logger.info(f"Total number of characters in the 'text' column of the mic training dataframe: {total_characters}")
     # 721,816
 
-    # Count total number of characters in all the texts from all rows of 'text' column in the test dataframe
+    # Count total number of characters in all the texts from all rows of 'text' column in the mic test dataframe
     total_characters_test: int = df_dict["test"]["text"].str.len().sum()
-    logger.info(f"Total number of characters in the 'text' column of the test dataframe: {total_characters_test}")
+    logger.info(f"Total number of characters in the 'text' column of the mic test dataframe: {total_characters_test}")
     # 103,734
 
-    # Count total number of characters in all the texts from all rows of 'text' column in the validation dataframe
+    # Count total number of characters in all the texts from all rows of 'text' column in the mic validation dataframe
     total_characters_val: int = df_dict["validation"]["text"].str.len().sum()
-    logger.info(f"Total number of characters in the 'text' column of the validation dataframe: {total_characters_val}")
+    logger.info(f"Total number of characters in the 'text' column of the mic validation dataframe: {total_characters_val}")
     # 86,937
     """
 
@@ -68,9 +73,11 @@ if __name__ == "__main__":
     logger.info(f"df_dict['{split_name}'].row[{row_id}].text:\n{df_dict[split_name].iloc[row_id].text}")
     """
 
-    raw_data_dir: Path = project_root / "data" / "raw" / "data"
-    processed_data_dir: Path = project_root / "data" / "processed"
+    """
+    raw_data_dir: Path = project_root / "data" / "raw" / "DATEXIS" / "med_intent_classification" / "data"
+    processed_data_dir: Path = project_root / "data" / "processed" / "DATEXIS" / "med_intent_classification"
     processed_data_dir.mkdir(parents=True, exist_ok=True)
+    """
 
     """
     entity_prediction_service: EntityPredictionService = EntityPredictionService()
@@ -211,4 +218,49 @@ if __name__ == "__main__":
     pe_stats_df = pd.DataFrame.from_dict(pe_stats, orient="index")
     pe_stats_df.index.name = "Data File"
     logger.info(f"\n{pe_stats_df.to_markdown()}")
+    """
+    
+    echr_data_handler: EchrDataHandler = EchrDataHandler(project_root)
+    
+    echr_raw_file_names: List[str] = echr_data_handler.get_available_raw_files()
+    logger.info(f"Available echr raw data files: \n{json.dumps(echr_raw_file_names, indent=2)}")
+    
+    ### Data files available:
+    """
+    [
+        "ECHR_Dataset.parquet"
+    ]
+    """
+
+    echr_df: pd.DataFrame = echr_data_handler.get_dataframe_for_file(echr_raw_file_names[0])
+    
+    """
+    row_id: int = 269
+    logger.info(f"echr_df.row[{row_id}].text:\n{echr_df.iloc[row_id].text}")
+    logger.info(f"echr_df.row[{row_id}].binary_judgement:{echr_df.iloc[row_id].binary_judgement}")
+    """
+
+    ### Total number of rows in echr dataframe
+    logger.info(f"Total number of rows in echr dataframe: {echr_df.shape[0]}")
+
+    ### Print all available column names
+    logger.info(f"echr_df columns: {echr_df.columns.tolist()}")
+
+    ### Print total count of binary_judgement values
+    binary_judgement_counts = echr_df['binary_judgement'].value_counts()
+    logger.info(f"echr_df binary_judgement value counts:\n{binary_judgement_counts}")
+
+    ### Print total count of partition values
+    partition_counts = echr_df['partition'].value_counts()
+    logger.info(f"echr_df partition value counts:\n{partition_counts}")
+
+    """
+    entity_prediction_service: EntityPredictionService = EntityPredictionService()
+    entity_set_id: str = "ontonotes5"
+    model_id: str = "ner-english-ontonotes-large"
+
+    model_service = entity_prediction_service._model_service
+    mim = model_service.get_model_inference_maker(entity_set_id, model_id)
+    result = mim.infer(echr_df.iloc[row_id].text)
+    logger.info(f"Named entity recognition result for echr_df.row[{row_id}]:\n{json.dumps(result, indent=2, ensure_ascii=False)}")
     """
