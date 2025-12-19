@@ -254,6 +254,34 @@ if __name__ == "__main__":
     partition_counts = echr_df['partition'].value_counts()
     logger.info(f"echr_df partition value counts:\n{partition_counts}")
 
+    ### Unique values in 'itemid' column
+    unique_itemids = echr_df['itemid'].unique()
+    logger.info(f"Unique itemids in echr_df: {len(unique_itemids.tolist())}")
+
+    ### Check how many rows have itemid starting with '001'
+    itemid_starting_with_001 = echr_df[echr_df['itemid'].str.startswith('001')]
+    logger.info(f"Number of rows with itemid starting with '001': {itemid_starting_with_001.shape[0]}")
+
+    ### Get train-dev-test DatasetDict for echr dataset
+    echr_dataset_dict_1 = echr_data_handler.get_train_dev_test_datasetdict(k=1)
+    
+    ### Check if the itemids in one split overlap with itemids in other splits
+    train_itemids_1 = set(echr_dataset_dict_1['train']['itemid'])
+    dev_itemids_1 = set(echr_dataset_dict_1['dev']['itemid'])
+    test_itemids_1 = set(echr_dataset_dict_1['test']['itemid'])
+    logger.info(f"Overlap between train and dev itemids: {len(train_itemids_1.intersection(dev_itemids_1))}")
+    logger.info(f"Overlap between train and test itemids: {len(train_itemids_1.intersection(test_itemids_1))}")
+    logger.info(f"Overlap between dev and test itemids: {len(dev_itemids_1.intersection(test_itemids_1))}")
+
+    ### Check Overlap between splits of fold 1 and fold 2
+    echr_dataset_dict_2 = echr_data_handler.get_train_dev_test_datasetdict(k=2)
+    train_itemids_2 = set(echr_dataset_dict_2['train']['itemid'])
+    dev_itemids_2 = set(echr_dataset_dict_2['dev']['itemid'])
+    test_itemids_2 = set(echr_dataset_dict_2['test']['itemid'])
+    logger.info(f"Overlap between fold 1 train and fold 2 train itemids: {len(train_itemids_1.intersection(train_itemids_2))}")
+    logger.info(f"Overlap between fold 1 dev and fold 2 dev itemids: {len(dev_itemids_1.intersection(dev_itemids_2))}")
+    logger.info(f"Overlap between fold 1 test and fold 2 test itemids: {len(test_itemids_1.intersection(test_itemids_2))}")
+
     """
     entity_prediction_service: EntityPredictionService = EntityPredictionService()
     entity_set_id: str = "ontonotes5"
