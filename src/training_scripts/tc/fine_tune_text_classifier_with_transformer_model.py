@@ -10,6 +10,7 @@ from flair.distributed_utils import launch_distributed
 from flair.embeddings import DocumentEmbeddings, TransformerDocumentEmbeddings
 from flair.models import TextClassifier
 from flair.trainers import ModelTrainer
+from flair.trainers.plugins.functional.anneal_on_plateau import AnnealingPlugin
 
 from data_handlers.echr_data_handler import EchrDataHandler
 from training_scripts.tc.multi_gpu_flair_model_trainer import MultiGpuFlairModelTrainer
@@ -134,7 +135,17 @@ def fine_tune():
         embeddings=document_embeddings,
         label_dictionary=label_dict,
         label_type='label',
-        multi_label=False
+        multi_label=False,
+        dropout=0.2
+    )
+
+    anneal_plugin = AnnealingPlugin(
+        base_path=model_dir_path,
+        min_learning_rate=1e-7,
+        anneal_factor=0.5,
+        patience=2,
+        initial_extra_patience=1,
+        anneal_with_restarts=True
     )
 
     models_with_unused_parameters = [
@@ -192,11 +203,12 @@ def fine_tune():
         write_weights = True, 
         save_final_model = False, 
         use_final_model_for_eval = False, 
-        shuffle=False, 
-        shuffle_first_epoch=False, 
         multi_gpu=use_multi_gpu, 
         use_amp=use_multi_gpu, 
-        plugins = [wandb_plugin] if log_to_wandb else None
+        main_evaluation_metric=("macro avg", "f1-score"), 
+        shuffle=True, 
+        attach_default_scheduler=False, 
+        plugins = [anneal_plugin, wandb_plugin] if log_to_wandb else [anneal_plugin]
     )
 
 if __name__ == "__main__":
