@@ -128,15 +128,16 @@ def fine_tune():
 
     document_embeddings: DocumentEmbeddings = TransformerDocumentEmbeddings(
         model=transformer_model_name,
-        fine_tune=True
+        fine_tune=True,
+        allow_long_sentences=True,
+        cls_pooling="mean"
     )
 
     classifier = TextClassifier(
         embeddings=document_embeddings,
         label_dictionary=label_dict,
         label_type='label',
-        multi_label=False,
-        dropout=0.2
+        multi_label=False
     )
 
     anneal_plugin = AnnealingPlugin(

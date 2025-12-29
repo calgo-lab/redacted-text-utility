@@ -49,7 +49,7 @@ spec:
             - name: TRANSFORMER_MODEL_NAME
               value: xlm-roberta-large
             - name: LEARNING_RATE
-              value: "5e-5"
+              value: "1e-5"
             - name: MAX_EPOCHS
               value: "50"
             - name: MINI_BATCH_SIZE
