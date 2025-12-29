@@ -41,7 +41,17 @@ class LongformerDocumentEmbeddings(TransformerDocumentEmbeddings):
 
         ### Longformer-specific fix
         if self.model.config.model_type == "longformer":
-            global_attention_mask = input_ids.new_zeros(input_ids.shape)
+            # ensure input length does not exceed Longformer max
+            max_len = self.model.config.max_position_embeddings
+            if input_ids.size(1) > max_len:
+                input_ids = input_ids[:, :max_len]
+                if attention_mask is not None:
+                    attention_mask = attention_mask[:, :max_len]
+                if word_ids is not None:
+                    word_ids = word_ids[:, :max_len]
+
+            # create global attention mask with dtype long and correct device
+            global_attention_mask = torch.zeros_like(input_ids, dtype=torch.long, device=input_ids.device)
             global_attention_mask[:, 0] = 1  # CLS token
             model_kwargs["global_attention_mask"] = global_attention_mask
         
