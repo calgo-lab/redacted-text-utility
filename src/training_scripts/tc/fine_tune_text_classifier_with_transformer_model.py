@@ -128,6 +128,7 @@ def fine_tune():
 
     document_embeddings: DocumentEmbeddings = TransformerDocumentEmbeddings(
         model=transformer_model_name,
+        cls_pooling="mean",
         fine_tune=True
     )
 
