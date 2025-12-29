@@ -13,6 +13,7 @@ from flair.trainers import ModelTrainer
 from flair.trainers.plugins.functional.anneal_on_plateau import AnnealingPlugin
 
 from data_handlers.echr_data_handler import EchrDataHandler
+from longformer_document_embeddings import LongformerDocumentEmbeddings
 from training_scripts.tc.multi_gpu_flair_model_trainer import MultiGpuFlairModelTrainer
 from training_scripts.tc.wandb_logger_plugin import WandbLoggerPlugin
 from utils.project_utils import ProjectUtils
@@ -126,7 +127,7 @@ def fine_tune():
     model_dir_path = model_dir_path / f"mini-batch-size-{mini_batch_size}"
     model_dir_path.mkdir(parents=True, exist_ok=True)
 
-    document_embeddings: DocumentEmbeddings = TransformerDocumentEmbeddings(
+    document_embeddings: DocumentEmbeddings = LongformerDocumentEmbeddings(
         model=transformer_model_name,
         cls_pooling="mean",
         fine_tune=True
