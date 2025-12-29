@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: xlm-roberta-large-sft-tc-echr
+  name: longformer-base-sft-tc-echr
   namespace: ssaha
 spec:
   ttlSecondsAfterFinished: 60
@@ -9,10 +9,10 @@ spec:
   template:
     metadata:
       labels:
-        app: xlm-roberta-large-sft-tc-echr
+        app: longformer-base-sft-tc-echr
     spec:
       containers:
-        - name: xlm-roberta-large-sft-tc-echr-container
+        - name: longformer-base-sft-tc-echr-container
           image: sksdotsauravs/python-nlp-dev-container:ubuntu24.04-python3.12.11-cuda12.8.1-torch2.7.1
           workingDir: /home/ssaha
           resources:
@@ -47,13 +47,13 @@ spec:
             - name: WANDB_ENTITY
               value: calgo-lab
             - name: TRANSFORMER_MODEL_NAME
-              value: xlm-roberta-large
+              value: allenai/longformer-base-4096
             - name: LEARNING_RATE
-              value: "1e-5"
+              value: "5e-5"
             - name: MAX_EPOCHS
               value: "50"
             - name: MINI_BATCH_SIZE
-              value: "1"
+              value: "2"
             - name: WANDB_API_KEY
               valueFrom:
                 secretKeyRef:

@@ -128,9 +128,7 @@ def fine_tune():
 
     document_embeddings: DocumentEmbeddings = TransformerDocumentEmbeddings(
         model=transformer_model_name,
-        fine_tune=True,
-        allow_long_sentences=True,
-        cls_pooling="mean"
+        fine_tune=True
     )
 
     classifier = TextClassifier(
