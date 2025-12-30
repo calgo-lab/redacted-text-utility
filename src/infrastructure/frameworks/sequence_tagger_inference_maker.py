@@ -182,7 +182,7 @@ class SequenceTaggerInferenceMaker(ModelInferenceMaker):
         for swb in model_output:
             next_cursor = swb.start
             sentence = swb.sentence
-            self.logger.info(f'{sentence.to_tagged_string()}')
+            # self.logger.info(f'{sentence.to_tagged_string()}')
             labels = sentence.get_labels()
             for label in labels:
                 text = label.data_point.text
@@ -242,5 +242,5 @@ class SequenceTaggerInferenceMaker(ModelInferenceMaker):
                         'token': text
                     })
 
-        self.logger.info(json.dumps(items, indent=2, ensure_ascii=False))
+        # self.logger.info(json.dumps(items, indent=2, ensure_ascii=False))
         return items
