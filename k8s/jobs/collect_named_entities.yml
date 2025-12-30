@@ -19,11 +19,11 @@ spec:
             requests:
               nvidia.com/gpu: "1"
               memory: "8Gi"
-              cpu: "32000m"
+              cpu: "16000m"
             limits:
               nvidia.com/gpu: "1"
               memory: "16Gi"
-              cpu: "64000m"
+              cpu: "32000m"
           volumeMounts:
             - name: ssaha-pv
               mountPath: /home/ssaha
