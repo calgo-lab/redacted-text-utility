@@ -14,6 +14,26 @@ import threading
 import pandas as pd
 
 
+_worker_mim = None
+
+def _init_worker(entity_set_id: str, model_id: str):
+    """
+    Initializer: runs ONCE per process.
+    """
+    global _worker_mim
+    model_service = ModelServiceImpl()
+    _worker_mim = model_service.get_model_inference_maker(entity_set_id, model_id)
+
+
+def _infer_single(idx: int, text: str):
+    """
+    Worker function: runs in each process.
+    """
+    global _worker_mim
+    result = _worker_mim.infer(text)
+    return idx, json.dumps(result), len(result) if isinstance(result, list) else 0
+
+
 class EntityPredictionService:
     """
     High-level helper service for entity predictions using NER models.
@@ -107,37 +127,26 @@ class EntityPredictionService:
         source_df = source_df.copy()
         source_df[target_column] = None
 
-        mim = self._model_service.get_model_inference_maker(entity_set_id, model_id)
+        max_workers = max_workers or max(1, (os.cpu_count() or 4) // 2)
+        self.logger.info(f"Using max_workers={max_workers} (ProcessPoolExecutor)")
 
+        texts = list(source_df[source_column].items())
         total_entities = 0
-        total_entities_lock = threading.Lock()
 
-        max_workers = max_workers or min(12, os.cpu_count() or 4)
-        self.logger.info(f"Using max_workers={max_workers} for parallel entity collection.")
+        with ProcessPoolExecutor(max_workers=max_workers,
+                                 initializer=_init_worker,
+                                 initargs=(entity_set_id, model_id)) as executor:
 
-        def infer_single(idx: int, text: str):
-            nonlocal total_entities
-
-            result = mim.infer(text)
-            entity_count = len(result) if isinstance(result, list) else 0
-
-            with total_entities_lock:
-                total_entities += entity_count
-
-            return idx, json.dumps(result)
-
-        texts = source_df[source_column].tolist()
-
-        with ProcessPoolExecutor(max_workers=max_workers) as executor:
             futures = {
-                executor.submit(infer_single, idx, text): idx
-                for idx, text in enumerate(texts)
+                executor.submit(_infer_single, idx, text): idx
+                for idx, text in texts
             }
 
             with tqdm(total=len(futures), desc="Collecting named entities") as pbar:
                 for future in as_completed(futures):
-                    idx, result_json = future.result()
+                    idx, result_json, entity_count = future.result()
                     source_df.at[idx, target_column] = result_json
+                    total_entities += entity_count
 
                     pbar.update(1)
                     pbar.set_postfix({"total_entities": total_entities})
@@ -147,5 +156,7 @@ class EntityPredictionService:
             source_df.to_parquet(target_df_export_path, index=False)
             return target_df_export_path
         except Exception as e:
-            print(f"Failed to export dataframe to {target_df_export_path}: {e}")
+            self.logger.exception(
+                f"Failed to export dataframe to {target_df_export_path}"
+            )
             return None
