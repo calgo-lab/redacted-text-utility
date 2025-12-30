@@ -297,7 +297,7 @@ if __name__ == "__main__":
     processed_data_dir.mkdir(parents=True, exist_ok=True)
 
     output_path = processed_data_dir / f"ECHR_Dataset_ne.parquet"
-    entity_prediction_service.collect_named_entities_for_dataframe_parallel(
+    entity_prediction_service.collect_named_entities_for_dataframe(
         entity_set_id=entity_set_id,
         model_id=model_id,
         source_df=echr_df,
