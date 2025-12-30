@@ -112,7 +112,7 @@ class EntityPredictionService:
         total_entities = 0
         total_entities_lock = threading.Lock()
 
-        max_workers = max_workers or min(8, os.cpu_count() or 4)
+        max_workers = max_workers or min(12, os.cpu_count() or 4)
         self.logger.info(f"Using max_workers={max_workers} for parallel entity collection.")
 
         def infer_single(idx: int, text: str):

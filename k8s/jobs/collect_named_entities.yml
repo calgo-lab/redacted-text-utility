@@ -18,11 +18,11 @@ spec:
           resources:
             requests:
               nvidia.com/gpu: "1"
-              memory: "8Gi"
+              memory: "64Gi"
               cpu: "16000m"
             limits:
               nvidia.com/gpu: "1"
-              memory: "16Gi"
+              memory: "72Gi"
               cpu: "32000m"
           volumeMounts:
             - name: ssaha-pv
