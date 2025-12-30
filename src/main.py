@@ -234,61 +234,82 @@ if __name__ == "__main__":
 
     echr_df: pd.DataFrame = echr_data_handler.get_dataframe_for_file(echr_raw_file_names[0])
     
-    """
-    row_id: int = 269
-    logger.info(f"echr_df.row[{row_id}].text:\n{echr_df.iloc[row_id].text}")
-    logger.info(f"echr_df.row[{row_id}].binary_judgement:{echr_df.iloc[row_id].binary_judgement}")
-    """
+    
+    # row_id: int = 269
+    # logger.info(f"echr_df.row[{row_id}].text:\n{echr_df.iloc[row_id].text}")
+    # logger.info(f"echr_df.row[{row_id}].binary_judgement:{echr_df.iloc[row_id].binary_judgement}")
+   
 
     ### Total number of rows in echr dataframe
-    logger.info(f"Total number of rows in echr dataframe: {echr_df.shape[0]}")
+    # logger.info(f"Total number of rows in echr dataframe: {echr_df.shape[0]}")
 
     ### Print all available column names
-    logger.info(f"echr_df columns: {echr_df.columns.tolist()}")
+    # logger.info(f"echr_df columns: {echr_df.columns.tolist()}")
 
     ### Print total count of binary_judgement values
-    binary_judgement_counts = echr_df['binary_judgement'].value_counts()
-    logger.info(f"echr_df binary_judgement value counts:\n{binary_judgement_counts}")
+    # binary_judgement_counts = echr_df['binary_judgement'].value_counts()
+    # logger.info(f"echr_df binary_judgement value counts:\n{binary_judgement_counts}")
 
     ### Print total count of partition values
-    partition_counts = echr_df['partition'].value_counts()
-    logger.info(f"echr_df partition value counts:\n{partition_counts}")
+    # partition_counts = echr_df['partition'].value_counts()
+    # logger.info(f"echr_df partition value counts:\n{partition_counts}")
 
     ### Unique values in 'itemid' column
-    unique_itemids = echr_df['itemid'].unique()
-    logger.info(f"Unique itemids in echr_df: {len(unique_itemids.tolist())}")
+    # unique_itemids = echr_df['itemid'].unique()
+    # logger.info(f"Unique itemids in echr_df: {len(unique_itemids.tolist())}")
 
     ### Check how many rows have itemid starting with '001'
-    itemid_starting_with_001 = echr_df[echr_df['itemid'].str.startswith('001')]
-    logger.info(f"Number of rows with itemid starting with '001': {itemid_starting_with_001.shape[0]}")
+    # itemid_starting_with_001 = echr_df[echr_df['itemid'].str.startswith('001')]
+    # logger.info(f"Number of rows with itemid starting with '001': {itemid_starting_with_001.shape[0]}")
 
     ### Get train-dev-test DatasetDict for echr dataset
-    echr_dataset_dict_1 = echr_data_handler.get_train_dev_test_datasetdict(k=1)
+    # echr_dataset_dict_1 = echr_data_handler.get_train_dev_test_datasetdict(k=1)
     
     ### Check if the itemids in one split overlap with itemids in other splits
-    train_itemids_1 = set(echr_dataset_dict_1['train']['itemid'])
-    dev_itemids_1 = set(echr_dataset_dict_1['dev']['itemid'])
-    test_itemids_1 = set(echr_dataset_dict_1['test']['itemid'])
-    logger.info(f"Overlap between train and dev itemids: {len(train_itemids_1.intersection(dev_itemids_1))}")
-    logger.info(f"Overlap between train and test itemids: {len(train_itemids_1.intersection(test_itemids_1))}")
-    logger.info(f"Overlap between dev and test itemids: {len(dev_itemids_1.intersection(test_itemids_1))}")
+    # train_itemids_1 = set(echr_dataset_dict_1['train']['itemid'])
+    # dev_itemids_1 = set(echr_dataset_dict_1['dev']['itemid'])
+    # test_itemids_1 = set(echr_dataset_dict_1['test']['itemid'])
+    # logger.info(f"Overlap between train and dev itemids: {len(train_itemids_1.intersection(dev_itemids_1))}")
+    # logger.info(f"Overlap between train and test itemids: {len(train_itemids_1.intersection(test_itemids_1))}")
+    # logger.info(f"Overlap between dev and test itemids: {len(dev_itemids_1.intersection(test_itemids_1))}")
 
     ### Check Overlap between splits of fold 1 and fold 2
-    echr_dataset_dict_2 = echr_data_handler.get_train_dev_test_datasetdict(k=2)
-    train_itemids_2 = set(echr_dataset_dict_2['train']['itemid'])
-    dev_itemids_2 = set(echr_dataset_dict_2['dev']['itemid'])
-    test_itemids_2 = set(echr_dataset_dict_2['test']['itemid'])
-    logger.info(f"Overlap between fold 1 train and fold 2 train itemids: {len(train_itemids_1.intersection(train_itemids_2))}")
-    logger.info(f"Overlap between fold 1 dev and fold 2 dev itemids: {len(dev_itemids_1.intersection(dev_itemids_2))}")
-    logger.info(f"Overlap between fold 1 test and fold 2 test itemids: {len(test_itemids_1.intersection(test_itemids_2))}")
+    # echr_dataset_dict_2 = echr_data_handler.get_train_dev_test_datasetdict(k=2)
+    # train_itemids_2 = set(echr_dataset_dict_2['train']['itemid'])
+    # dev_itemids_2 = set(echr_dataset_dict_2['dev']['itemid'])
+    # test_itemids_2 = set(echr_dataset_dict_2['test']['itemid'])
+    # logger.info(f"Overlap between fold 1 train and fold 2 train itemids: {len(train_itemids_1.intersection(train_itemids_2))}")
+    # logger.info(f"Overlap between fold 1 dev and fold 2 dev itemids: {len(dev_itemids_1.intersection(dev_itemids_2))}")
+    # logger.info(f"Overlap between fold 1 test and fold 2 test itemids: {len(test_itemids_1.intersection(test_itemids_2))}")
 
-    """
     entity_prediction_service: EntityPredictionService = EntityPredictionService()
     entity_set_id: str = "ontonotes5"
     model_id: str = "ner-english-ontonotes-large"
 
+    """
     model_service = entity_prediction_service._model_service
     mim = model_service.get_model_inference_maker(entity_set_id, model_id)
     result = mim.infer(echr_df.iloc[row_id].text)
     logger.info(f"Named entity recognition result for echr_df.row[{row_id}]:\n{json.dumps(result, indent=2, ensure_ascii=False)}")
     """
+
+    processed_data_dir: Path = project_root / "data" / "processed" / "glnmario" / "ECHR"
+    processed_data_dir.mkdir(parents=True, exist_ok=True)
+
+    output_path = processed_data_dir / f"ECHR_Dataset_ne.parquet"
+    entity_prediction_service.collect_named_entities_for_dataframe_parallel(
+        entity_set_id=entity_set_id,
+        model_id=model_id,
+        source_df=echr_df,
+        source_column="text",
+        target_column=None,
+        target_df_export_path=output_path
+    )
+    ne_df = pd.read_parquet(output_path)
+    named_entities: List[Dict[str, Any]] = list()
+    for _, row in ne_df.iterrows():
+        nes = json.loads(row["text_ne_ontonotes5_ner-english-ontonotes-large"])
+        [ne.update({"itemid": row["itemid"]}) for ne in nes]
+        named_entities.extend(nes)
+    with open(processed_data_dir / f"named_entities.json", "w", encoding="utf-8") as f:
+        json.dump(named_entities, f, indent=2, ensure_ascii=False)

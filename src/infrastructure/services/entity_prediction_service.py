@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from tqdm import tqdm
@@ -6,7 +7,9 @@ from core.logging import get_logger
 from infrastructure.services.model_service import ModelService
 from infrastructure.services.model_service_impl import ModelServiceImpl
 
+import os
 import json
+import threading
 
 import pandas as pd
 
@@ -69,6 +72,77 @@ class EntityPredictionService:
             )
 
         try:
+            source_df.to_parquet(target_df_export_path, index=False)
+            return target_df_export_path
+        except Exception as e:
+            print(f"Failed to export dataframe to {target_df_export_path}: {e}")
+            return None
+    
+    def collect_named_entities_for_dataframe_parallel(self,
+                                                      entity_set_id: str,
+                                                      model_id: str,
+                                                      source_df: pd.DataFrame,
+                                                      source_column: str,
+                                                      target_column: str | None,
+                                                      target_df_export_path: Path,
+                                                      max_workers: int | None = None) -> Path | None:
+        """
+        Collects named entities for each text entry in the specified column of the dataframe
+        using the specified NER model in parallel and exports the results to a new column in 
+        the dataframe.
+
+        :param entity_set_id: The ID of the entity set to use for predictions.
+        :param model_id: The ID of the NER model to use for predictions.
+        :param source_df: The pandas DataFrame containing the text data.
+        :param source_column: The name of the column in the dataframe containing text to analyze.
+        :param target_column: The name of the column in the dataframe where predictions will be stored.
+        :param target_df_export_path: The path where the updated dataframe with predictions will be saved.
+        :param max_workers: The maximum number of worker threads to use for parallel processing.
+        :return: The path to the exported dataframe with named entity predictions, or None if export fails.
+        """
+
+        if target_column is None:
+            target_column = f"{source_column}_ne_{entity_set_id}_{model_id}"
+
+        source_df = source_df.copy()
+        source_df[target_column] = None
+
+        mim = self._model_service.get_model_inference_maker(entity_set_id, model_id)
+
+        total_entities = 0
+        total_entities_lock = threading.Lock()
+
+        max_workers = max_workers or min(32, os.cpu_count() or 4)
+
+        def infer_single(idx: int, text: str):
+            nonlocal total_entities
+
+            result = mim.infer(text)
+            entity_count = len(result) if isinstance(result, list) else 0
+
+            with total_entities_lock:
+                total_entities += entity_count
+
+            return idx, json.dumps(result)
+
+        texts = source_df[source_column].tolist()
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = {
+                executor.submit(infer_single, idx, text): idx
+                for idx, text in enumerate(texts)
+            }
+
+            with tqdm(total=len(futures), desc="Collecting named entities") as pbar:
+                for future in as_completed(futures):
+                    idx, result_json = future.result()
+                    source_df.at[idx, target_column] = result_json
+
+                    pbar.update(1)
+                    pbar.set_postfix({"total_entities": total_entities})
+
+        try:
+            target_df_export_path.parent.mkdir(parents=True, exist_ok=True)
             source_df.to_parquet(target_df_export_path, index=False)
             return target_df_export_path
         except Exception as e:

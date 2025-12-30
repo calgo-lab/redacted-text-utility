@@ -1,0 +1,45 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: collect-named-entities-echr
+  namespace: ssaha
+spec:
+  ttlSecondsAfterFinished: 60
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: collect-named-entities-echr
+    spec:
+      containers:
+        - name: collect-named-entities-echr-container
+          image: sksdotsauravs/python-nlp-dev-container:ubuntu24.04-python3.12.11-cuda12.8.1-torch2.7.1
+          workingDir: /home/ssaha
+          resources:
+            requests:
+              nvidia.com/gpu: "1"
+              memory: "8Gi"
+              cpu: "32000m"
+            limits:
+              nvidia.com/gpu: "1"
+              memory: "16Gi"
+              cpu: "64000m"
+          volumeMounts:
+            - name: ssaha-pv
+              mountPath: /home/ssaha
+          env:
+            - name: RUN_PYTHON_SCRIPT
+              value: "yes"
+            - name: PYTHON_SCRIPT_PATH
+              value: "/home/ssaha/Projects/redacted-text-utility/src/main.py"
+            - name: FLAIR_CACHE_ROOT
+              value: /home/ssaha/.flair
+            - name: HF_HOME
+              value: /home/ssaha/.cache/huggingface
+      restartPolicy: Never
+      volumes:
+        - name: ssaha-pv
+          persistentVolumeClaim:
+            claimName: ssaha-pvc
+      nodeSelector:
+        gpu: a100
