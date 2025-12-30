@@ -14,6 +14,7 @@ from transformers import (
     DataCollatorWithPadding,
     EarlyStoppingCallback
 )
+from transformers.trainer_utils import get_last_checkpoint
 
 from data_handlers.echr_data_handler import EchrDataHandler
 from utils.project_utils import ProjectUtils
@@ -207,7 +208,7 @@ def fine_tune():
         gradient_accumulation_steps=mini_batch_size,
 
         fp16=True,
-        evaluation_strategy="epoch",
+        eval_strategy="epoch",
         save_strategy="epoch",
         logging_strategy="steps",
         logging_steps=50,
@@ -224,12 +225,14 @@ def fine_tune():
         resume_from_checkpoint=True
     )
 
+    last_checkpoint = get_last_checkpoint(training_args.output_dir)
+
     trainer = Trainer(
         model=model,
         args=training_args,
         train_dataset=dataset["train"],
         eval_dataset=dataset["validation"],
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
         data_collator=DataCollatorWithPadding(tokenizer),
         compute_metrics=compute_metrics,
         callbacks=[
@@ -240,7 +243,7 @@ def fine_tune():
         ]
     )
 
-    trainer.train(resume_from_checkpoint=True)
+    trainer.train(resume_from_checkpoint=last_checkpoint)
 
     metrics = trainer.evaluate(dataset["test"])
     print(metrics)
