@@ -31,7 +31,7 @@ spec:
             - name: RUN_PYTHON_SCRIPT
               value: "yes"
             - name: PYTHON_SCRIPT_PATH
-              value: "/home/ssaha/Projects/redacted-text-utility/src/training_scripts/tc/fine_tune_text_classifier_with_transformer_model.py"
+              value: "/home/ssaha/Projects/redacted-text-utility/src/training_scripts/tc/fine_tune_text_classifier_with_transformer_model_with_hf.py"
             - name: FLAIR_CACHE_ROOT
               value: /home/ssaha/.flair
             - name: HF_HOME
