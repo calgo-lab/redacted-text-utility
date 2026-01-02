@@ -91,20 +91,22 @@ def fine_tune():
     data_dir_path =  data_dir_path / f"sample-size-{sample_size}" / f"data-fold-{data_fold_k_value}"
     data_dir_path.mkdir(parents=True, exist_ok=True)
 
-    train_df[['text', 'binary_judgement']].to_csv(data_dir_path / "train.csv", 
-                                                  sep='\t', 
-                                                  index=False, 
-                                                  header=['text', 'label'])
+    if not Path(data_dir_path / "train.csv").exists():
+        train_df[['text', 'binary_judgement']].to_csv(data_dir_path / "train.csv", 
+                                                      sep='\t', 
+                                                      index=False, 
+                                                      header=['text', 'label'])
+    if not Path(data_dir_path / "dev.csv").exists():
+        dev_df[['text', 'binary_judgement']].to_csv(data_dir_path / "dev.csv", 
+                                                    sep='\t', 
+                                                    index=False, 
+                                                    header=['text', 'label'])
     
-    dev_df[['text', 'binary_judgement']].to_csv(data_dir_path / "dev.csv", 
-                                                sep='\t', 
-                                                index=False, 
-                                                header=['text', 'label'])
-    
-    test_df[['text', 'binary_judgement']].to_csv(data_dir_path / "test.csv", 
-                                                 sep='\t', 
-                                                 index=False, 
-                                                 header=['text', 'label'])
+    if not Path(data_dir_path / "test.csv").exists():
+        test_df[['text', 'binary_judgement']].to_csv(data_dir_path / "test.csv", 
+                                                     sep='\t', 
+                                                     index=False, 
+                                                     header=['text', 'label'])
     
     column_name_map = {0: "text", 1: "label"}
     label_type = "label"
