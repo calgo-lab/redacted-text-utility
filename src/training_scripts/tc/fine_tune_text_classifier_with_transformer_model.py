@@ -144,10 +144,10 @@ def fine_tune():
 
     anneal_plugin = AnnealingPlugin(
         base_path=model_dir_path,
-        min_learning_rate=5e-7,
+        min_learning_rate=5e-8,
         anneal_factor=0.5,
         patience=2,
-        initial_extra_patience=1,
+        initial_extra_patience=0,
         anneal_with_restarts=True
     )
 
@@ -208,12 +208,11 @@ def fine_tune():
         write_weights = True, 
         save_final_model = False, 
         use_final_model_for_eval = False, 
-        multi_gpu=use_multi_gpu, 
-        use_amp=use_multi_gpu, 
-        main_evaluation_metric=("macro avg", "f1-score"), 
-        shuffle=False, 
-        shuffle_first_epoch=False, 
-        attach_default_scheduler=False, 
+        multi_gpu = use_multi_gpu, 
+        use_amp = use_multi_gpu, 
+        shuffle = False if use_multi_gpu else True, 
+        shuffle_first_epoch = False if use_multi_gpu else True, 
+        attach_default_scheduler = False, 
         plugins = [anneal_plugin, wandb_plugin] if log_to_wandb else [anneal_plugin]
     )
 

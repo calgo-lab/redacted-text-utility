@@ -49,11 +49,11 @@ spec:
             - name: TRANSFORMER_MODEL_NAME
               value: bert-large-cased
             - name: LEARNING_RATE
-              value: "5e-5"
+              value: "5e-6"
             - name: MAX_EPOCHS
-              value: "50"
+              value: "20"
             - name: MINI_BATCH_SIZE
-              value: "1"
+              value: "2"
             - name: WANDB_API_KEY
               valueFrom:
                 secretKeyRef:
@@ -65,4 +65,4 @@ spec:
           persistentVolumeClaim:
             claimName: ssaha-pvc
       nodeSelector:
-        gpu: h200
+        gpu: b200
