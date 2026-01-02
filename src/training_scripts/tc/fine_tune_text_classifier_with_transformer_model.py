@@ -168,7 +168,7 @@ def fine_tune():
         wandb_plugin = WandbLoggerPlugin(
             entity = wandb_entity, 
             project = project_root.name, 
-            name = f"echr-tc__{model_dir_name}__fold-{data_fold_k_value}",
+            name = f"echr-tc__{model_dir_name}__fold-{data_fold_k_value}", 
             config = {
                 "transformer_model_name": transformer_model_name, 
                 "data_fold": data_fold_k_value, 

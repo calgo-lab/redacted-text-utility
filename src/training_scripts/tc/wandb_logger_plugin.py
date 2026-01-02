@@ -11,6 +11,7 @@ class WandbLoggerPlugin(TrainerPlugin):
     def __init__(self, 
                  entity: str, 
                  project: str, 
+                 name: str, 
                  config: Dict[str, Any] = None, 
                  tracked: Set[str] = None, 
                  reinit: str = "finish_previous"):
@@ -26,6 +27,7 @@ class WandbLoggerPlugin(TrainerPlugin):
         
         self.entity = entity
         self.project = project
+        self.name = name
         self.config = dict(config) if config is not None else dict()
         self.tracked = set(tracked) if tracked is not None else None
         self.reinit = reinit
@@ -41,6 +43,7 @@ class WandbLoggerPlugin(TrainerPlugin):
         self._run = wandb.init(
             entity=self.entity, 
             project=self.project, 
+            name=self.name, 
             config=self.config, 
             reinit=self.reinit
         )
