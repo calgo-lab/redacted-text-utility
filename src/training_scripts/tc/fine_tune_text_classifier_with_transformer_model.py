@@ -13,7 +13,6 @@ from flair.trainers import ModelTrainer
 from flair.trainers.plugins.functional.anneal_on_plateau import AnnealingPlugin
 
 from data_handlers.echr_data_handler import EchrDataHandler
-from longformer_document_embeddings import LongformerDocumentEmbeddings
 from training_scripts.tc.multi_gpu_flair_model_trainer import MultiGpuFlairModelTrainer
 from training_scripts.tc.wandb_logger_plugin import WandbLoggerPlugin
 from utils.project_utils import ProjectUtils
@@ -127,8 +126,9 @@ def fine_tune():
     model_dir_path = model_dir_path / f"mini-batch-size-{mini_batch_size}"
     model_dir_path.mkdir(parents=True, exist_ok=True)
 
-    document_embeddings: DocumentEmbeddings = LongformerDocumentEmbeddings(
+    document_embeddings: DocumentEmbeddings = TransformerDocumentEmbeddings(
         model=transformer_model_name,
+        allow_long_sentences=True,
         cls_pooling="mean",
         fine_tune=True
     )
@@ -142,7 +142,7 @@ def fine_tune():
 
     anneal_plugin = AnnealingPlugin(
         base_path=model_dir_path,
-        min_learning_rate=1e-7,
+        min_learning_rate=5e-7,
         anneal_factor=0.5,
         patience=2,
         initial_extra_patience=1,
@@ -168,6 +168,7 @@ def fine_tune():
         wandb_plugin = WandbLoggerPlugin(
             entity = wandb_entity, 
             project = project_root.name, 
+            name = f"echr-tc__{model_dir_name}__fold-{data_fold_k_value}",
             config = {
                 "transformer_model_name": transformer_model_name, 
                 "data_fold": data_fold_k_value, 
@@ -207,7 +208,8 @@ def fine_tune():
         multi_gpu=use_multi_gpu, 
         use_amp=use_multi_gpu, 
         main_evaluation_metric=("macro avg", "f1-score"), 
-        shuffle=True, 
+        shuffle=False, 
+        shuffle_first_epoch=False, 
         attach_default_scheduler=False, 
         plugins = [anneal_plugin, wandb_plugin] if log_to_wandb else [anneal_plugin]
     )
