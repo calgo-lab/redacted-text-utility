@@ -144,7 +144,7 @@ def fine_tune():
 
     anneal_plugin = AnnealingPlugin(
         base_path=model_dir_path,
-        min_learning_rate=5e-8,
+        min_learning_rate=1e-8,
         anneal_factor=0.5,
         patience=2,
         initial_extra_patience=0,

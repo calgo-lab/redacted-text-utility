@@ -17,11 +17,11 @@ spec:
           workingDir: /home/ssaha
           resources:
             requests:
-              nvidia.com/gpu: "1"
+              nvidia.com/gpu: "2"
               memory: "32Gi"
               cpu: "8000m"
             limits:
-              nvidia.com/gpu: "1"
+              nvidia.com/gpu: "2"
               memory: "64Gi"
               cpu: "16000m"
           volumeMounts:
@@ -41,7 +41,7 @@ spec:
             - name: DATA_FOLD_K_VALUE
               value: "1"
             - name: USE_MULTI_GPU
-              value: "0"
+              value: "1"
             - name: LOG_TO_WANDB
               value: "1"
             - name: WANDB_ENTITY
@@ -49,11 +49,11 @@ spec:
             - name: TRANSFORMER_MODEL_NAME
               value: xlm-roberta-large
             - name: LEARNING_RATE
-              value: "1e-5"
+              value: "1e-6"
             - name: MAX_EPOCHS
-              value: "50"
+              value: "35"
             - name: MINI_BATCH_SIZE
-              value: "1"
+              value: "2"
             - name: WANDB_API_KEY
               valueFrom:
                 secretKeyRef:
@@ -65,4 +65,4 @@ spec:
           persistentVolumeClaim:
             claimName: ssaha-pvc
       nodeSelector:
-        gpu: h200
+        gpu: b200
