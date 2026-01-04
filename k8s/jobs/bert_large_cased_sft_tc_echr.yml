@@ -49,9 +49,9 @@ spec:
             - name: TRANSFORMER_MODEL_NAME
               value: bert-large-cased
             - name: LEARNING_RATE
-              value: "5e-6"
+              value: "5e-7"
             - name: MAX_EPOCHS
-              value: "20"
+              value: "35"
             - name: MINI_BATCH_SIZE
               value: "2"
             - name: WANDB_API_KEY

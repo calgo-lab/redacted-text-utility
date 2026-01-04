@@ -10,7 +10,7 @@ from flair.distributed_utils import launch_distributed
 from flair.embeddings import DocumentEmbeddings, TransformerDocumentEmbeddings
 from flair.models import TextClassifier
 from flair.trainers import ModelTrainer
-from flair.trainers.plugins.functional.anneal_on_plateau import AnnealingPlugin
+# from flair.trainers.plugins.functional.anneal_on_plateau import AnnealingPlugin
 
 from data_handlers.echr_data_handler import EchrDataHandler
 from training_scripts.tc.multi_gpu_flair_model_trainer import MultiGpuFlairModelTrainer
@@ -139,17 +139,18 @@ def fine_tune():
         embeddings=document_embeddings,
         label_dictionary=label_dict,
         label_type='label',
-        multi_label=False
+        multi_label=False, 
+        dropout=0.3
     )
 
-    anneal_plugin = AnnealingPlugin(
-        base_path=model_dir_path,
-        min_learning_rate=1e-8,
-        anneal_factor=0.5,
-        patience=2,
-        initial_extra_patience=0,
-        anneal_with_restarts=True
-    )
+    # anneal_plugin = AnnealingPlugin(
+    #     base_path=model_dir_path,
+    #     min_learning_rate=1e-8,
+    #     anneal_factor=0.5,
+    #     patience=2,
+    #     initial_extra_patience=0,
+    #     anneal_with_restarts=True
+    # )
 
     models_with_unused_parameters = [
         "google-bert/bert-base-german-cased", 
@@ -212,8 +213,9 @@ def fine_tune():
         use_amp = use_multi_gpu, 
         shuffle = False if use_multi_gpu else True, 
         shuffle_first_epoch = False if use_multi_gpu else True, 
-        attach_default_scheduler = False, 
-        plugins = [anneal_plugin, wandb_plugin] if log_to_wandb else [anneal_plugin]
+        plugins = [wandb_plugin] if log_to_wandb else None
+        # attach_default_scheduler = False, 
+        # plugins = [anneal_plugin, wandb_plugin] if log_to_wandb else [anneal_plugin]
     )
 
 if __name__ == "__main__":
