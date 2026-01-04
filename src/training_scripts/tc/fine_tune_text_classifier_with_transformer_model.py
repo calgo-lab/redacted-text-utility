@@ -139,8 +139,7 @@ def fine_tune():
         embeddings=document_embeddings,
         label_dictionary=label_dict,
         label_type='label',
-        multi_label=False, 
-        dropout=0.3
+        multi_label=False
     )
 
     # anneal_plugin = AnnealingPlugin(
