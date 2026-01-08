@@ -234,7 +234,7 @@ if __name__ == "__main__":
 
     echr_df: pd.DataFrame = echr_data_handler.get_dataframe_for_file(echr_raw_file_names[0])
     
-    
+    ### Log specific row text for checking
     # row_id: int = 269
     # logger.info(f"echr_df.row[{row_id}].text:\n{echr_df.iloc[row_id].text}")
     # logger.info(f"echr_df.row[{row_id}].binary_judgement:{echr_df.iloc[row_id].binary_judgement}")
@@ -258,58 +258,155 @@ if __name__ == "__main__":
     # unique_itemids = echr_df['itemid'].unique()
     # logger.info(f"Unique itemids in echr_df: {len(unique_itemids.tolist())}")
 
-    ### Check how many rows have itemid starting with '001'
-    # itemid_starting_with_001 = echr_df[echr_df['itemid'].str.startswith('001')]
-    # logger.info(f"Number of rows with itemid starting with '001': {itemid_starting_with_001.shape[0]}")
-
-    ### Get train-dev-test DatasetDict for echr dataset
-    # echr_dataset_dict_1 = echr_data_handler.get_train_dev_test_datasetdict(k=1)
+    ### Get num_tokens dataframe for echr dataset and log statistics
+    """
+    num_tokens_df = echr_data_handler.get_num_tokens_df(echr_raw_file_names[0])
     
-    ### Check if the itemids in one split overlap with itemids in other splits
-    # train_itemids_1 = set(echr_dataset_dict_1['train']['itemid'])
-    # dev_itemids_1 = set(echr_dataset_dict_1['dev']['itemid'])
-    # test_itemids_1 = set(echr_dataset_dict_1['test']['itemid'])
-    # logger.info(f"Overlap between train and dev itemids: {len(train_itemids_1.intersection(dev_itemids_1))}")
-    # logger.info(f"Overlap between train and test itemids: {len(train_itemids_1.intersection(test_itemids_1))}")
-    # logger.info(f"Overlap between dev and test itemids: {len(dev_itemids_1.intersection(test_itemids_1))}")
+    logger.info(f"num_tokens statistics:\n{num_tokens_df['num_tokens'].describe()}")
+    
+    ## OUTPUT:
+    ## count    11478
+    ## mean      2538.018470
+    ## std       2924.495029
+    ## min         14
+    ## 25%        818
+    ## 50%       1737
+    ## 75%       3184
+    ## max      59784
 
-    ### Check Overlap between splits of fold 1 and fold 2
-    # echr_dataset_dict_2 = echr_data_handler.get_train_dev_test_datasetdict(k=2)
-    # train_itemids_2 = set(echr_dataset_dict_2['train']['itemid'])
-    # dev_itemids_2 = set(echr_dataset_dict_2['dev']['itemid'])
-    # test_itemids_2 = set(echr_dataset_dict_2['test']['itemid'])
-    # logger.info(f"Overlap between fold 1 train and fold 2 train itemids: {len(train_itemids_1.intersection(train_itemids_2))}")
-    # logger.info(f"Overlap between fold 1 dev and fold 2 dev itemids: {len(dev_itemids_1.intersection(dev_itemids_2))}")
-    # logger.info(f"Overlap between fold 1 test and fold 2 test itemids: {len(test_itemids_1.intersection(test_itemids_2))}")
+    num_tokens_df_filtered = num_tokens_df[
+        (num_tokens_df["num_tokens"] >= 512) & (num_tokens_df["num_tokens"] <= 5120)
+    ]
+    logger.info(f"Number of documents with total tokens between 512 and 5120: {num_tokens_df_filtered.shape[0]}")
 
+    filtered_echr_df = echr_df[echr_df["itemid"].isin(num_tokens_df_filtered["itemid"])]
+    logger.info(f"binary_judgement distribution:\n{filtered_echr_df['binary_judgement'].value_counts()}")
+    """
+
+    ### Get NER result for specific row for checking
+    """
     entity_prediction_service: EntityPredictionService = EntityPredictionService()
     entity_set_id: str = "ontonotes5"
     model_id: str = "ner-english-ontonotes-large"
-
-    """
+    row_id: int = 0
     model_service = entity_prediction_service._model_service
     mim = model_service.get_model_inference_maker(entity_set_id, model_id)
     result = mim.infer(echr_df.iloc[row_id].text)
     logger.info(f"Named entity recognition result for echr_df.row[{row_id}]:\n{json.dumps(result, indent=2, ensure_ascii=False)}")
     """
 
+    ### Collect named entities for echr dataframe
+    """
+    entity_prediction_service: EntityPredictionService = EntityPredictionService()
+    entity_set_id: str = "ontonotes5"
+    model_id: str = "ner-english-ontonotes-large"
+    
     processed_data_dir: Path = project_root / "data" / "processed" / "glnmario" / "ECHR"
     processed_data_dir.mkdir(parents=True, exist_ok=True)
-
     output_path = processed_data_dir / f"ECHR_Dataset_ne.parquet"
+    
     entity_prediction_service.collect_named_entities_for_dataframe(
         entity_set_id=entity_set_id,
         model_id=model_id,
         source_df=echr_df,
         source_column="text",
         target_column=None,
-        target_df_export_path=output_path
+        target_df_export_path=output_path,
+        export_with_only_id_column="itemid"
     )
+    
     ne_df = pd.read_parquet(output_path)
     named_entities: List[Dict[str, Any]] = list()
     for _, row in ne_df.iterrows():
         nes = json.loads(row["text_ne_ontonotes5_ner-english-ontonotes-large"])
         [ne.update({"itemid": row["itemid"]}) for ne in nes]
         named_entities.extend(nes)
-    with open(processed_data_dir / f"named_entities.json", "w", encoding="utf-8") as f:
+    with open(processed_data_dir / f"named_entities_partial.json", "w", encoding="utf-8") as f:
         json.dump(named_entities, f, indent=2, ensure_ascii=False)
+    """
+
+    ### Collect private entities for echr dataframe
+    """ 
+    processed_data_dir: Path = project_root / "data" / "processed" / "glnmario" / "ECHR"
+    processed_data_dir.mkdir(parents=True, exist_ok=True)
+    
+    ne_df = pd.read_parquet(processed_data_dir / f"ECHR_Dataset_ne.parquet")
+    ne_column = "text_ne_ontonotes5_ner-english-ontonotes-large"
+    target_column = "text_pe_ontonotes5_ner-english-ontonotes-large"
+    target_df_export_path = processed_data_dir / f"ECHR_Dataset_pe.parquet"
+    TokenTreatmentUtils.collect_private_entity_entities_for_dataframe(
+        ne_df=ne_df,
+        ne_column=ne_column,
+        target_column=target_column,
+        target_df_export_path=target_df_export_path
+    )
+    """
+
+    ### Analyze private entities dataframe
+    """
+    pe_df = echr_data_handler.get_private_entities_df(echr_raw_file_names[0])
+
+    num_rows_with_zero_pe = pe_df[pe_df["text_pe_ontonotes5_ner-english-ontonotes-large"] == "[]"].shape
+    logger.info(f"Number of rows with zero private entities: {num_rows_with_zero_pe[0]}")
+
+    num_tokens_df = echr_data_handler.get_num_tokens_df(echr_raw_file_names[0])
+    num_tokens_df_filtered = num_tokens_df[
+        (num_tokens_df["num_tokens"] >= 512) & (num_tokens_df["num_tokens"] <= 5120)
+    ]
+    pe_df_filtered = pe_df[pe_df["itemid"].isin(num_tokens_df_filtered["itemid"])]
+
+    num_rows_with_zero_pe = pe_df_filtered[pe_df_filtered["text_pe_ontonotes5_ner-english-ontonotes-large"] == "[]"].shape
+    logger.info(f"Number of rows with zero private entities for pe_df_filtered: {num_rows_with_zero_pe[0]}")
+    """
+
+    ### Update private entities stat into private entities dataframe
+    """
+    processed_data_dir: Path = project_root / "data" / "processed" / "glnmario" / "ECHR"
+    processed_data_dir.mkdir(parents=True, exist_ok=True)
+
+    pe_df_file_path = processed_data_dir / f"ECHR_Dataset_pe.parquet"
+    pe_column = "text_pe_ontonotes5_ner-english-ontonotes-large"
+    id_column = "itemid"
+
+    stats = TokenTreatmentUtils.update_private_entity_dataframe_with_stats(
+        pe_df_file_path=pe_df_file_path,
+        pe_column=pe_column,
+        id_column=id_column
+    )
+    logger.info(f"Private entity statistics:\n{json.dumps(stats, indent=2)}")
+    """
+
+    ### Get updated private entities dataframe for echr dataset
+    """
+    pe_df = echr_data_handler.get_private_entities_df(echr_raw_file_names[0])
+    logger.info(f"pe_df columns: {pe_df.columns.tolist()}")
+    """
+
+    ### Get private entity statistics for filtered echr private entities dataframe
+    """
+    pe_df = echr_data_handler.get_private_entities_df(echr_raw_file_names[0])
+    num_tokens_df = echr_data_handler.get_num_tokens_df(echr_raw_file_names[0])
+    num_tokens_df_filtered = num_tokens_df[
+        (num_tokens_df["num_tokens"] >= 512) & (num_tokens_df["num_tokens"] <= 5120)
+    ]
+    pe_df_filtered = pe_df[pe_df["itemid"].isin(num_tokens_df_filtered["itemid"])]
+    stats = echr_data_handler.get_private_entity_stats(pe_df_filtered)
+    logger.info(f"Private entity statistics for filtered pe_df:\n{json.dumps(stats, indent=2)}")
+    """
+
+    ### Get train-dev-test DatasetDict for echr dataset for k=1
+    """ 
+    echr_dataset_dict = echr_data_handler.get_train_dev_test_datasetdict(k=1)
+   
+    ### Log number of rows in each split
+    for split_name, dataset in echr_dataset_dict.items():
+        logger.info(f"Number of rows in echr_dataset_dict['{split_name}']: {len(dataset)}")
+    
+    ### Total number of rows in all splits
+    total_rows_all_splits = sum(len(dataset) for dataset in echr_dataset_dict.values())
+    logger.info(f"Total number of rows in all splits: {total_rows_all_splits}")
+
+    ### Get fold stats for echr dataset for k=1
+    fold_stats = echr_data_handler.get_fold_stats(echr_dataset_dict)
+    logger.info(f"ECHR Dataset k=1 fold stats:\n{json.dumps(fold_stats, indent=2)}")
+    """

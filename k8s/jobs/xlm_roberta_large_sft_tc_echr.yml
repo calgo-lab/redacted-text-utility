@@ -49,9 +49,9 @@ spec:
             - name: TRANSFORMER_MODEL_NAME
               value: xlm-roberta-large
             - name: LEARNING_RATE
-              value: "1e-6"
+              value: "5e-7"
             - name: MAX_EPOCHS
-              value: "35"
+              value: "25"
             - name: MINI_BATCH_SIZE
               value: "2"
             - name: WANDB_API_KEY

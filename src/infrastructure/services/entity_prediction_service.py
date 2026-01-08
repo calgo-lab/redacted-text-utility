@@ -29,7 +29,8 @@ class EntityPredictionService:
                                              source_df: pd.DataFrame, 
                                              source_column: str, 
                                              target_column: str | None, 
-                                             target_df_export_path: Path) -> Path | None:
+                                             target_df_export_path: Path, 
+                                             export_with_only_id_column: str = None) -> Path | None:
         
         """
         Collects named entities for each text entry in the specified column of the dataframe
@@ -41,6 +42,7 @@ class EntityPredictionService:
         :param source_column: The name of the column in the dataframe containing text to analyze.
         :param target_column: The name of the column in the dataframe where predictions will be stored.
         :param target_df_export_path: The path where the updated dataframe with predictions will be saved.
+        :param export_with_only_id_column: If provided, only this ID column will be exported along with predictions.
         :return: The path to the exported dataframe with named entity predictions, or None if export fails.
         """
 
@@ -67,6 +69,9 @@ class EntityPredictionService:
                     })
                 )[1]
             )
+        
+        if export_with_only_id_column is not None:
+            source_df = source_df[[export_with_only_id_column, target_column]]
 
         try:
             source_df.to_parquet(target_df_export_path, index=False)

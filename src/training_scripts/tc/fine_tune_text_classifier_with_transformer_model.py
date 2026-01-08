@@ -10,7 +10,6 @@ from flair.distributed_utils import launch_distributed
 from flair.embeddings import DocumentEmbeddings, TransformerDocumentEmbeddings
 from flair.models import TextClassifier
 from flair.trainers import ModelTrainer
-# from flair.trainers.plugins.functional.anneal_on_plateau import AnnealingPlugin
 
 from data_handlers.echr_data_handler import EchrDataHandler
 from training_scripts.tc.multi_gpu_flair_model_trainer import MultiGpuFlairModelTrainer
@@ -64,6 +63,7 @@ def fine_tune():
     project_root: Path = ProjectUtils.get_project_root()
     data_handler = EchrDataHandler(project_root, data_dir=data_dir)
     datasetdict = data_handler.get_train_dev_test_datasetdict(k=data_fold_k_value)
+    fold_stats = data_handler.get_fold_stats(datasetdict)
 
     train_df = datasetdict["train"].to_pandas()
     dev_df = datasetdict["dev"].to_pandas()
@@ -142,15 +142,6 @@ def fine_tune():
         multi_label=False
     )
 
-    # anneal_plugin = AnnealingPlugin(
-    #     base_path=model_dir_path,
-    #     min_learning_rate=1e-8,
-    #     anneal_factor=0.5,
-    #     patience=2,
-    #     initial_extra_patience=0,
-    #     anneal_with_restarts=True
-    # )
-
     models_with_unused_parameters = [
         "google-bert/bert-base-german-cased", 
         "xlm-roberta-large",
@@ -178,7 +169,8 @@ def fine_tune():
                 "learning_rate": learning_rate, 
                 "max_epochs": max_epochs, 
                 "mini_batch_size": mini_batch_size, 
-                "sample_size": sample_size
+                "sample_size": sample_size, 
+                "fold_stats": fold_stats
             }, 
             tracked = {
                 "train/loss", 
@@ -213,8 +205,6 @@ def fine_tune():
         shuffle = False if use_multi_gpu else True, 
         shuffle_first_epoch = False if use_multi_gpu else True, 
         plugins = [wandb_plugin] if log_to_wandb else None
-        # attach_default_scheduler = False, 
-        # plugins = [anneal_plugin, wandb_plugin] if log_to_wandb else [anneal_plugin]
     )
 
 if __name__ == "__main__":

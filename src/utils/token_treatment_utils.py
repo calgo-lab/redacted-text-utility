@@ -1,12 +1,15 @@
 from pathlib import Path
 from typing import Any, Dict, List, Set, Tuple
 
+from tqdm import tqdm
+
 import json
 import random
 import re
 import string
 
 import pandas as pd
+
 
 class TokenTreatmentUtils:
 
@@ -200,3 +203,99 @@ class TokenTreatmentUtils:
         
         redacted_ne_df.to_parquet(target_df_export_path, index=False)
         return target_df_export_path
+    
+    @staticmethod
+    def collect_private_entity_entities_for_dataframe(ne_df: pd.DataFrame,
+                                                      ne_column: str,
+                                                      target_column: str,
+                                                      target_df_export_path: Path) -> Path:
+        """
+        Collects or filters private entities from the named entities column of a DataFrame
+        
+        :param ne_df: The DataFrame with named entities per rows.
+        :param ne_column: The column name in the DataFrame that contains the named entities as list of dictionaries.
+        :param target_column: The column name in the DataFrame to store the collected private entities as list of dictionaries.
+        :param target_df_export_path: The path where the target dataframe with private entities will be saved.
+        
+        :return: The path to the exported DataFrame.
+        """
+        pe_df = ne_df.copy()
+
+        total_private_entities = [0]
+        def filter_and_count(data):
+            ne_list = json.loads(data)
+            pe_list, _ = TokenTreatmentUtils.filter_named_entities(ne_list)
+            pe_count = len(pe_list) if isinstance(pe_list, list) else 0
+            total_private_entities[0] += pe_count
+            return json.dumps(pe_list)
+
+        with tqdm(total=len(pe_df), desc=f"Collecting private entities") as pbar:
+            pe_df[target_column] = pe_df[ne_column].apply(
+                lambda data: (
+                    pbar.update(1), 
+                    filter_and_count(data), 
+                    pbar.set_postfix({
+                        "total_private_entities": total_private_entities[0]
+                    })
+                )[1]
+            )
+        
+        pe_df = pe_df.drop(columns=[ne_column])
+        pe_df.to_parquet(target_df_export_path, index=False)
+        return target_df_export_path
+    
+    @staticmethod
+    def update_private_entity_dataframe_with_stats(pe_df_file_path: Path, 
+                                                   pe_column: str,
+                                                   id_column: str) -> Dict[str, int]:
+        """
+        Collects statistics about private entities from the specified column of a DataFrame 
+        and updates the DataFrame with these statistics.
+        
+        :param pe_df: The DataFrame containing private entities.
+        :param pe_column: The column name in the DataFrame that contains the private entities as list of dictionaries.
+        :param id_column: The column name in the DataFrame that contains the unique identifier for each row.
+        
+        :return: Returns a dictionary with counts of all private entity labels.
+        """
+
+        pe_df = pd.read_parquet(pe_df_file_path)
+        
+        id_label_counts: Dict[str, Dict[str, int]] = dict()
+        all_labels: Set[str] = set()
+
+        with tqdm(total=len(pe_df), desc=f"Collecting private entity stats") as pbar:
+            for _, row in pe_df.iterrows():
+                pe_list = json.loads(row[pe_column])
+                row_label_counts: Dict[str, int] = dict()
+                row_label_counts['pe_count_total'] = len(pe_list)
+                for pe in pe_list:
+                    label = pe['label']
+                    if label not in row_label_counts:
+                        row_label_counts[label] = 0
+                    row_label_counts[label] += 1
+                    all_labels.add(label)
+                id_label_counts[row[id_column]] = row_label_counts
+                pbar.update(1)
+        
+        all_label_counts: Dict[str, int] = dict()
+
+        cols = ['pe_count_total'] + [f'pe_count_{label}' for label in all_labels]
+        for col in cols:
+            pe_df[col] = 0
+
+        with tqdm(total=len(pe_df), desc=f"Updating dataframe with private entity stats") as pbar:
+            for idx, row in pe_df.iterrows():
+                itemid = row[id_column]
+                row_label_counts = id_label_counts.get(itemid, {})
+                total_count = row_label_counts.get('pe_count_total', 0)
+                pe_df.at[idx, 'pe_count_total'] = total_count
+                all_label_counts['pe_count_total'] = all_label_counts.get('pe_count_total', 0) + total_count
+                for label in all_labels:
+                    label_count = row_label_counts.get(label, 0)
+                    pe_df.at[idx, f'pe_count_{label}'] = label_count
+                    all_label_counts[label] = all_label_counts.get(label, 0) + label_count
+                pbar.update(1)
+        
+        pe_df.to_parquet(pe_df_file_path, index=False)
+        return all_label_counts
