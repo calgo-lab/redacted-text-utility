@@ -4,7 +4,7 @@ This repository contains codebase for redacting sensitive information from
 text documents to check how different redaction process affects the utility 
 of those documents when used in the downstream tasks.
 
-## Medical Intent Classification Dataset (DATEXIS)
+## Medical Intent Classification Dataset ([DATEXIS](https://huggingface.co/DATEXIS))
 
 Available at:
 https://huggingface.co/datasets/DATEXIS/med_intent_classification
@@ -89,4 +89,23 @@ Following are the statistics of (T)otal found (P)rivate (E)ntities in the raw da
 ### Results
 \* Experiments done, results will be compiled and documneted soon.
 
-## European Court of Human Rights Dataset
+## European Court of Human Rights Dataset ([AUEB-NLP](https://huggingface.co/AUEB-NLP))
+
+Available at: https://huggingface.co/datasets/glnmario/ECHR
+
+The dataset is an adoptation of the original ECHR dataset introduced by 
+Chalkidis et al. (2019): [Neural Legal Judgment Prediction in English](https://aclanthology.org/P19-1424/) with only usable data (columns - text and 
+binary_judgement) available for the Binary Violation prediction task 
+(The first task described in the paper).
+
+*The original dataset download [link](https://archive.org/details/ECHR-ACL2019) 
+from the paper or the [link](http://archive.org/details/ECtHR-NAACL2021/) from 
+[HuggingFace](https://huggingface.co/datasets/AUEB-NLP/ecthr_cases) does not 
+work anymore and hence this adoptation is used in our experiments. (last checked 
+on: 9th January 2026)*
+
+The dataset contains approximately 11.5k cases from ECHR’s public database. 
+For each case, the dataset provides a list of facts (column - "text") and 
+a binary label (column - "binary_judgement") indicating whether any human 
+rights article or protocol of European Convention of Human Rights has been 
+violated (1) or not (0).
