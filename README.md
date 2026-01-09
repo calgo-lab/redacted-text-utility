@@ -4,12 +4,25 @@ This repository contains codebase for redacting sensitive information from
 text documents to check how different redaction process affects the utility 
 of those documents when used in the downstream tasks.
 
-For now, we are using - 
+## Medical Intent Classification Dataset (DATEXIS)
 
-(1) Medical Intent Classification dataset from DATEXIS available at:
+Available at:
 https://huggingface.co/datasets/DATEXIS/med_intent_classification
 
-(2) As the texts are in English, an English NER model (based on 
+### Preview
+| text  | intents |
+|-------|---------|
+| you do have a little bit of periphe- peripheral neuropathy . um , there is a medication we can use if they get really bad , but you're already on so many medications . | ["Discussion", "Medication", "Reassessment"] |
+| and where would you say the tingling and numbness is ? | ["Acute Symptoms"] |
+| doctor: alright thanks good seeing you thanks for coming in to them | ["Chitchat"] |
+
+### Downstream Task
+Medical Intent Classification is a multi-label classification task where 
+given a medical text, the goal is to predict one or more medical 
+intents/labels associated with that text.
+
+### Redaction Model
+As the texts are in English, an English NER model (based on 
 xlm-roberta-large) fine-tuned on OntoNotes 5.0 from HuggingFace is used for 
 redaction:
 https://huggingface.co/flair/ner-english-ontonotes-large
@@ -72,3 +85,8 @@ Following are the statistics of (T)otal found (P)rivate (E)ntities in the raw da
 | train-00000-of-00001.parquet      |     3886 |         396 |    642 |      460 |    151 |    16 |    15 |
 | validation-00000-of-00001.parquet |      646 |          57 |     88 |       66 |     21 |     1 |     0 |
 | test-00000-of-00001.parquet       |      760 |          72 |    117 |       93 |     23 |     0 |     1 |
+
+### Results
+\* Experiments done, results will be compiled and documneted soon.
+
+## European Court of Human Rights Dataset
