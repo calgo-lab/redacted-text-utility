@@ -10,6 +10,7 @@ from core.logging import configure_logging, get_logger
 from data_handlers.echr_data_handler import EchrDataHandler
 from data_handlers.mic_data_handler import MicDataHandler
 from infrastructure.services.entity_prediction_service import EntityPredictionService
+from utils.plot_utils import PlotUtils
 from utils.project_utils import ProjectUtils
 from utils.token_treatment_utils import TokenTreatmentUtils
 
@@ -273,6 +274,13 @@ if __name__ == "__main__":
     ## 50%       1737
     ## 75%       3184
     ## max      59784
+
+    ### Plot num_tokens distribution
+    plot_output_path = project_root / "plots" / "glnmario" / "ECHR" / "eda"
+    plot_output_path.mkdir(parents=True, exist_ok=True)
+    PlotUtils.plot_num_tokens_distribution(data_handler=echr_data_handler,
+                                           filename=echr_raw_file_names[0],
+                                           output_path=plot_output_path)
 
     num_tokens_df_filtered = num_tokens_df[
         (num_tokens_df["num_tokens"] >= 512) & (num_tokens_df["num_tokens"] <= 5120)
