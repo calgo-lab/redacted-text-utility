@@ -129,9 +129,49 @@ contains a few private entities to redact while also avoiding memory issues.
 
 The following table and histogram shows the distribution of number of tokens in the text column for the ECHR dataset without any sampling -
 
-| doc_num | mean | std  | min | 25% | 50%  | 75%  | 90%   | max    |
-|--------:|-----:|-----:|----:|----:|-----:|-----:|------:|-------:|
-|   11478 | 2538 | 2924 |  14 | 818 | 1737 | 3184 |  5511 |  59784 |
+| total_item | mean | std  | min | 25% | 50%  | 75%  | 90%   | max    |
+|-----------:|-----:|-----:|----:|----:|-----:|-----:|------:|-------:|
+|   11478    | 2538 | 2924 |  14 | 818 | 1737 | 3184 |  5511 |  59784 |
 
 ![ECHR_Dataset_num_tokens_distribution](plots/glnmario/ECHR/eda/ECHR_Dataset_num_tokens_distribution.jpg)
+
+After sampling (selecting samples with tokens count between 512 and 10x512), the total number of samples are reduced to 8435 (~73.5%).
+
+In the next step, with theses samples a 5-fold cross validation split is performed - to create 5 separate train(60%)/dev(20%)/test(20%) sets with rolling.
+
+### Redaction Model
+As the texts are in English, the same English NER model (based on 
+xlm-roberta-large) fine-tuned on OntoNotes 5.0 earlier used for Medical 
+Intent Classification dataset, is used for redaction.
+
+### Fold-wise Statistics
+
+| Stat/Label           | Fold 1                                 | Fold 2                                   | Fold 3                                   | Fold 4                                   | Fold 5                                   |
+|-----------------------|------------------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|
+| Total Item           | Train: 5,062<br>Dev: 1,687<br>Test: 1,686         | Train: 5,061<br>Dev: 1,686<br>Test: 1,688         | Train: 5,060<br>Dev: 1,688<br>Test: 1,687         | Train: 5,061<br>Dev: 1,687<br>Test: 1,687         | Train: 5,061<br>Dev: 1,687<br>Test: 1,687         |
+| Total Violation          | Train: 2,536<br>Dev: 845<br>Test: 845 | Train: 2,535<br>Dev: 845<br>Test: 846 | Train: 2,535<br>Dev: 846<br>Test: 845  | Train: 2,536<br>Dev: 845<br>Test: 845  | Train: 2,536<br>Dev: 845<br>Test: 845  |
+| Total Non-violation          | Train: 2,526<br>Dev: 842<br>Test: 841 | Train: 2,526<br>Dev: 841<br>Test: 842 | Train: 2,525<br>Dev: 842<br>Test: 842  | Train: 2,525<br>Dev: 842<br>Test: 842  | Train: 2,525<br>Dev: 842<br>Test: 842  |
+| Total Token          | Train: 10,407,471<br>Dev: 3,465,128<br>Test: 3,514,678 | Train: 10,357,217<br>Dev: 3,514,678<br>Test: 3,515,382 | Train: 10,404,374<br>Dev: 3,515,382<br>Test: 3,467,521  | Train: 10,495,188<br>Dev: 3,467,521<br>Test: 3,424,568  | Train: 10,497,581<br>Dev: 3,424,568<br>Test: 3,465,128  |
+| Total Private Entity        | Train: 435,495<br>Dev: 144,631<br>Test: 144,816      | Train: 433,902<br>Dev: 144,816<br>Test: 146,224      | Train: 432,009<br>Dev: 146,224<br>Test: 146,709      | Train: 435,671<br>Dev: 146,709<br>Test: 142,562      | Train: 437,749<br>Dev: 142,562<br>Test: 144,631      |
+| DATE        | Train: 160,873<br>Dev: 53,692<br>Test: 52,879      | Train: 161,080<br>Dev: 52,879<br>Test: 53,485      | Train: 160,251<br>Dev: 53,485<br>Test: 53,708      | Train: 160,056<br>Dev: 53,708<br>Test: 53,680      | Train: 160,072<br>Dev: 53,680<br>Test: 53,692      |
+| GPE        | Train: 49,956<br>Dev: 16,410<br>Test: 16,650      | Train: 49,919<br>Dev: 16,650<br>Test: 16,447      | Train: 49,108<br>Dev: 16,447<br>Test: 17,461      | Train: 49,507<br>Dev: 17,461<br>Test: 16,048      | Train: 50,558<br>Dev: 16,048<br>Test: 16,410      |
+| ORG        | Train: 160,821<br>Dev: 53,362<br>Test: 54,271      | Train: 159,558<br>Dev: 54,271<br>Test: 54,625      | Train: 159,577<br>Dev: 54,625<br>Test: 54,252      | Train: 162,258<br>Dev: 54,252<br>Test: 51,944      | Train: 163,148<br>Dev: 51,944<br>Test: 53,362      |
+| PERSON        | Train: 63,845<br>Dev: 21,167<br>Test: 21,016      | Train: 63,345<br>Dev: 21,016<br>Test: 21,667      | Train: 63,073<br>Dev: 21,667<br>Test: 21,288      | Train: 63,850<br>Dev: 21,288<br>Test: 20,890      | Train: 63,971<br>Dev: 20,890<br>Test: 21,167      |
+
+### Selected PLMs and frameworks
+
+Three separate transformers based pre-trained language models are fine-tuned for the Text Classification task on the ECHR dataset using Flair framework (TextClassifier from flair.models and TransformerDocumentEmbeddings from flair.embeddings with allow_long_sentences=True and cls_pooling="mean"):
+
+
+1. 🤗 [xlm-roberta-large](https://huggingface.co/FacebookAI/xlm-roberta-large) (<b>aka</b> xlm-roberta-large)
+2. 🤗 [google/electra-large-discriminator](https://huggingface.co/google/electra-large-discriminator) (<b>aka</b> electra-large-discriminator)
+3. 🤗 [google-bert/bert-large-cased](https://huggingface.co/google-bert/bert-large-cased) (<b>aka</b> bert-large-cased)
+
+### Weights and Biases
+All experiments are logged to Weights and Biases and can be found at:
+
+https://wandb.ai/calgo-lab/redacted-text-utility/workspace
+ 
+
+
 
