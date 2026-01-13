@@ -1,7 +1,8 @@
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict
 
 import matplotlib.pyplot as plt
+import pandas as pd
 
 class PlotUtils:
     """
@@ -9,31 +10,27 @@ class PlotUtils:
     """
 
     @staticmethod
-    def plot_num_tokens_distribution(data_handler: Any, 
-                                     filename: str, 
-                                     output_path: Path, 
-                                     show_logs: bool = True) -> None:
+    def plot_num_tokens_distribution(num_tokens_df: pd.DataFrame, 
+                                     figure_file_path: Path, 
+                                     show_logs: bool = True, 
+                                     plot_config: Dict[str, Any] = None) -> None:
         """
-        Plots the num_tokens distribution using data_handler.get_num_tokens_df() function.
+        Plots the num_tokens distribution using the provided num_tokens_df DataFrame.
 
-        :param data_handler: An instance of the data handler with get_num_tokens_df method.
-        :param filename: The filename to load the data from.
-        :param output_path: The path to save the output plot.
+        :param num_tokens_df: A DataFrame containing num_tokens column.
+        :param figure_file_path: The path to save the output plot.
+        :param show_logs: Whether to print log messages.
+        :param plot_config: Additional configuration for the plot.
 
         :return: None
         """
 
-        num_tokens_df = data_handler.get_num_tokens_df(filename)
-        if filename.endswith('.parquet'):
-            filename = filename[:-8]
-        figure_file_path = output_path / f"{filename}_num_tokens_distribution.jpg"
-        
         plt.hist(num_tokens_df['num_tokens'])
-        plt.xlabel("Token count")
+        plt.xlabel("Token Count")
         plt.ylabel("Frequency")
         plt.title("Distribution of Token Counts")
         plt.savefig(figure_file_path)
         plt.close()
         
         if show_logs:
-            print(f"figure_path: {figure_file_path}")
+            print(f"figure_file_path: {figure_file_path}")

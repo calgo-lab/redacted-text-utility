@@ -205,6 +205,56 @@ class TokenTreatmentUtils:
         return target_df_export_path
     
     @staticmethod
+    def redact_private_entity_tokens_in_text_for_dataframe_with_pe_df(input_df: pd.DataFrame,
+                                                                      pe_df: pd.DataFrame,
+                                                                      id_column: str,
+                                                                      text_column: str,
+                                                                      class_column: str,
+                                                                      pe_column: str,
+                                                                      replacement_strategy: str = "semantic_label_mask",
+                                                                      zero_entity_retain_text: bool = True) -> pd.DataFrame:
+        """
+        Redacts private entity tokens in the test set of a specific fold using the provided data handler.
+        
+        :param input_df: The DataFrame containing the id, text, and class columns.
+        :param pe_df: The DataFrame containing the id and private entities columns.
+        :param id_column: The column name in the DataFrame that contains the unique identifier for each row.
+        :param text_column: The column name in the DataFrame that contains the text.
+        :param class_column: The column name in the DataFrame that contains the class labels.
+        :param pe_column: The column name in the DataFrame that contains the private entities as list of dictionaries.
+        :param replacement_strategy: The strategy for replacing tokens. Default is "semantic_label_mask".
+               Options are - 
+               (1) "semantic_label_mask"
+               (2) "random_mask"
+               (3) "generic_mask"
+        :param zero_entity_retain_text: If True, retains the original text for rows with zero private entities.
+        :return: The DataFrame with redacted text for the specified replacement strategy.
+        """
+
+        input_df = input_df[[id_column, text_column, class_column]]
+        merged_df = pd.merge(input_df, pe_df, on=id_column, how="left")
+        redacted_df = merged_df.copy()
+        
+        redacted_text_column_name = f"{text_column}_redacted_with_{replacement_strategy}"
+        redacted_df[redacted_text_column_name] = None
+        for idx, row in redacted_df.iterrows():
+            input_text = row[text_column]
+            private_entities = json.loads(row[pe_column])
+            if private_entities:
+                redacted_text = TokenTreatmentUtils.redact_private_entity_tokens_in_text(
+                    input_text=input_text,
+                    private_entities=private_entities,
+                    replacement_strategy=replacement_strategy
+                )
+                redacted_df.at[idx, redacted_text_column_name] = redacted_text
+            else:
+                if zero_entity_retain_text:
+                    redacted_df.at[idx, redacted_text_column_name] = input_text
+        
+        redacted_df = redacted_df[[id_column, redacted_text_column_name, class_column]]
+        return redacted_df
+    
+    @staticmethod
     def collect_private_entity_entities_for_dataframe(ne_df: pd.DataFrame,
                                                       ne_column: str,
                                                       target_column: str,

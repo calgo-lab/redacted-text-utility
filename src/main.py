@@ -262,7 +262,6 @@ if __name__ == "__main__":
     ### Get num_tokens dataframe for echr dataset and log statistics
     """
     num_tokens_df = echr_data_handler.get_num_tokens_df(echr_raw_file_names[0])
-    
     logger.info(f"num_tokens statistics:\n{num_tokens_df['num_tokens'].describe()}")
     
     ## OUTPUT:
@@ -278,9 +277,8 @@ if __name__ == "__main__":
     ### Plot num_tokens distribution
     plot_output_path = project_root / "plots" / "glnmario" / "ECHR" / "eda"
     plot_output_path.mkdir(parents=True, exist_ok=True)
-    PlotUtils.plot_num_tokens_distribution(data_handler=echr_data_handler,
-                                           filename=echr_raw_file_names[0],
-                                           output_path=plot_output_path)
+    plot_file_name = f"{echr_raw_file_names[0].replace('.parquet', '')}_num_tokens_distribution.jpg"
+    PlotUtils.plot_num_tokens_distribution(num_tokens_df, plot_output_path / plot_file_name)
 
     num_tokens_df_filtered = num_tokens_df[
         (num_tokens_df["num_tokens"] >= 512) & (num_tokens_df["num_tokens"] <= 5120)
@@ -417,4 +415,20 @@ if __name__ == "__main__":
     ### Get fold stats for echr dataset for k=1
     fold_stats = echr_data_handler.get_fold_stats(echr_dataset_dict)
     logger.info(f"ECHR Dataset k=1 fold stats:\n{json.dumps(fold_stats, indent=2)}")
+    """
+
+    ### Redact private entities in the echr test set for k=1 and log redacted dataframe
+    """
+    redacted_df = TokenTreatmentUtils.redact_private_entity_tokens_in_text_for_dataframe_with_pe_df(
+        input_df=echr_data_handler.get_train_dev_test_datasetdict(k=1)["test"].to_pandas(),
+        pe_df=echr_data_handler.get_private_entities_df(echr_raw_file_names[0]),
+        id_column="itemid",
+        text_column="text",
+        class_column="binary_judgement",
+        pe_column="text_pe_ontonotes5_ner-english-ontonotes-large",
+        replacement_strategy="semantic_label_mask",
+        zero_entity_retain_text=True
+    )
+    logger.info(f"Redacted dataframe columns: {redacted_df.columns.tolist()}")
+    logger.info(redacted_df.iloc[0].to_dict())
     """
