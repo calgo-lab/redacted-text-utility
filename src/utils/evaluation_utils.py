@@ -23,6 +23,7 @@ class EvaluationUtils:
                                                 replacement_strategy: str,
                                                 zero_entity_retain_text: bool,
                                                 model_file_path: Path,
+                                                data_dir_path: Path,
                                                 metrics_output_path: Path) -> None:
         """
         Redacts private entity tokens in the input_df using the specified 
@@ -43,6 +44,7 @@ class EvaluationUtils:
                (3) "generic_mask"
         :param zero_entity_retain_text: If True, retains the original text for rows with zero private entities.
         :param model_file_path: The file path to the pre-trained text classifier model.
+        :param data_dir_path: The directory path where the redacted test CSV will be saved.
         :param metrics_output_path: The file path where the evaluation metrics will be saved.
         
         :return: None
@@ -60,15 +62,15 @@ class EvaluationUtils:
         )
 
         test_filename = f'test_redacted_with_{replacement_strategy}.csv'
-        if (model_file_path.parent / test_filename).exists():
-            (model_file_path.parent / test_filename).unlink()
+        if (data_dir_path / test_filename).exists():
+            (data_dir_path / test_filename).unlink()
 
         redacted_df[
             [
                 f'text_redacted_with_{replacement_strategy}',
                 class_column
             ]
-        ].to_csv(model_file_path.parent / test_filename,
+        ].to_csv(data_dir_path / test_filename,
                  sep='\t',
                  index=False,
                  header=['text', 'label']
@@ -77,14 +79,14 @@ class EvaluationUtils:
         classifier = TextClassifier.load(model_file_path)
 
         csv.field_size_limit(int(1e8))
-        corpus: Corpus = CSVClassificationCorpus(data_folder=model_file_path.parent,
+        corpus: Corpus = CSVClassificationCorpus(data_folder=data_dir_path,
                                                  column_name_map={
                                                      0: "text",
                                                      1: "label"
                                                  },
                                                  label_type="label",
-                                                 train_file=None,
-                                                 dev_file=None,
+                                                 train_file='train.csv',
+                                                 dev_file='dev.csv',
                                                  test_file=test_filename,
                                                  skip_header=True,
                                                  delimiter="\t")
@@ -96,4 +98,4 @@ class EvaluationUtils:
         with open(metrics_output_path, 'w') as f:
             f.write(result.detailed_results)
         
-        (model_file_path.parent / test_filename).unlink()
+        (data_dir_path / test_filename).unlink()
