@@ -3,6 +3,7 @@ from pathlib import Path
 from flair.data import Corpus
 from flair.datasets import CSVClassificationCorpus
 from flair.models import TextClassifier
+from flair.training_utils import Result
 
 from utils.token_treatment_utils import TokenTreatmentUtils
 
@@ -22,14 +23,12 @@ class EvaluationUtils:
                                                 pe_column: str,
                                                 replacement_strategy: str,
                                                 zero_entity_retain_text: bool,
-                                                model_file_path: Path,
                                                 data_dir_path: Path,
-                                                metrics_output_path: Path) -> None:
+                                                model_file_path: Path) -> Result:
         """
         Redacts private entity tokens in the input_df using the specified 
         replacement strategy, evaluates a text classifier model on the 
-        redacted data and saves the evaluation metrics to the specified 
-        output path.
+        redacted data and returns the evaluation result.
         
         :param input_df: The DataFrame containing the id, text, and class columns.
         :param pe_df: The DataFrame containing the id and private entities columns.
@@ -43,9 +42,8 @@ class EvaluationUtils:
                (2) "random_mask"
                (3) "generic_mask"
         :param zero_entity_retain_text: If True, retains the original text for rows with zero private entities.
-        :param model_file_path: The file path to the pre-trained text classifier model.
         :param data_dir_path: The directory path where the redacted test CSV will be saved.
-        :param metrics_output_path: The file path where the evaluation metrics will be saved.
+        :param model_file_path: The file path to the pre-trained text classifier model.
         
         :return: None
         """
@@ -90,12 +88,13 @@ class EvaluationUtils:
                                                  test_file=test_filename,
                                                  skip_header=True,
                                                  delimiter="\t")
-
-        result = classifier.evaluate(corpus.test,
-                                     mini_batch_size=1,
-                                     gold_label_type="label")
         
-        with open(metrics_output_path, 'w') as f:
-            f.write(result.detailed_results)
+        print(f'Check first row of test corpus:\n{corpus.test[0]}')
+
+        result: Result = classifier.evaluate(corpus.test,
+                                             mini_batch_size=1,
+                                             gold_label_type="label")
         
         (data_dir_path / test_filename).unlink()
+
+        return result
