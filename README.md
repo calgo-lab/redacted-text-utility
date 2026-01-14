@@ -142,7 +142,8 @@ In the next step, with theses samples a 5-fold cross validation split is perform
 ### Redaction Model
 As the texts are in English, the same English NER model (based on 
 xlm-roberta-large) fine-tuned on OntoNotes 5.0 earlier used for Medical 
-Intent Classification dataset, is used for redaction.
+Intent Classification dataset, is used for redaction and the private 
+entities of same types: DATE, GPE, ORG and PERSON are masked or redacted.
 
 ### Fold-wise Statistics
 
@@ -171,7 +172,42 @@ Three separate transformers based pre-trained language models are fine-tuned for
 All experiments are logged to Weights and Biases and can be found at:
 
 https://wandb.ai/calgo-lab/redacted-text-utility/workspace
- 
+
+### System setup and fine-tuning parameters
+
+The experiments were performed on a system with following configuration:
+
+| Package     | Version     |
+|-------------|------------:|
+| datasets    | 4.0.0       |
+| flair       | 0.15.1      |
+| pyarrow     | 20.0.0      |
+| tokenizers  | 0.21.4      |
+| torch       | 2.7.1+cu128 |
+| transformers| 4.49.0      |
+
+and the following hyperparameters were used for fine-tuning all the three models:
+
+| HP              |       Value |
+|-----------------|------------:|
+| learning_rate   | 5e-07       |
+| mini_batch_size | 2           |
+| max_epochs      | 25          |
+| lr_scheduler    | LinearScheduler<br>  warmup_fraction: '0.1' |
+
+### Results
+
+The following tables show fold-wise performance, for differently redacted same 
+test samples, of fine-tuned text classifiers based on different transformers 
+models on the ECHR dataset for Binary Violation Prediction task:
 
 
+<b>Model</b>: xlm-roberta-large <br>
+<b>Metric</b>: Macro F1-score
 
+| Redaction Strategy     |   Fold 1 |   Fold 2 |   Fold 3 |   Fold 4 |   Fold 5 |
+|------------------------|---------:|---------:|---------:|---------:|---------:|
+| No Redaction           |   0.8509 |   0.8711 |   0.8683 |   0.8609 |   0.8439 |
+| Semantic Label Masking |   0.8548 |   0.8631 |   0.8680 |   0.8556 |   0.8581 |
+| Random Masking         |   <b>0.8296</b> |   0.8622 |   0.8643 |   0.8553 |   0.8585 |
+| Generic Masking        |   <b>0.8279</b> |   0.8666 |   0.8700 |   <b>0.8352</b> |   <b>0.8192</b> |

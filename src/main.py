@@ -273,13 +273,15 @@ if __name__ == "__main__":
     ## 50%       1737
     ## 75%       3184
     ## max      59784
-
+    
     ### Plot num_tokens distribution
     plot_output_path = project_root / "plots" / "glnmario" / "ECHR" / "eda"
     plot_output_path.mkdir(parents=True, exist_ok=True)
     plot_file_name = f"{echr_raw_file_names[0].replace('.parquet', '')}_num_tokens_distribution.jpg"
-    PlotUtils.plot_num_tokens_distribution(num_tokens_df, plot_output_path / plot_file_name)
-
+    PlotUtils.plot_num_tokens_distribution(num_tokens_df, 
+                                           plot_output_path / plot_file_name,
+                                           plot_config={"bins": 50, "show_grid": True})
+    
     num_tokens_df_filtered = num_tokens_df[
         (num_tokens_df["num_tokens"] >= 512) & (num_tokens_df["num_tokens"] <= 5120)
     ]

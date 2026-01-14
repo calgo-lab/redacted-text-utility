@@ -25,7 +25,11 @@ class PlotUtils:
         :return: None
         """
 
-        plt.hist(num_tokens_df['num_tokens'])
+        bins: int = plot_config.get('bins') if plot_config and 'bins' in plot_config else None
+        show_grid: bool = plot_config.get('show_grid') if plot_config and 'show_grid' in plot_config else False
+
+        plt.hist(num_tokens_df['num_tokens'], bins=bins)
+        plt.grid(show_grid)
         plt.xlabel("Token Count")
         plt.ylabel("Frequency")
         plt.title("Distribution of Token Counts")
