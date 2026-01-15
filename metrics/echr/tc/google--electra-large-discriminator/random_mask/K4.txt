@@ -1,0 +1,14 @@
+Results:
+- F-score (micro) 0.84
+- F-score (macro) 0.839
+- Accuracy 0.84
+
+By class:
+              precision    recall  f1-score   support
+
+           1     0.7961    0.9148    0.8513       845
+           0     0.8994    0.7648    0.8267       842
+
+    accuracy                         0.8400      1687
+   macro avg     0.8478    0.8398    0.8390      1687
+weighted avg     0.8477    0.8400    0.8390      1687

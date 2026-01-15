@@ -183,6 +183,30 @@ if __name__ == "__main__":
     logger.info(f"pe_redacted_df_{split_name}.row[{row_idx}].redacted_text:\n{redacted_text}\n")
     """
 
+    ### Filter test set rows with redacted text and analyze intent distribution
+    """
+    processed_data_dir: Path = project_root / "data" / "processed" / "DATEXIS" / "med_intent_classification"
+    split_name: str = "test"
+    test_ne_df = pd.read_parquet(processed_data_dir / f"{split_name}-00000-of-00001_ne_redacted.parquet")
+    
+    filtered_test_ne_df = test_ne_df[
+        (test_ne_df["text_redacted_with_semantic_label_mask"].notnull()) &
+        (test_ne_df["text_redacted_with_semantic_label_mask"] != "")
+    ]
+    logger.info(f"Number of rows in filtered_test_ne_df : {filtered_test_ne_df.shape[0]}")
+
+    filtered_test_intents = list()
+    for intents in filtered_test_ne_df['intents']:
+        filtered_test_intents.extend(intents.tolist())
+    
+    unique_filtered_test_intents: Set[str] = set(filtered_test_intents)
+    filtered_test_intents_counts: Dict[str, int] = dict()
+    for intent in unique_filtered_test_intents:
+        filtered_test_intents_counts[intent] = filtered_test_intents.count(intent)
+    
+    logger.info(f"Frequency of filtered test intents ({len(filtered_test_intents_counts)}): \n{json.dumps(filtered_test_intents_counts, indent=2)}")
+    """
+    
     ### Calulate statistics on private entities per split
     """
     pe_stats: Dict[str, Dict[str, Any]] = dict()

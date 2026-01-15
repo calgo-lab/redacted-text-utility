@@ -2,7 +2,7 @@
 
 This repository contains codebase for redacting sensitive information from 
 text documents to check how different redaction process affects the utility 
-of those documents when used in the downstream tasks.
+of those documents when used for evaluation in various downstream models.
 
 ## Medical Intent Classification Dataset ([DATEXIS](https://huggingface.co/DATEXIS))
 
@@ -97,6 +97,21 @@ Following are the statistics of (T)otal found (P)rivate (E)ntities in the raw da
 | validation-00000-of-00001.parquet |      646 |          57 |     88 |       66 |     21 |     1 |     0 |
 | test-00000-of-00001.parquet       |      760 |          72 |    117 |       93 |     23 |     0 |     1 |
 
+### Test samples Intent Label Distribution
+
+Following table shows the distribution of different intent labels in the filtered 
+test samples where at least one private entity is found and redacted.
+
+| Intent | Count | Intent | Count |
+|--------|------:|--------|------:|
+| 1. Acute Assessment | 2 | 10. Lab Examination | 2 |
+| 2. Acute Symptoms | 21 | 11. Medication | 3 |
+| 3. Chitchat | 12 | 12. Other Socials | 2 |
+| 4. Diagnostic Testing | 2 | 14. Personal History | 16 |
+| 5. Discussion | 8 | 15. Physical Examination | 3 |
+| 8. Follow-up | 2 | 17. Reassessment | 1 |
+| 9. Greetings | 28 | 19. Therapeutic History | 3 |
+
 ### Task Model and Fine-tuning Details
 The transformers based 🤗 [microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract](https://huggingface.co/microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract) model, 
 which is pre-traind from scratch using abstracts from PubMed, is fine-tuned 
@@ -128,7 +143,7 @@ strategies:
 
 | Redaction Strategy     | F1-score | Precision | Recall |  AUROC |
 |------------------------|---------:|----------:|-------:|-------:|
-| No Redaction           | 0.1928   | 0.4049    | 0.1434 | 0.8137 |
+| <i>No Redaction</i>    | <i>0.1928</i>   | <i>0.4049</i>    | <i>0.1434</i> | <i>0.8137</i> |
 | Semantic Label Masking | 0.1901   | 0.3817    | 0.1411 | 0.8127 |
 | Random Masking         | 0.1902   | 0.3808    | 0.1413 | 0.8139 |
 | Generic Masking        | 0.1899   | 0.3806    | 0.1410 | 0.8129 |
@@ -259,7 +274,19 @@ models on the ECHR dataset for Binary Violation Prediction task:
 
 | Redaction Strategy     |   Fold 1 |   Fold 2 |   Fold 3 |   Fold 4 |   Fold 5 |
 |------------------------|---------:|---------:|---------:|---------:|---------:|
-| No Redaction           |   0.8509 |   0.8711 |   0.8683 |   0.8609 |   0.8439 |
+| <i>No Redaction</i>    |   <i>0.8509</i> |   <i>0.8711</i> |   <i>0.8683</i> |   <i>0.8609</i> |   <i>0.8439</i> |
 | Semantic Label Masking |   0.8548 |   0.8631 |   0.8680 |   0.8556 |   0.8581 |
 | Random Masking         |   <b>0.8296</b> |   0.8622 |   0.8643 |   0.8553 |   0.8585 |
 | Generic Masking        |   <b>0.8279</b> |   0.8666 |   0.8700 |   <b>0.8352</b> |   <b>0.8192</b> |
+
+<br/>
+
+<b>Model</b>: electra-large-discriminator <br>
+<b>Metric</b>: Macro F1-score
+
+| Redaction Strategy     |   Fold 1 |   Fold 2 |   Fold 3 |   Fold 4 |   Fold 5 |
+|------------------------|---------:|---------:|---------:|---------:|---------:|
+| <i>No Redaction</i>    |   <i>0.8380</i> |   <i>0.8398</i> |   <i>0.8476</i> |   <i>0.8569</i> |   <i>0.8273</i> |
+| Semantic Label Masking |   0.8188 |   <b>0.8036</b> |   <b>0.7986</b> |   0.8497 |   0.8122 |
+| Random Masking         |   <b>0.8149</b> |   <b>0.8117</b> |   <b>0.8131</b> |   0.8390 |   <b>0.7984</b> |
+| Generic Masking        |   <b>0.8088</b> |   <b>0.8084</b> |   0.8300 |   0.8492 |   0.8162 |
