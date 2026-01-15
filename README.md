@@ -15,22 +15,17 @@ https://huggingface.co/datasets/DATEXIS/med_intent_classification
 | you do have a little bit of periphe- peripheral neuropathy . um , there is a medication we can use if they get really bad , but you're already on so many medications . | ["Discussion", "Medication", "Reassessment"] |
 | and where would you say the tingling and numbness is ? | ["Acute Symptoms"] |
 | doctor: alright thanks good seeing you thanks for coming in to them | ["Chitchat"] |
-|
+<br/>
 
 <b>List of all intent labels:</b>
-|||
-|----------------------|----------------|
-| 1. Acute Assessment | 11. Medication |
-| 2. Acute Symptoms | 12. Other Socials |
-| 3. Chitchat | 13. Other Treatments |
-| 4. Diagnostic Testing | 14. Personal History |
-| 5. Discussion | 15. Physical Examination |
-| 6. Drug History | 16. Radiology Examination |
-| 7. Family History | 17. Reassessment |
-| 8. Follow-up | 18. Referral |
-| 9. Greetings | 19. Therapeutic History |
-| 10. Lab Examination | 20. Vegetative History |
-|
+|||||
+|---|---|---|---|
+| 1. Acute Assessment | 6. Drug History | 11. Medication | 16. Radiology Examination |
+| 2. Acute Symptoms | 7. Family History | 12. Other Socials | 17. Reassessment |
+| 3. Chitchat | 8. Follow-up | 13. Other Treatments | 18. Referral |
+| 4. Diagnostic Testing | 9. Greetings | 14. Personal History | 19. Therapeutic History |
+| 5. Discussion | 10. Lab Examination | 15. Physical Examination | 20. Vegetative History |
+<br/>
 
 ### Downstream Task
 Medical Intent Classification is a <b>multi-label text classification</b> task where 
