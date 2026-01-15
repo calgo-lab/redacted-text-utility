@@ -26,12 +26,10 @@ if __name__ == "__main__":
     logger = get_logger(__name__)
     project_root: Path = ProjectUtils.get_project_root()
     
-    """
     mic_data_handler: MicDataHandler = MicDataHandler(project_root)
     mic_raw_file_names: List[str] = mic_data_handler.get_available_raw_files()
     logger.info(f"Available mic raw data files: \n{json.dumps(mic_raw_file_names, indent=2)}")
-    """
-    
+
     ### Data files available:
     """
     [
@@ -41,12 +39,20 @@ if __name__ == "__main__":
     ]
     """
 
-    """
     df_dict: Dict[str, pd.DataFrame] = dict()
     for file_name in mic_raw_file_names:
         df = mic_data_handler.get_dataframe_for_file(file_name)
         df_dict[file_name.split("-")[0]] = df
         logger.info(f"Loaded mic dataframe for file '{file_name}' with {df.shape[0]} rows.")
+    
+    ### Find all unique intent labels in the mic dataset
+    """
+    intents_list = list()
+    for intents in df_dict["train"]['intents']:
+        intents_list.extend(intents.tolist())
+
+    unique_intents: Set[str] = set(intents_list)
+    logger.info(f"Unique intent labels in mic training dataframe ({len(unique_intents)}): \n{json.dumps(sorted(unique_intents), indent=2)}")
     """
 
     ### If we decide to use translation service, we need an estimate of total characters to estimate costs

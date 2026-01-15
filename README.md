@@ -16,6 +16,29 @@ https://huggingface.co/datasets/DATEXIS/med_intent_classification
 | and where would you say the tingling and numbness is ? | ["Acute Symptoms"] |
 | doctor: alright thanks good seeing you thanks for coming in to them | ["Chitchat"] |
 
+| Set of Intents |
+|----------------|
+| 1. Acute Assessment |
+| 2. Acute Symptoms |
+| 3. Chitchat |
+| 4. Diagnostic Testing |
+| 5. Discussion |
+| 6. Drug History |
+| 7. Family History |
+| 8. Follow-up |
+| 9. Greetings |
+| 10. Lab Examination |
+| 11. Medication |
+| 12. Other Socials |
+| 13. Other Treatments |
+| 14. Personal History |
+| 15. Physical Examination |
+| 16. Radiology Examination |
+| 17. Reassessment |
+| 18. Referral |
+| 19. Therapeutic History |
+| 20. Vegetative History |
+
 ### Downstream Task
 Medical Intent Classification is a multi-label classification task where 
 given a medical text, the goal is to predict one or more medical 
@@ -86,8 +109,41 @@ Following are the statistics of (T)otal found (P)rivate (E)ntities in the raw da
 | validation-00000-of-00001.parquet |      646 |          57 |     88 |       66 |     21 |     1 |     0 |
 | test-00000-of-00001.parquet       |      760 |          72 |    117 |       93 |     23 |     0 |     1 |
 
+### Task Model and Fine-tuning Details
+The transformers based 🤗 [microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract](https://huggingface.co/microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract) model, 
+which is pre-traind from scratch using abstracts from PubMed, is fine-tuned 
+for the multi-label text classification downstream task on the Medical Intent 
+Classification dataset.
+
+Hyperparameters:
+
+| HP                 |       Value |
+|--------------------|------------:|
+| learning_rate      | 2e-5        |
+| batch_size         | 8           |
+| max_epochs         | 5           |
+| weight_decay       | 0.01        |
+| lr_scheduler    | LinearScheduler<br>  warmup_steps: 500 |
+
+The fine-tuning is performed using PyTorch Lightning and HuggingFace 
+Transformers libraries and is repeated for 2 different random seeds: 
+42 and 1312.
+
+Fine-tuning script: [src/infrastructure/frameworks/task_model/task_bert.py](src/infrastructure/frameworks/task_model/task_bert.py)
+
+
 ### Results
-\* Experiments done, results will be compiled and documented soon.
+
+The following table shows performance (macro-average) of the fine-tuned 
+PubMedBERT based text classifier on the test samples  for different redaction 
+strategies:
+
+| Redaction Strategy     | F1-score | Precision | Recall |  AUROC |
+|------------------------|---------:|----------:|-------:|-------:|
+| No Redaction           | 0.1928   | 0.4049    | 0.1434 | 0.8137 |
+| Semantic Label Masking | 0.1901   | 0.3817    | 0.1411 | 0.8127 |
+| Random Masking         | 0.1902   | 0.3808    | 0.1413 | 0.8139 |
+| Generic Masking        | 0.1899   | 0.3806    | 0.1410 | 0.8129 |
 
 ## European Court of Human Rights Dataset ([AUEB-NLP](https://huggingface.co/AUEB-NLP))
 
@@ -194,6 +250,14 @@ and the following hyperparameters were used for fine-tuning all the three models
 | mini_batch_size | 2           |
 | max_epochs      | 25          |
 | lr_scheduler    | LinearScheduler<br>  warmup_fraction: '0.1' |
+
+Fine-tuning script: [src/training_scripts/tc/fine_tune_text_classifier_with_transformer_model.py](src/training_scripts/tc/fine_tune_text_classifier_with_transformer_model.py)
+
+
+Evaluation Notebook: [notebooks/Evaluate_Text_Classifier_with_Redacted_Text.ipynb](notebooks/Evaluate_Text_Classifier_with_Redacted_Text.ipynb)
+
+
+Metrics Directory: [metrics/echr/tc/](metrics/echr/tc/)
 
 ### Results
 
