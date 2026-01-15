@@ -15,36 +15,29 @@ https://huggingface.co/datasets/DATEXIS/med_intent_classification
 | you do have a little bit of periphe- peripheral neuropathy . um , there is a medication we can use if they get really bad , but you're already on so many medications . | ["Discussion", "Medication", "Reassessment"] |
 | and where would you say the tingling and numbness is ? | ["Acute Symptoms"] |
 | doctor: alright thanks good seeing you thanks for coming in to them | ["Chitchat"] |
+||
 
-| Set of Intents |
-|----------------|
-| 1. Acute Assessment |
-| 2. Acute Symptoms |
-| 3. Chitchat |
-| 4. Diagnostic Testing |
-| 5. Discussion |
-| 6. Drug History |
-| 7. Family History |
-| 8. Follow-up |
-| 9. Greetings |
-| 10. Lab Examination |
-| 11. Medication |
-| 12. Other Socials |
-| 13. Other Treatments |
-| 14. Personal History |
-| 15. Physical Examination |
-| 16. Radiology Examination |
-| 17. Reassessment |
-| 18. Referral |
-| 19. Therapeutic History |
-| 20. Vegetative History |
+<b>List of all intent labels:</b>
+|||
+|----------------------|----------------|
+| 1. Acute Assessment | 11. Medication |
+| 2. Acute Symptoms | 12. Other Socials |
+| 3. Chitchat | 13. Other Treatments |
+| 4. Diagnostic Testing | 14. Personal History |
+| 5. Discussion | 15. Physical Examination |
+| 6. Drug History | 16. Radiology Examination |
+| 7. Family History | 17. Reassessment |
+| 8. Follow-up | 18. Referral |
+| 9. Greetings | 19. Therapeutic History |
+| 10. Lab Examination | 20. Vegetative History |
+|||
 
 ### Downstream Task
-Medical Intent Classification is a multi-label classification task where 
+Medical Intent Classification is a <b>multi-label text classification</b> task where 
 given a medical text, the goal is to predict one or more medical 
 intents/labels associated with that text.
 
-### Redaction Model
+### Redaction Model and Entity Statistics
 As the texts are in English, an English NER model (based on 
 xlm-roberta-large) fine-tuned on OntoNotes 5.0 from HuggingFace is used for 
 redaction:
