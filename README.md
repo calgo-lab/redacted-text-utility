@@ -224,8 +224,8 @@ Three separate transformers based pre-trained language models are fine-tuned for
 
 
 1. 🤗 [xlm-roberta-large](https://huggingface.co/FacebookAI/xlm-roberta-large) (<b>aka</b> xlm-roberta-large)
-2. 🤗 [google/electra-large-discriminator](https://huggingface.co/google/electra-large-discriminator) (<b>aka</b> electra-large-discriminator)
-3. 🤗 [google-bert/bert-large-cased](https://huggingface.co/google-bert/bert-large-cased) (<b>aka</b> bert-large-cased)
+2. 🤗 [google-bert/bert-large-cased](https://huggingface.co/google-bert/bert-large-cased) (<b>aka</b> bert-large-cased)
+3. 🤗 [google/electra-large-discriminator](https://huggingface.co/google/electra-large-discriminator) (<b>aka</b> electra-large-discriminator)
 
 ### Weights and Biases
 All experiments are logged to Weights and Biases and can be found at:
@@ -281,6 +281,17 @@ models on the ECHR dataset for Binary Violation Prediction task:
 
 <br/>
 
+<b>Model</b>: bert-large-cased <br>
+<b>Metric</b>: Macro F1-score
+
+| Redaction Strategy     |   Fold 1 |   Fold 2 |   Fold 3 |   Fold 4 |   Fold 5 |
+|------------------------|---------:|---------:|---------:|---------:|---------:|
+| <i>No Redaction</i>    |   <i>0.8337</i> |   <i>0.8645</i> |   <i>0.8682</i> |   <i>0.8563</i> |   <i>0.8409</i> |
+| Semantic Label Masking |   0.8143 |   0.8563 |   <b>0.8399</b> |   0.8498 |   0.8453 |
+| Random Masking         |   <b>0.7954</b> |   0.8513 |   0.8520 |   <b>0.8037</b> |   <b>0.8132</b> |
+| Generic Masking        |   0.8262 |   0.8580 |   0.8531 |   0.8527 |   0.8472 |
+<br/>
+
 <b>Model</b>: electra-large-discriminator <br>
 <b>Metric</b>: Macro F1-score
 
@@ -290,3 +301,4 @@ models on the ECHR dataset for Binary Violation Prediction task:
 | Semantic Label Masking |   0.8188 |   <b>0.8036</b> |   <b>0.7986</b> |   0.8497 |   0.8122 |
 | Random Masking         |   <b>0.8149</b> |   <b>0.8117</b> |   <b>0.8131</b> |   0.8390 |   <b>0.7984</b> |
 | Generic Masking        |   <b>0.8088</b> |   <b>0.8084</b> |   0.8300 |   0.8492 |   0.8162 |
+
