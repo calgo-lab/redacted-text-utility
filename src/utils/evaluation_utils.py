@@ -48,24 +48,29 @@ class EvaluationUtils:
         :return: None
         """
 
-        redacted_df = TokenTreatmentUtils.redact_private_entity_tokens_in_text_for_dataframe_with_pe_df(
-            input_df=input_df,
-            pe_df=pe_df,
-            id_column=id_column,
-            text_column=text_column,
-            class_column=class_column,
-            pe_column=pe_column,
-            replacement_strategy=replacement_strategy,
-            zero_entity_retain_text=zero_entity_retain_text
-        )
+        valid_replacement_strategies = ["semantic_label_mask", "random_mask", "generic_mask"]
+        if replacement_strategy in valid_replacement_strategies:
+            redacted_df = TokenTreatmentUtils.redact_private_entity_tokens_in_text_for_dataframe_with_pe_df(
+                input_df=input_df,
+                pe_df=pe_df,
+                id_column=id_column,
+                text_column=text_column,
+                class_column=class_column,
+                pe_column=pe_column,
+                replacement_strategy=replacement_strategy,
+                zero_entity_retain_text=zero_entity_retain_text
+            )
+            test_filename = f'test_redacted_with_{replacement_strategy}.csv'
+        else:
+            redacted_df = input_df.copy()
+            test_filename = 'test_no_redaction.csv'
 
-        test_filename = f'test_redacted_with_{replacement_strategy}.csv'
         if (data_dir_path / test_filename).exists():
             (data_dir_path / test_filename).unlink()
 
         redacted_df[
             [
-                f'text_redacted_with_{replacement_strategy}',
+                f'text_redacted_with_{replacement_strategy}' if replacement_strategy in valid_replacement_strategies else text_column,
                 class_column
             ]
         ].to_csv(data_dir_path / test_filename,
