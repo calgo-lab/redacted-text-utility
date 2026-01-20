@@ -264,6 +264,9 @@ Metrics Directory: [metrics/echr/tc/](metrics/echr/tc/)
 
 ### Results
 
+<b>(*) Bold values in the tables below indicate decrease of ≥ 0.02 point in performance metric 
+compared to the No Redaction counterpart for that fold and model.</b>
+
 The following tables show fold-wise performance, for differently redacted same 
 test samples, of fine-tuned text classifiers based on different transformers 
 models on the ECHR dataset for Binary Violation Prediction task:
@@ -308,9 +311,35 @@ The following table shows average performance across all folds with standard dev
 
 <b>Metric</b>: Macro F1-score
 
-| redaction_strategy   | xlm-roberta-large   | bert-large-cased   | electra-large-discriminator   |
-|:---------------------|--------------------:|-------------------:|------------------------------:|
-| unredacted           | 0.86 ± 0.01         | 0.85 ± 0.01        | 0.84 ± 0.01                   |
-| semantic_label_mask  | 0.86 ± 0.01         | 0.84 ± 0.01        | 0.82 ± 0.02                   |
-| generic_mask         | 0.84 ± 0.02         | 0.85 ± 0.01        | 0.82 ± 0.02                   |
-| random_mask          | 0.85 ± 0.01         | 0.82 ± 0.02        | 0.82 ± 0.01                   |
+| Redaction Strategy      | xlm-roberta-large   | bert-large-cased   | electra-large-discriminator   |
+|:------------------------|--------------------:|-------------------:|------------------------------:|
+| <i>No Redaction</i>     | <i>0.86 ± 0.01</i>  | <i>0.85 ± 0.01</i> | <i>0.84 ± 0.01</i>            |
+| Semantic Label Masking  | 0.86 ± 0.01         | 0.84 ± 0.01        | <b>0.82 ± 0.02</b>            |
+| Random Masking          | 0.85 ± 0.01         | <b>0.82 ± 0.02</b> | <b>0.82 ± 0.01</b>            |
+| Generic Masking         | <b>0.84 ± 0.02</b>  | 0.85 ± 0.01        | <b>0.82 ± 0.02</b>            |
+
+<br/>
+
+Entity-count statistics in test samples for differnt folds:
+
+|   Fold     | total_item |   mean |   std |   min |   25% |   50% |   75% |   max |
+|-----------:|-----------:|-------:|------:|------:|------:|------:|------:|------:|
+|          1 |       1686 |     85 |    51 |     7 |    49 |    72 |   111 |   357 |
+|          2 |       1688 |     86 |    51 |     5 |    49 |    73 |   113 |   335 |
+|          3 |       1687 |     86 |    52 |    13 |    48 |    74 |   115 |   383 |
+|          4 |       1687 |     84 |    50 |    11 |    48 |    71 |   108 |   472 |
+|          5 |       1687 |     85 |    51 |     2 |    47 |    72 |   111 |   411 |
+
+<br/>
+
+The following tables show average performance across all folds with standard deviation, for differently redacted same test samples, of fine-tuned text classifiers based on different transformers models on the ECHR dataset for Binary Violation Prediction task, where test samples are grouped by the number of entities in them in the specific <b>entity count percentile range</b>:
+
+<b>Model</b>: xlm-roberta-large <br>
+<b>Metric</b>: Macro F1-score
+
+| Redaction Strategy     | 0-100        | 0-25        | 25-50       | 50-75       | 75-100      |
+|:-----------------------|-------------:|------------:|------------:|------------:|------------:|
+| <i>No Redaction</i>    | <i>0.86 ± 0.01</i> | <i>0.89 ± 0.01</i> | <i>0.87 ± 0.02</i> | <i>0.84 ± 0.01</i> | <i>0.83 ± 0.02</i> |
+| Semantic Label Masking | 0.86 ± 0.01  | 0.89 ± 0.01 | 0.88 ± 0.01 | 0.84 ± 0.01 | 0.83 ± 0.01 |
+| Random Masking         | 0.85 ± 0.01  | 0.88 ± 0.02 | 0.87 ± 0.03 | 0.84 ± 0.02 | 0.82 ± 0.01 |
+| Generic Masking        | <b>0.84 ± 0.02</b> | 0.88 ± 0.02 | 0.86 ± 0.02 | 0.83 ± 0.01 | <b>0.81 ± 0.03</b> |
