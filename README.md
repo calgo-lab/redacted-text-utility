@@ -302,3 +302,15 @@ models on the ECHR dataset for Binary Violation Prediction task:
 | Random Masking         |   <b>0.8149</b> |   <b>0.8117</b> |   <b>0.8131</b> |   0.8390 |   <b>0.7984</b> |
 | Generic Masking        |   <b>0.8088</b> |   <b>0.8084</b> |   0.8300 |   0.8492 |   0.8162 |
 
+<br/>
+
+The following table shows average performance across all folds with standard deviation, for differently redacted same test samples, of fine-tuned text classifiers based on different transformers models on the ECHR dataset for Binary Violation Prediction task:
+
+<b>Metric</b>: Macro F1-score
+
+| redaction_strategy   | xlm-roberta-large   | bert-large-cased   | electra-large-discriminator   |
+|:---------------------|--------------------:|-------------------:|------------------------------:|
+| unredacted           | 0.86 ± 0.01         | 0.85 ± 0.01        | 0.84 ± 0.01                   |
+| semantic_label_mask  | 0.86 ± 0.01         | 0.84 ± 0.01        | 0.82 ± 0.02                   |
+| generic_mask         | 0.84 ± 0.02         | 0.85 ± 0.01        | 0.82 ± 0.02                   |
+| random_mask          | 0.85 ± 0.01         | 0.82 ± 0.02        | 0.82 ± 0.01                   |
