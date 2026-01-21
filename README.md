@@ -320,7 +320,7 @@ The following table shows average performance across all folds with standard dev
 
 <br/>
 
-Entity-count statistics in test samples for differnt folds:
+<b>Entity-count</b> statistics in test samples for differnt folds:
 
 |   Fold     | total_item |   mean |   std |   min |   25% |   50% |   75% |   max |
 |-----------:|-----------:|-------:|------:|------:|------:|------:|------:|------:|
@@ -330,9 +330,20 @@ Entity-count statistics in test samples for differnt folds:
 |          4 |       1687 |     84 |    50 |    11 |    48 |    71 |   108 |   472 |
 |          5 |       1687 |     85 |    51 |     2 |    47 |    72 |   111 |   411 |
 
+<b>Entity-count / Token-count</b> statistics in test samples segmented by 
+<b>entity count percentile ranges</b> (averaged across all folds):
+
+|        |   total_item | mean       | std       | min        | 25%        | 50%        | 75%        | max        |
+|-------:|-------------:|-----------:|----------:|-----------:|-----------:|-----------:|-----------:|-----------:|
+| 0-100  |         1687 | 86 / 2061  | 51 / 1169 | 8 / 514    | 48 / 1095  | 72 / 1812  | 112 / 2803 | 392 / 5103 |
+| 0-25   |          433 | 36 / 1054  | 9 / 516   | 8 / 514    | 30 / 671   | 38 / 912   | 43 / 1275  | 48 / 4015  |
+| 25-50  |          435 | 59 / 1529  | 7 / 697   | 48 / 538   | 53 / 1006  | 59 / 1387  | 66 / 1892  | 72 / 4634  |
+| 50-75  |          439 | 90 / 2275  | 12 / 842  | 72 / 728   | 80 / 1649  | 89 / 2152  | 100 / 2796 | 112 / 4954 |
+| 75-100 |          427 | 158 / 3375 | 42 / 951  | 112 / 1171 | 126 / 2618 | 145 / 3367 | 177 / 4158 | 392 / 5103 |
+
 <br/>
 
-The following tables show average performance across all folds with standard deviation, for differently redacted same test samples, of fine-tuned text classifiers based on different transformers models on the ECHR dataset for Binary Violation Prediction task, where test samples are grouped by the number of entities in them in the specific <b>entity count percentile range</b>:
+The following tables show average performance across all folds with standard deviation, for differently redacted same test samples, of fine-tuned text classifiers based on different transformers models on the ECHR dataset for Binary Violation Prediction task, where test samples are segmented by the number of entities in them in the specific <b>entity count percentile range</b>:
 
 <b>Model</b>: xlm-roberta-large <br>
 <b>Metric</b>: Macro F1-score
