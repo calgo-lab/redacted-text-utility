@@ -355,6 +355,12 @@ The following tables show average performance across all folds with standard dev
 | Random Masking         | 0.85 ± 0.01  | 0.88 ± 0.02 | 0.87 ± 0.03 | 0.84 ± 0.02 | 0.82 ± 0.01 |
 | Generic Masking        | <b>0.84 ± 0.02</b> | 0.88 ± 0.02 | 0.86 ± 0.02 | 0.83 ± 0.01 | <b>0.81 ± 0.03</b> |
 
+<p align="left">
+  <img src="plots/glnmario/ECHR/tc/xlm-roberta-large/macro_f1_xlm-roberta-large_no_redaction_vs_semantic_label_mask.png" width="30%" />
+  <img src="plots/glnmario/ECHR/tc/xlm-roberta-large/macro_f1_xlm-roberta-large_no_redaction_vs_random_mask.png" width="30%" />
+  <img src="plots/glnmario/ECHR/tc/xlm-roberta-large/macro_f1_xlm-roberta-large_no_redaction_vs_generic_mask.png" width="30%" />
+</p>
+
 <br/>
 
 <b>Model</b>: bert-large-cased <br>
@@ -367,6 +373,12 @@ The following tables show average performance across all folds with standard dev
 | Random Masking         | <b>0.82 ± 0.02</b> | <b>0.87 ± 0.02</b> | <b>0.84 ± 0.03</b> | <b>0.79 ± 0.03</b> | <b>0.78 ± 0.03</b> |
 | Generic Masking        | 0.85 ± 0.01 | 0.89 ± 0.01 | 0.87 ± 0.02 | 0.82 ± 0.02 | 0.81 ± 0.02 |
 
+<p align="left">
+  <img src="plots/glnmario/ECHR/tc/bert-large-cased/macro_f1_bert-large-cased_no_redaction_vs_semantic_label_mask.png" width="30%" />
+  <img src="plots/glnmario/ECHR/tc/bert-large-cased/macro_f1_bert-large-cased_no_redaction_vs_random_mask.png" width="30%" />
+  <img src="plots/glnmario/ECHR/tc/bert-large-cased/macro_f1_bert-large-cased_no_redaction_vs_generic_mask.png" width="30%" />
+</p>
+
 <br/>
 
 <b>Model</b>: electra-large-discriminator <br>
@@ -378,3 +390,9 @@ The following tables show average performance across all folds with standard dev
 | Semantic Label Masking | <b>0.82 ± 0.02</b> | 0.87 ± 0.02 | 0.85 ± 0.02 | <b>0.78 ± 0.04</b> | <b>0.75 ± 0.03</b> |
 | Random Masking         | <b>0.82 ± 0.01</b> | 0.87 ± 0.01 | <b>0.84 ± 0.02</b> | <b>0.79 ± 0.02</b> | <b>0.77 ± 0.02</b> |
 | Generic Masking        | <b>0.82 ± 0.02</b> | 0.88 ± 0.01 | 0.85 ± 0.02 | <b>0.78 ± 0.04</b> | <b>0.76 ± 0.02</b> |
+
+<p align="left">
+  <img src="plots/glnmario/ECHR/tc/google--electra-large-discriminator/macro_f1_google--electra-large-discriminator_no_redaction_vs_semantic_label_mask.png" width="30%" />
+  <img src="plots/glnmario/ECHR/tc/google--electra-large-discriminator/macro_f1_google--electra-large-discriminator_no_redaction_vs_random_mask.png" width="30%" />
+  <img src="plots/glnmario/ECHR/tc/google--electra-large-discriminator/macro_f1_google--electra-large-discriminator_no_redaction_vs_generic_mask.png" width="30%" />
+</p>

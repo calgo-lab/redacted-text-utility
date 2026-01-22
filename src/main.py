@@ -12,6 +12,7 @@ from data_handlers.mic_data_handler import MicDataHandler
 from infrastructure.services.entity_prediction_service import EntityPredictionService
 from utils.plot_utils import PlotUtils
 from utils.project_utils import ProjectUtils
+from utils.report_utils import ReportUtils
 from utils.token_treatment_utils import TokenTreatmentUtils
 
 import json
@@ -464,3 +465,299 @@ if __name__ == "__main__":
     logger.info(f"Redacted dataframe columns: {redacted_df.columns.tolist()}")
     logger.info(redacted_df.iloc[0].to_dict())
     """
+
+    ### Get performance metrics with hierarchy for echr tc experiments
+    """
+    reports = ReportUtils.get_performance_metrics_with_hierarchy(
+        metrics_dir=project_root / "metrics" / "glnmario" / "ECHR" / "tc"
+    )
+    logger.info(f'{list(reports.keys())[0]}: {json.dumps(reports.get(list(reports.keys())[0]), indent=2)}')
+    """
+    
+    ### Generate performance metrics summary table (redaction strategies vs models)
+    """
+    table_report = ReportUtils.get_echr_tc_performance_metrics_summary_table(
+        metrics_dir=project_root / "metrics" / "glnmario" / "ECHR" / "tc",
+        row_dimension='redaction_strategy',
+        row_values_order=['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask'],
+        column_dimension='model_name',
+        column_values_order=['xlm-roberta-large', 'bert-large-cased', 'google--electra-large-discriminator'],
+        class_or_stat='macro avg',
+        hierarchy=['model_name', 'redaction_strategy', 'percentile', 'metric_type'],
+        fixed_dimensions={'percentile': '0-100', 'metric_type': 'f1-score'},
+        model_name_aliases={
+            'xlm-roberta-large': 'xlm-roberta-large',
+            'bert-large-cased': 'bert-large-cased',
+            'google--electra-large-discriminator': 'electra-large-discriminator'
+        },
+        redaction_strategy_aliases={
+            'unredacted': 'No Redaction',
+            'semantic_label_mask': 'Semantic Label Masking',
+            'random_mask': 'Random Masking',
+            'generic_mask': 'Generic Masking'
+        }
+    )
+    logger.info(f"Performance metrics summary table:\n{table_report.to_markdown()}")
+    """
+
+    ### Get private entity counts statistics across all folds
+    """
+    k_range = range(1, 6)
+    pe_df = echr_data_handler.get_private_entities_df(echr_raw_file_names[0])
+    fold_stats_dict: Dict[int, pd.Series] = dict()
+    for k in k_range:
+        test_df_k = echr_data_handler.get_train_dev_test_datasetdict(k=k)["test"].to_pandas()
+        pe_df_filtered = pe_df[pe_df["itemid"].isin(test_df_k["itemid"])]
+        fold_stats_dict[k] = pe_df_filtered['pe_count_total'].describe()
+    
+    entity_counts_stats_table = pd.DataFrame(fold_stats_dict).T
+    entity_counts_stats_table = entity_counts_stats_table.astype(int)
+    entity_counts_stats_table.index.name = "Fold (k)"
+    logger.info(f"Private entity counts statistics across all folds:\n{entity_counts_stats_table.to_markdown()}")
+    """
+    
+    ### Prepare entity-count / token-count stats for all percentile ranges
+    """
+    pe_df = echr_data_handler.get_private_entities_df(echr_raw_file_names[0])
+    num_tokens_df = echr_data_handler.get_num_tokens_df(echr_raw_file_names[0])
+    percentile_ranges = {
+        "0-100": (0, 100), 
+        "0-25": (0, 25), 
+        "25-50": (25, 50), 
+        "50-75": (50, 75), 
+        "75-100": (75, 100)
+    }
+    k_range = range(1, 6)
+
+    percentile_token_count_stats_dict = dict()
+    percentile_entity_count_stats_dict = dict()
+    for k in k_range:
+        test_df_k = echr_data_handler.get_train_dev_test_datasetdict(k=k)["test"].to_pandas()
+        pe_df_k = pe_df[pe_df["itemid"].isin(test_df_k["itemid"])]
+        
+        for percentile_label, (p_min, p_max) in percentile_ranges.items():
+            lb = int(pe_df_k['pe_count_total'].quantile(q=p_min/100))
+            ub = int(pe_df_k['pe_count_total'].quantile(q=p_max/100))
+            
+            pe_df_k_filtered = pe_df_k[
+                (pe_df_k['pe_count_total'] >= lb) &
+                (pe_df_k['pe_count_total'] <= ub)
+            ]
+            entity_count_stats_k = pe_df_k_filtered['pe_count_total'].describe()
+            
+            stat_keys = entity_count_stats_k.to_dict().keys()
+
+            entity_count_stats_dict = percentile_entity_count_stats_dict.get(
+                percentile_label, {stat_key: list() for stat_key in stat_keys}
+            )
+            for stat_key in stat_keys:
+                entity_count_stats_dict[stat_key].append(entity_count_stats_k[stat_key])
+            percentile_entity_count_stats_dict[percentile_label] = entity_count_stats_dict
+
+
+            num_tokens_df_filtered = num_tokens_df[
+                num_tokens_df["itemid"].isin(pe_df_k_filtered["itemid"])
+            ]            
+            token_count_stats_k = num_tokens_df_filtered['num_tokens'].describe()
+                        
+            token_count_stats_dict = percentile_token_count_stats_dict.get(
+                percentile_label, {stat_key: list() for stat_key in stat_keys}
+            )
+            for stat_key in stat_keys:
+                token_count_stats_dict[stat_key].append(token_count_stats_k[stat_key])
+            percentile_token_count_stats_dict[percentile_label] = token_count_stats_dict
+    
+    def average_stats_across_folds(stats_dict):
+        return {
+            stat_key: sum(values) / len(values)
+            for stat_key, values in stats_dict.items()
+        }
+
+    combined_stats_table = dict()
+    for percentile_label in percentile_token_count_stats_dict.keys():
+        avg_token_stats = average_stats_across_folds(
+            percentile_token_count_stats_dict[percentile_label]
+        )
+        avg_entity_stats = average_stats_across_folds(
+            percentile_entity_count_stats_dict[percentile_label]
+        )
+
+        row = dict()
+        for stat_key in avg_token_stats.keys():
+            if stat_key == "count":
+                row["total_item"] = int(round(avg_token_stats["count"]))
+            else:
+                row[stat_key] = (
+                    f"{int(round(avg_entity_stats[stat_key]))} / "
+                    f"{int(round(avg_token_stats[stat_key]))}"
+                )
+
+        combined_stats_table[percentile_label] = row
+    
+    combined_df = (
+        pd.DataFrame.from_dict(combined_stats_table, orient="index").loc[
+            :, ["total_item", "mean", "std", "min", "25%", "50%", "75%", "max"]
+        ]
+    )
+
+    logger.info(f"Entity count / Token count statistics across all folds for percentile ranges:\n{combined_df.to_markdown()}")
+    """
+
+    ### Generate performance metrics summary table (redaction strategies vs percentiles)
+    """
+    table_report = ReportUtils.get_echr_tc_performance_metrics_summary_table(
+        metrics_dir=project_root / "metrics" / "glnmario" / "ECHR" / "tc",
+        row_dimension='redaction_strategy',
+        row_values_order=['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask'],
+        column_dimension='percentile',
+        column_values_order=["0-100", "0-25", "25-50", "50-75", "75-100"],
+        class_or_stat='macro avg',
+        hierarchy=['model_name', 'redaction_strategy', 'percentile', 'metric_type'],
+        fixed_dimensions={'model_name': 'xlm-roberta-large', 'metric_type': 'f1-score'},
+        model_name_aliases={
+            'xlm-roberta-large': 'xlm-roberta-large',
+            'bert-large-cased': 'bert-large-cased',
+            'google--electra-large-discriminator': 'electra-large-discriminator'
+        },
+        redaction_strategy_aliases={
+            'unredacted': 'No Redaction',
+            'semantic_label_mask': 'Semantic Label Masking',
+            'random_mask': 'Random Masking',
+            'generic_mask': 'Generic Masking'
+        }
+    )
+    logger.info(f"Performance metrics summary table:\n{table_report.to_markdown()}")
+    """
+
+    ### Plot macro F1-score by entity percentiles for all models and redaction strategies
+    """
+    table_reports = list()
+    for model_name in ['xlm-roberta-large', 'bert-large-cased', 'google--electra-large-discriminator']:
+        table_report = ReportUtils.get_echr_tc_performance_metrics_summary_table(
+            metrics_dir=project_root / "metrics" / "glnmario" / "ECHR" / "tc",
+            row_dimension='redaction_strategy',
+            row_values_order=['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask'],
+            column_dimension='percentile',
+            column_values_order=["0-100", "0-25", "25-50", "50-75", "75-100"],
+            class_or_stat='macro avg',
+            hierarchy=['model_name', 'redaction_strategy', 'percentile', 'metric_type'],
+            fixed_dimensions={'model_name': model_name, 'metric_type': 'f1-score'},
+            model_name_aliases={
+                'xlm-roberta-large': 'xlm-roberta-large',
+                'bert-large-cased': 'bert-large-cased',
+                'google--electra-large-discriminator': 'electra-large-discriminator'
+            },
+            redaction_strategy_aliases={
+                'unredacted': 'No Redaction',
+                'semantic_label_mask': 'Semantic Label Masking',
+                'random_mask': 'Random Masking',
+                'generic_mask': 'Generic Masking'
+            }
+        )
+        table_reports.append(table_report)
+
+    strategy_styles = {
+        "No Redaction": {
+            "color": "olivedrab",
+            "marker": "o"
+        },
+        "Semantic Label Masking": {
+            "color": "firebrick",
+            "marker": "o"
+        },
+        "Random Masking": {
+            "color": "cornflowerblue",
+            "marker": "o"
+        },
+        "Generic Masking": {
+            "color": "darkgoldenrod",
+            "marker": "o"
+        }
+    }
+    
+    fig, ax = PlotUtils.plot_echr_tc_classifier_performance_type_one(
+        model_dfs=table_reports,
+        model_names=[
+            "xlm-roberta-large",
+            "bert-large-cased",
+            "electra-large-discriminator"
+        ],
+        percentile_labels=["0-100", "0-25", "25-50", "50-75", "75-100"],
+        entity_counts={
+            "0-100": 1687,
+            "0-25": 433,
+            "25-50": 435,
+            "50-75": 439,
+            "75-100": 427
+        },
+        redaction_strategies=list(strategy_styles.keys()),
+        model_bg_colors={
+            "xlm-roberta-large": "peachpuff",
+            "bert-large-cased": "palegreen",
+            "electra-large-discriminator": "lightpink"
+        },
+        strategy_styles=strategy_styles
+    )
+
+    figure_dir = project_root / "plots" / "glnmario" / "ECHR" / "tc"
+    figure_dir.mkdir(parents=True, exist_ok=True)
+
+    fig.savefig(
+        figure_dir / "macro_f1_models_vs_entity_percentiles_redaction_strategies.png",
+        dpi=300,
+        bbox_inches="tight"
+    ) 
+    """
+
+    ### Plot macro F1-score comparison between No Redaction and other redaction strategies
+    
+    model_name = 'google--electra-large-discriminator'
+    model_name_alias = 'electra-large-discriminator'
+    redaction_strategy = 'generic_mask'
+    redaction_strategy_alias = 'Generic Masking'
+    
+    model_performance = ReportUtils.get_echr_tc_performance_metrics_summary_table(
+        metrics_dir=project_root / "metrics" / "glnmario" / "ECHR" / "tc",
+        row_dimension='redaction_strategy',
+        row_values_order=['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask'],
+        column_dimension='percentile',
+        column_values_order=["0-100", "0-25", "25-50", "50-75", "75-100"],
+        class_or_stat='macro avg',
+        hierarchy=['model_name', 'redaction_strategy', 'percentile', 'metric_type'],
+        fixed_dimensions={'model_name': model_name, 'metric_type': 'f1-score'},
+        model_name_aliases={
+            'xlm-roberta-large': 'xlm-roberta-large',
+            'bert-large-cased': 'bert-large-cased',
+            'google--electra-large-discriminator': 'electra-large-discriminator'
+        },
+        redaction_strategy_aliases={
+            'unredacted': 'No Redaction',
+            'semantic_label_mask': 'Semantic Label Masking',
+            'random_mask': 'Random Masking',
+            'generic_mask': 'Generic Masking'
+        }
+    )
+
+    fig, ax = PlotUtils.plot_echr_tc_classifier_performance_type_two(
+        model_df=model_performance,
+        model_name=model_name_alias,
+        strategy_a="No Redaction",
+        strategy_b=redaction_strategy_alias,
+        percentile_labels=["0-100", "0-25", "25-50", "50-75", "75-100"],
+        colors={
+            "No Redaction": "olivedrab",
+            "Semantic Label Masking": "firebrick",
+            "Random Masking": "cornflowerblue",
+            "Generic Masking": "darkgoldenrod",
+        }
+    )
+    figure_dir = project_root / "plots" / "glnmario" / "ECHR" / "tc" / model_name
+    figure_dir.mkdir(parents=True, exist_ok=True)
+
+    fig.savefig(
+        figure_dir / f"macro_f1_{model_name}_no_redaction_vs_{redaction_strategy}.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+    
+    
