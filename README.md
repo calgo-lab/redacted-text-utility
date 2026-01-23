@@ -356,9 +356,9 @@ The following tables show average performance across all folds with standard dev
 | Generic Masking        | <b>0.84 ± 0.02</b> | 0.88 ± 0.02 | 0.86 ± 0.02 | 0.83 ± 0.01 | <b>0.81 ± 0.03</b> |
 
 <p align="left">
-  <img src="plots/glnmario/ECHR/tc/xlm-roberta-large/macro_f1_xlm-roberta-large_no_redaction_vs_semantic_label_mask.png" width="30%" />
-  <img src="plots/glnmario/ECHR/tc/xlm-roberta-large/macro_f1_xlm-roberta-large_no_redaction_vs_random_mask.png" width="30%" />
-  <img src="plots/glnmario/ECHR/tc/xlm-roberta-large/macro_f1_xlm-roberta-large_no_redaction_vs_generic_mask.png" width="30%" />
+  <img src="plots/glnmario/ECHR/tc/xlm-roberta-large/macro_f1_xlm-roberta-large_no_redaction_vs_semantic_label_mask.png" width="90%" />
+  <img src="plots/glnmario/ECHR/tc/xlm-roberta-large/macro_f1_xlm-roberta-large_no_redaction_vs_random_mask.png" width="90%" />
+  <img src="plots/glnmario/ECHR/tc/xlm-roberta-large/macro_f1_xlm-roberta-large_no_redaction_vs_generic_mask.png" width="90%" />
 </p>
 
 <br/>
