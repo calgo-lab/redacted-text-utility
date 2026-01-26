@@ -17,6 +17,7 @@ from utils.token_treatment_utils import TokenTreatmentUtils
 
 import json
 
+import numpy as np
 import pandas as pd
 
 
@@ -26,52 +27,194 @@ if __name__ == "__main__":
     
     logger = get_logger(__name__)
     project_root: Path = ProjectUtils.get_project_root()
+
+    def make_json_serializable(obj) -> Any:
+        """
+        Converts an object to a JSON-serializable format.
+        
+        :param obj: The object to convert.
+        :return: A JSON-serializable representation of the object.
+        """
+
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        
+        if isinstance(obj, (dict, list, int, float, bool)) or obj is None:
+            return obj
+        
+        if isinstance(obj, str):
+            obj_strip = obj.strip()
+            if (obj_strip.startswith("[") and obj_strip.endswith("]")) or \
+            (obj_strip.startswith("{") and obj_strip.endswith("}")):
+                try:
+                    return json.loads(obj)
+                except json.JSONDecodeError:
+                    pass
+        
+        return obj
     
     mic_data_handler: MicDataHandler = MicDataHandler(project_root)
+    
+    ### Data files available:
+    """
     mic_raw_file_names: List[str] = mic_data_handler.get_available_raw_files()
     logger.info(f"Available mic raw data files: \n{json.dumps(mic_raw_file_names, indent=2)}")
 
-    ### Data files available:
-    """
-    [
-        "train-00000-of-00001.parquet",
-        "validation-00000-of-00001.parquet",
-        "test-00000-of-00001.parquet"
-    ]
+    ### [
+    ###     "train-00000-of-00001.parquet",
+    ###     "validation-00000-of-00001.parquet",
+    ###     "test-00000-of-00001.parquet"
+    ### ]
     """
 
-    df_dict: Dict[str, pd.DataFrame] = dict()
-    for file_name in mic_raw_file_names:
-        df = mic_data_handler.get_dataframe_for_file(file_name)
-        df_dict[file_name.split("-")[0]] = df
-        logger.info(f"Loaded mic dataframe for file '{file_name}' with {df.shape[0]} rows.")
+    ### Get merged dataframe for mic dataset and log basic info
+    """
+    mic_merged_df = mic_data_handler.get_merged_dataframe()
+    logger.info(f"mic_merged_df.shape: {mic_merged_df.shape}")
+    logger.info(f"mic_merged_df.columns: {mic_merged_df.columns.tolist()}")
+    first_row_dict = {
+        k: make_json_serializable(v)
+        for k, v in mic_merged_df.iloc[0].to_dict().items()
+    }
+    logger.info(
+        f"mic_merged_df[0]:\n{json.dumps(first_row_dict, indent=2, ensure_ascii=False)}"
+    )
+    """
+
+    ### Get num_tokens dataframe for mic dataset and log statistics
+    """
+    num_tokens_df_mic = mic_data_handler.get_num_tokens_df()
+    logger.info(f"num_tokens statistics for mic_merged_df:\n{num_tokens_df_mic['num_tokens'].describe()}")
+
+    percentile = 0.9983
+    logger.info(f"{round(percentile*100, 4)}th percentile of num_tokens in mic_merged_df: {num_tokens_df_mic['num_tokens'].quantile(q=percentile)}")
+    logger.info(f"Number of rows with num_tokens > 512: {len(num_tokens_df_mic[num_tokens_df_mic['num_tokens'] > 512])}")
     
-    ### Find all unique intent labels in the mic dataset
+    ### Plot num_tokens distribution
+    plot_output_path = project_root / "plots" / "DATEXIS" / "med_intent_classification" / "eda"
+    plot_output_path.mkdir(parents=True, exist_ok=True)
+    plot_file_name = f"mic_merged_num_tokens_distribution.jpg"
+    PlotUtils.plot_num_tokens_distribution(num_tokens_df_mic, 
+                                           plot_output_path / plot_file_name,
+                                           plot_config={"bins": 50, "show_grid": True})
     """
-    intents_list = list()
-    for intents in df_dict["train"]['intents']:
-        intents_list.extend(intents.tolist())
-
-    unique_intents: Set[str] = set(intents_list)
-    logger.info(f"Unique intent labels in mic training dataframe ({len(unique_intents)}): \n{json.dumps(sorted(unique_intents), indent=2)}")
+    
+    ### Create intent distribution table for mic dataset
+    """
+    mic_merged_df = mic_data_handler.get_merged_dataframe()
+    intent_distribution_dict: Dict[str, int] = dict()
+    for _, row in mic_merged_df.iterrows():
+        intents = row['intents']
+        for intent in intents:
+            intent_distribution_dict[intent] = intent_distribution_dict.get(intent, 0) + 1
+    
+    intent_distribution_dict = sorted(intent_distribution_dict.items(), key=lambda item: item[0])
+    intent_distribution_df = pd.DataFrame.from_dict(intent_distribution_dict)
+    intent_distribution_df.columns = ['Intent', 'Count']
+    logger.info(f"Intent distribution table for mic dataset:\n{intent_distribution_df.to_markdown(index=False)}")
     """
 
-    ### If we decide to use translation service, we need an estimate of total characters to estimate costs
+    ### Plot intent distribution bar chart
     """
-    # Count total number of characters in all the texts from all rows of 'text' column in the mic train dataframe
-    total_characters: int = df_dict["train"]["text"].str.len().sum()
-    logger.info(f"Total number of characters in the 'text' column of the mic training dataframe: {total_characters}")
-    # 721,816
+    plot_output_path = project_root / "plots" / "DATEXIS" / "med_intent_classification" / "eda"
+    plot_output_path.mkdir(parents=True, exist_ok=True)
+    plot_file_name = "mic_intent_distribution_bar_chart.jpg"
+    PlotUtils.plot_mic_intent_distribution_bar_chart(intent_distribution_df, plot_output_path / plot_file_name)
+    """
 
-    # Count total number of characters in all the texts from all rows of 'text' column in the mic test dataframe
-    total_characters_test: int = df_dict["test"]["text"].str.len().sum()
-    logger.info(f"Total number of characters in the 'text' column of the mic test dataframe: {total_characters_test}")
-    # 103,734
+    ### Collect named entities for mic dataset
+    """
+    mic_merged_df = mic_data_handler.get_merged_dataframe()
 
-    # Count total number of characters in all the texts from all rows of 'text' column in the mic validation dataframe
-    total_characters_val: int = df_dict["validation"]["text"].str.len().sum()
-    logger.info(f"Total number of characters in the 'text' column of the mic validation dataframe: {total_characters_val}")
-    # 86,937
+    entity_prediction_service: EntityPredictionService = EntityPredictionService()
+    entity_set_id: str = "ontonotes5"
+    model_id: str = "ner-english-ontonotes-large"
+    
+    processed_data_dir: Path = project_root / "data" / "processed" / "DATEXIS" / "med_intent_classification"
+    processed_data_dir.mkdir(parents=True, exist_ok=True)
+    output_path = processed_data_dir / f"mic_merged_ne.parquet"
+    
+    entity_prediction_service.collect_named_entities_for_dataframe(
+        entity_set_id=entity_set_id,
+        model_id=model_id,
+        source_df=mic_merged_df,
+        source_column="text",
+        target_column=None,
+        target_df_export_path=output_path,
+        export_with_only_id_column="itemid"
+    )
+    
+    ne_df = pd.read_parquet(output_path)
+    named_entities: List[Dict[str, Any]] = list()
+    for _, row in ne_df.iterrows():
+        nes = json.loads(row["text_ne_ontonotes5_ner-english-ontonotes-large"])
+        [ne.update({"itemid": row["itemid"]}) for ne in nes]
+        named_entities.extend(nes)
+    with open(processed_data_dir / f"named_entities.json", "w", encoding="utf-8") as f:
+        json.dump(named_entities, f, indent=2, ensure_ascii=False)
+    """
+
+    ### Collect private entities for mic dataset
+    """
+    processed_data_dir: Path = project_root / "data" / "processed" / "DATEXIS" / "med_intent_classification"
+    processed_data_dir.mkdir(parents=True, exist_ok=True)
+    
+    ne_df = pd.read_parquet(processed_data_dir / f"mic_merged_ne.parquet")
+    ne_column = "text_ne_ontonotes5_ner-english-ontonotes-large"
+    target_column = "text_pe_ontonotes5_ner-english-ontonotes-large"
+    target_df_export_path = processed_data_dir / f"mic_merged_pe.parquet"
+    TokenTreatmentUtils.collect_private_entity_entities_for_dataframe(
+        ne_df=ne_df,
+        ne_column=ne_column,
+        target_column=target_column,
+        target_df_export_path=target_df_export_path
+    )
+    """
+
+    ### Update private entities stat into private entities dataframe
+    """
+    processed_data_dir: Path = project_root / "data" / "processed" / "DATEXIS" / "med_intent_classification"
+    processed_data_dir.mkdir(parents=True, exist_ok=True)
+
+    pe_df_file_path = processed_data_dir / f"mic_merged_pe.parquet"
+    pe_column = "text_pe_ontonotes5_ner-english-ontonotes-large"
+    id_column = "itemid"
+
+    stats = TokenTreatmentUtils.update_private_entity_dataframe_with_stats(
+        pe_df_file_path=pe_df_file_path,
+        pe_column=pe_column,
+        id_column=id_column
+    )
+    logger.info(f"Private entity statistics:\n{json.dumps(stats, indent=2)}")
+    """
+
+    ### Load and analyze private entities dataframe for mic dataset
+    """
+    mic_merged_pe_df = mic_data_handler.get_private_entities_df()
+    logger.info(f"mic_merged_pe_df columns: {mic_merged_pe_df.columns.tolist()}")
+    ### [
+    ###     'itemid', 
+    ###     'text_pe_ontonotes5_ner-english-ontonotes-large', 
+    ###     'pe_count_total', 
+    ###     'pe_count_ORG', 
+    ###     'pe_count_PERSON', 
+    ###     'pe_count_DATE', 
+    ###     'pe_count_GPE'
+    ### ]
+
+    mic_merged_df = mic_data_handler.get_merged_dataframe()
+    entity_stats = mic_data_handler.get_private_entity_stats(mic_merged_df)
+    logger.info(f"Private entity statistics for mic_merged_df:\n{json.dumps(entity_stats, indent=2)}")
+
+    mic_merged_pe_df_filtered = mic_merged_pe_df[
+        mic_merged_pe_df["text_pe_ontonotes5_ner-english-ontonotes-large"] != "[]"
+    ]
+    logger.info(f"Number of rows in mic_merged_pe_df_filtered with non-empty private entities: {mic_merged_pe_df_filtered.shape[0]}")
+    first_row_dict = {
+        k: make_json_serializable(v)
+        for k, v in mic_merged_pe_df_filtered.iloc[0].to_dict().items()
+    }
+    logger.info(f"First row of mic_merged_pe_df_filtered:\n{json.dumps(first_row_dict, indent=2, ensure_ascii=False)}")
     """
 
     ### Log specific row text for checking
@@ -252,6 +395,7 @@ if __name__ == "__main__":
     logger.info(f"\n{pe_stats_df.to_markdown()}")
     """
     
+    """
     echr_data_handler: EchrDataHandler = EchrDataHandler(project_root)
     
     echr_raw_file_names: List[str] = echr_data_handler.get_available_raw_files()
@@ -265,6 +409,7 @@ if __name__ == "__main__":
     """
 
     echr_df: pd.DataFrame = echr_data_handler.get_dataframe_for_file(echr_raw_file_names[0])
+    """
     
     ### Log specific row text for checking
     # row_id: int = 269
@@ -710,7 +855,7 @@ if __name__ == "__main__":
     """
 
     ### Plot macro F1-score comparison between No Redaction and other redaction strategies
-    
+    """
     model_name = 'google--electra-large-discriminator'
     model_name_alias = 'electra-large-discriminator'
     redaction_strategy = 'generic_mask'
@@ -759,5 +904,5 @@ if __name__ == "__main__":
         dpi=300,
         bbox_inches="tight"
     )
-    
+    """
     

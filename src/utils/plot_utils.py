@@ -46,6 +46,51 @@ class PlotUtils:
         
         if show_logs:
             print(f"figure_file_path: {figure_file_path}")
+    
+    @staticmethod
+    def plot_mic_intent_distribution_bar_chart(df: pd.DataFrame,
+                                               figure_file_path: Path,
+                                               plot_config: Dict[str, Any] = None,
+                                               show_logs: bool = True) -> None:
+        """
+        Plots the intent distribution as a bar chart.
+
+        :param df: DataFrame with 'Intent' and 'Count' columns.
+        :param figure_file_path: The path to save the output plot.
+        :param plot_config: Additional configuration for the plot.
+        :param show_logs: Whether to print log messages.
+        :return: None
+        """
+
+        figsize = plot_config.get('figsize') if plot_config and 'figsize' in plot_config else (7, 5)
+        color = plot_config.get('color') if plot_config and 'color' in plot_config else 'skyblue'
+        plt.figure(figsize=figsize)
+
+        df = df.sort_values(by='Count', ascending=True)
+        
+        bars = plt.barh(df['Intent'], df['Count'], color=color)
+
+        plt.xlabel("Count")
+        plt.title("Intent Distribution")
+
+        for bar in bars:
+            width = bar.get_width()
+            plt.text(width + max(df['Count']) * 0.01,
+                     bar.get_y() + bar.get_height() / 2,
+                     f"{int(width)}",
+                     va='center')
+
+        max_count = df['Count'].max()
+        plt.xlim(0, max_count * 1.15)
+
+        plt.subplots_adjust(left=0.2)
+        plt.tight_layout()
+
+        plt.savefig(figure_file_path, dpi=300)
+        plt.close()
+
+        if show_logs:
+            print(f"figure_file_path: {figure_file_path}")
 
     @staticmethod
     def parse_mean_std(cell: str):

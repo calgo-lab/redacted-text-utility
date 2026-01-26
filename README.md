@@ -25,7 +25,16 @@ https://huggingface.co/datasets/DATEXIS/med_intent_classification
 | 3. Chitchat | 8. Follow-up | 13. Other Treatments | 18. Referral |
 | 4. Diagnostic Testing | 9. Greetings | 14. Personal History | 19. Therapeutic History |
 | 5. Discussion | 10. Lab Examination | 15. Physical Examination | 20. Vegetative History |
-<br/>
+
+### Exploratory Data Analysis
+There are 3 separate data files [train](data/raw/DATEXIS/med_intent_classification/data/train-00000-of-00001.parquet), [validation](data/raw/DATEXIS/med_intent_classification/data/validation-00000-of-00001.parquet) and [test](data/raw/DATEXIS/med_intent_classification/data/test-00000-of-00001.parquet) splits in parquet format.
+For the purpose of cross-validation setup, these files are merged together [here](data/processed/DATEXIS/med_intent_classification/mic_merged.parquet) and later will 
+be split into different train/dev/test sets with rolling ignoring the original splits.
+
+The following plots show the distribution of number of tokens in the texts and number of intents present in the merged dataset:
+
+<img src="plots/DATEXIS/med_intent_classification/eda/mic_merged_num_tokens_distribution.jpg" alt="Number of Tokens Distribution" width="45%"/>&nbsp;&nbsp;
+<img src="plots/DATEXIS/med_intent_classification/eda/mic_intent_distribution_bar_chart.jpg" alt="Number of Intents Distribution" width="45%"/>&nbsp;&nbsp;
 
 ### Downstream Task
 Medical Intent Classification is a <b>multi-label text classification</b> task where 
@@ -34,17 +43,10 @@ intents/labels associated with that text.
 
 ### Redaction Model and Entity Statistics
 As the texts are in English, an English NER model (based on 
-xlm-roberta-large) fine-tuned on OntoNotes 5.0 from HuggingFace is used for 
-redaction:
+xlm-roberta-large) fine-tuned on OntoNotes 5.0 from HuggingFace is used for detecting entities to redact:
 https://huggingface.co/flair/ner-english-ontonotes-large
 
-Redacted datasets can be found at [here](data/processed/DATEXIS/med_intent_classification/):
-<br>
-(1) train-00000-of-00001.parquet > train-00000-of-00001_ne_redacted.parquet
-<br>
-(2) validation-00000-of-00001.parquet > validation-00000-of-00001_ne_redacted.parquet
-<br>
-(3) test-00000-of-00001.parquet > test-00000-of-00001_ne_redacted.parquet
+Named entities dataframe: [here](data/processed/DATEXIS/med_intent_classification/mic_merged_ne.parquet)
 
 Because NER models fine-tuned on OntoNotes 5.0 detects a lot of non-private 
 entities we only redact entities of type: DATE, GPE, ORG and PERSON (GPE is 
@@ -53,64 +55,41 @@ short for Geo-Political Entity which includes locations).
 Moreover, we also filter out some unusual DATE and PERSON entities.
 Details of the implementation can be found [here](src/utils/token_treatment_utils.py).
 
-For transperency, we keep a separate list of excluded date entities which can be found [here](data/processed/DATEXIS/med_intent_classification/).
+Private entities dataframe: [here](data/processed/DATEXIS/med_intent_classification/mic_merged_pe.parquet)
 
-In the redacted datasets, 3 new columns are added in regards to 3 different redaction strategies:
-<br>
-(1) "text_redacted_with_semantic_label_mask"
-<br>
-(2) "text_redacted_with_random_mask"
-<br>
-(3) "text_redacted_with_generic_mask"
+Following are the statistics of total found (<b>P</b>)rivate (<b>E</b>)ntities in the merged raw dataset:
 
-Not all texts from all rows contain private entities. So, in case a text does not
-contain any private entities, the row in those columns are kept empty.
+| Total Rows | Rows with PE | Total PE | PERSON | DATE | GPE | ORG |
+|-----------:|-------------:|---------:|-------:|-----:|----:|----:|
+|       5292 |          525 |      847 |    619 |  195 |  17 |  16 |
+
+To redact the private entities from the texts, three different redaction strategies are applied: (1) Semantic Label Masking, (2) Random Masking and (3) Generic Masking.
+
 
 Example:
 
-File: train-00000-of-00001_ne_redacted.parquet
+File: train-00000-of-00001.parquet
 <br>
 Row Index: 2106
 <br>
-[text]:
+Original Text:
 ```
 miss edwards is here for evaluation of facial pain this is a 54 -year-old male
 ```
-[text_redacted_with_semantic_label_mask]:
+Text redacted with Semantic Label Masking:
 ```
 miss [PERSON] is here for evaluation of facial pain this is a [DATE] male
 ```
-[text_redacted_with_random_mask]:
+Text redacted with Random Masking:
 ```
 miss lhyZXSX is here for evaluation of facial pain this is a vejE4fPRUxkG male
 ```
-[text_redacted_with_generic_mask]:
+Text redacted with Generic Masking:
 ```
 miss XXXX is here for evaluation of facial pain this is a XXXX male
 ```
 
-Following are the statistics of (T)otal found (P)rivate (E)ntities in the raw dataset:
 
-| Data File                         |   T-Rows |   T-Rows-PE |   T-PE |   PERSON |   DATE |   GPE |   ORG |
-|:----------------------------------|---------:|------------:|-------:|---------:|-------:|------:|------:|
-| train-00000-of-00001.parquet      |     3886 |         396 |    642 |      460 |    151 |    16 |    15 |
-| validation-00000-of-00001.parquet |      646 |          57 |     88 |       66 |     21 |     1 |     0 |
-| test-00000-of-00001.parquet       |      760 |          72 |    117 |       93 |     23 |     0 |     1 |
-
-### Test samples Intent Label Distribution
-
-Following table shows the distribution of different intent labels in the filtered 
-test samples where at least one private entity is found and redacted.
-
-| Intent | Count | Intent | Count |
-|--------|------:|--------|------:|
-| 1. Acute Assessment | 2 | 10. Lab Examination | 2 |
-| 2. Acute Symptoms | 21 | 11. Medication | 3 |
-| 3. Chitchat | 12 | 12. Other Socials | 2 |
-| 4. Diagnostic Testing | 2 | 14. Personal History | 16 |
-| 5. Discussion | 8 | 15. Physical Examination | 3 |
-| 8. Follow-up | 2 | 17. Reassessment | 1 |
-| 9. Greetings | 28 | 19. Therapeutic History | 3 |
 
 ### Task Model and Fine-tuning Details
 The transformers based 🤗 [microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract](https://huggingface.co/microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract) model, 
