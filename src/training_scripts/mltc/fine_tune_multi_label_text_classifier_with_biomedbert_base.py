@@ -67,9 +67,12 @@ def fine_tune():
     project_root: Path = ProjectUtils.get_project_root()
     data_handler = MicDataHandler(project_root, data_dir=data_dir)
 
-    train_df = data_handler.get_dataframe_for_file("train-00000-of-00001.parquet")
-    dev_df = data_handler.get_dataframe_for_file("validation-00000-of-00001.parquet")
-    test_df = data_handler.get_dataframe_for_file("test-00000-of-00001.parquet")
+    datasetdict = data_handler.get_train_dev_test_datasetdict(k=data_fold_k_value)
+    fold_stats = data_handler.get_fold_stats(datasetdict)
+
+    train_df = datasetdict["train"].to_pandas()
+    dev_df = datasetdict["dev"].to_pandas()
+    test_df = datasetdict["test"].to_pandas()
     sample_size = len(train_df) + len(dev_df) + len(test_df)
 
     print(f"model_checkpoints_root_dir: {model_checkpoints_root_dir}")
@@ -124,7 +127,9 @@ def fine_tune():
         :param path: Path to the output file.
         """
         with open(path, "w", encoding="utf-8") as f:
-            for _, row in tqdm(df.iterrows(), total=len(df)):
+            for _, row in tqdm(df.iterrows(), 
+                               total=len(df), 
+                               desc=f"Writing chunked FastText format file to {path.name}..."):
                 text_chunks = chunk_text_to_fasttext(row['text'], row['intents'])
                 for chunk in text_chunks:
                     f.write(chunk + "\n")
@@ -190,7 +195,8 @@ def fine_tune():
                 "learning_rate": learning_rate, 
                 "max_epochs": max_epochs, 
                 "mini_batch_size": mini_batch_size, 
-                "sample_size": sample_size
+                "sample_size": sample_size,
+                "fold_stats": fold_stats
             }, 
             tracked = {
                 "train/loss", 

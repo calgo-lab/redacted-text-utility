@@ -147,7 +147,6 @@ def fine_tune():
     )
 
     models_with_unused_parameters = [
-        "google-bert/bert-base-german-cased", 
         "xlm-roberta-large",
         "bert-large-cased"
     ]
