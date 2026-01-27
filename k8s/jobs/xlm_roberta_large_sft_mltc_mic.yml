@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: longformer-base-sft-tc-echr
+  name: xlm-roberta-large-sft-mltc-mic
   namespace: ssaha
 spec:
   ttlSecondsAfterFinished: 60
@@ -9,19 +9,19 @@ spec:
   template:
     metadata:
       labels:
-        app: longformer-base-sft-tc-echr
+        app: xlm-roberta-large-sft-mltc-mic
     spec:
       containers:
-        - name: longformer-base-sft-tc-echr-container
+        - name: xlm-roberta-large-sft-mltc-mic-container
           image: sksdotsauravs/python-nlp-dev-container:ubuntu24.04-python3.12.11-cuda12.8.1-torch2.7.1
           workingDir: /home/ssaha
           resources:
             requests:
-              nvidia.com/gpu: "1"
+              nvidia.com/gpu: "4"
               memory: "32Gi"
               cpu: "8000m"
             limits:
-              nvidia.com/gpu: "1"
+              nvidia.com/gpu: "4"
               memory: "64Gi"
               cpu: "16000m"
           volumeMounts:
@@ -31,7 +31,7 @@ spec:
             - name: RUN_PYTHON_SCRIPT
               value: "yes"
             - name: PYTHON_SCRIPT_PATH
-              value: "/home/ssaha/Projects/redacted-text-utility/src/training_scripts/tc/custom/huggingface_longformer_base_echr.py"
+              value: "/home/ssaha/Projects/redacted-text-utility/src/training_scripts/mltc/fine_tune_multi_label_text_classifier_with_transformer_model.py"
             - name: FLAIR_CACHE_ROOT
               value: /home/ssaha/.flair
             - name: HF_HOME
@@ -41,19 +41,19 @@ spec:
             - name: DATA_FOLD_K_VALUE
               value: "1"
             - name: USE_MULTI_GPU
-              value: "0"
+              value: "1"
             - name: LOG_TO_WANDB
               value: "1"
             - name: WANDB_ENTITY
               value: calgo-lab
             - name: TRANSFORMER_MODEL_NAME
-              value: allenai/longformer-base-4096
+              value: xlm-roberta-large
             - name: LEARNING_RATE
               value: "5e-5"
             - name: MAX_EPOCHS
-              value: "50"
+              value: "25"
             - name: MINI_BATCH_SIZE
-              value: "2"
+              value: "8"
             - name: WANDB_API_KEY
               valueFrom:
                 secretKeyRef:
@@ -65,4 +65,4 @@ spec:
           persistentVolumeClaim:
             claimName: ssaha-pvc
       nodeSelector:
-        gpu: h200
+        gpu: a100

@@ -1,10 +1,15 @@
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
+from datasets import Dataset, DatasetDict
 from huggingface_hub import hf_hub_download
+from sklearn.model_selection import KFold
 
 from core.logging import get_logger
 
+import json
+
+import numpy as np
 import pandas as pd
 import spacy
 import tqdm
@@ -248,3 +253,261 @@ class MicDataHandler:
                 stats[count_col] += count
         
         return stats
+
+    def get_train_dev_test_datasetdict(self, 
+                                       random_state: int = 2026, 
+                                       k: int = 1) -> DatasetDict:
+        
+        """
+        Retrieve the train, dev, and test dataframes for the specified fold.
+
+        :param random_state: Random state for reproducibility.
+        :param k: The fold number to retrieve (1-based index).
+        :return: A DatasetDict containing the train, dev, and test datasets.
+        """
+        sample_df = self.get_merged_dataframe()
+
+        pe_df = self.get_private_entities_df()
+
+        itemids_wpe = pe_df[pe_df["pe_count_total"] > 0]["itemid"].unique().tolist()
+        itemids_wope = pe_df[pe_df["pe_count_total"] == 0]["itemid"].unique().tolist()
+
+        sample_df_wpe = sample_df[sample_df["itemid"].isin(itemids_wpe)].copy()
+        sample_df_wope = sample_df[sample_df["itemid"].isin(itemids_wope)].copy()
+
+        sample_df_wpe = sample_df_wpe.reset_index(drop=True)
+        sample_df_wope = sample_df_wope.reset_index(drop=True)
+
+        fold_tuples = list()
+        splits_wpe = list(KFold(n_splits=5, shuffle=True, random_state=random_state).split(sample_df_wpe.index.to_numpy()))
+        splits_wope = list(KFold(n_splits=5, shuffle=True, random_state=random_state).split(sample_df_wope.index.to_numpy()))
+
+        train_dev_test_k_folds = self.get_train_dev_test_folds()
+        for index, fold in enumerate(train_dev_test_k_folds):
+            
+            train_indices_wpe = list()
+            train_indices_wope = list()
+            fold_train_indices = fold[1]
+            for fold_train_index in fold_train_indices:
+                train_indices_wpe += list(splits_wpe[fold_train_index][1])
+                train_indices_wope += list(splits_wope[fold_train_index][1])
+            
+            dev_indices_wpe = list()
+            dev_indices_wope = list()
+            fold_dev_indices = fold[2]
+            for fold_dev_index in fold_dev_indices:
+                dev_indices_wpe += list(splits_wpe[fold_dev_index][1])
+                dev_indices_wope += list(splits_wope[fold_dev_index][1])
+            
+            test_indices = list()
+            fold_test_indices = fold[3]
+            for fold_test_index in fold_test_indices:
+                test_indices += list(splits_wpe[fold_test_index][1])
+            
+            fold_tuples.append((
+                index + 1,
+                sample_df_wpe[sample_df_wpe.index.isin(train_indices_wpe)].itemid.tolist() + sample_df_wope[sample_df_wope.index.isin(train_indices_wope)].itemid.tolist(),
+                sample_df_wpe[sample_df_wpe.index.isin(dev_indices_wpe)].itemid.tolist() + sample_df_wope[sample_df_wope.index.isin(dev_indices_wope)].itemid.tolist(),
+                sample_df_wpe[sample_df_wpe.index.isin(test_indices)].itemid.tolist()
+            ))
+
+        kth_tuple = fold_tuples[k-1]
+
+        split_order = {
+            "train": 0, 
+            "validation": 1, 
+            "test": 2
+        }
+        
+        train_df = sample_df[sample_df.itemid.isin(kth_tuple[1])].copy()
+        train_df = train_df.sort_values(
+            by="itemid",
+            key=lambda s: s.map(
+                lambda x: (
+                    split_order[x.split("_")[0]],
+                    int(x.split("_")[1])
+                )
+            )
+        ).reset_index(drop=True)
+        train_ds = Dataset.from_pandas(train_df)
+
+        dev_df = sample_df[sample_df.itemid.isin(kth_tuple[2])].copy()
+        dev_df = dev_df.sort_values(
+            by="itemid",
+            key=lambda s: s.map(
+                lambda x: (
+                    split_order[x.split("_")[0]],
+                    int(x.split("_")[1])
+                )
+            )
+        ).reset_index(drop=True)
+        dev_ds = Dataset.from_pandas(dev_df)
+
+        test_df = sample_df[sample_df.itemid.isin(kth_tuple[3])].copy()
+        test_df = test_df.sort_values(
+            by="itemid",
+            key=lambda s: s.map(
+                lambda x: (
+                    split_order[x.split("_")[0]],
+                    int(x.split("_")[1])
+                )
+            )
+        ).reset_index(drop=True)
+        test_ds = Dataset.from_pandas(test_df)
+
+        return DatasetDict({
+            "train": train_ds, 
+            "dev": dev_ds, 
+            "test": test_ds
+        })
+    
+    @staticmethod
+    def get_train_dev_test_folds(n_fold: int = 5, 
+                                 train_percent: float = 0.6, 
+                                 dev_percent: float = 0.2) -> List[Tuple]:
+        """
+        Generates train, dev, and test fold indices for k-fold cross-validation.
+        
+        :param n_fold: Total number of folds.
+        :param train_percent: Percentage of data to be used for training.
+        :param dev_percent: Percentage of data to be used for development/validation.
+        :return: List of tuples containing fold number, train indices, dev indices, and test indices.
+        """
+        fold_tuples = list()
+        indices = list(range(n_fold))
+        train_start = 0
+        train_end = int(round(n_fold * train_percent))
+        dev_start = train_end
+        dev_end = int(round(n_fold * (train_percent + dev_percent)))
+        test_start = dev_end
+        test_end = n_fold
+        for index in indices:
+            rolled_indices = np.roll(indices, -index)
+            train_indices = list(rolled_indices[train_start: train_end])
+            dev_indices = list(rolled_indices[dev_start: dev_end])
+            test_indices = list(rolled_indices[test_start: test_end])
+            fold_tuples.append((
+                index + 1,
+                train_indices,
+                dev_indices,
+                test_indices
+            ))
+        return fold_tuples
+
+    def get_fold_stats(self,
+                       fold_datasetdict: DatasetDict,
+                       id_column: str = "itemid") -> Dict[str, str]:
+        """
+        Given a DatasetDict with 'train', 'dev', 'test' splits,
+        returns a dict with total tokens, entities, and per-label entity counts for each split.
+
+        :param fold_datasetdict: The DatasetDict containing 'train', 'dev', 'test' datasets.
+        :param id_column: Name of the ID column in the DataFrame.
+        :return: A dictionary with stats as keys and formatted strings as values
+        """
+        train_df = fold_datasetdict["train"].to_pandas()
+        dev_df = fold_datasetdict["dev"].to_pandas()
+        test_df = fold_datasetdict["test"].to_pandas()
+
+        stats: Dict[str, str] = dict()
+        stats["total_documents"] = {
+            "train": len(train_df[id_column].unique()),
+            "dev": len(dev_df[id_column].unique()),
+            "test": len(test_df[id_column].unique())
+        }
+        
+        train_intent_counts: Dict[str, int] = dict()
+        for intents in train_df["intents"]:
+            for intent in intents:
+                train_intent_counts[intent] = train_intent_counts.get(intent, 0) + 1
+        train_intent_counts = dict(sorted(train_intent_counts.items()))
+
+        dev_intent_counts: Dict[str, int] = dict()
+        for intents in dev_df["intents"]:
+            for intent in intents:
+                dev_intent_counts[intent] = dev_intent_counts.get(intent, 0) + 1
+        dev_intent_counts = dict(sorted(dev_intent_counts.items()))
+
+        test_intent_counts: Dict[str, int] = dict()
+        for intents in test_df["intents"]:
+            for intent in intents:
+                test_intent_counts[intent] = test_intent_counts.get(intent, 0) + 1
+        test_intent_counts = dict(sorted(test_intent_counts.items()))
+
+        stats["class_counts"] = {
+            "train": train_intent_counts,
+            "dev": dev_intent_counts,
+            "test": test_intent_counts
+        }
+
+        num_tokens_df = self.get_num_tokens_df()
+        num_tokens_df_train = num_tokens_df[num_tokens_df[id_column].isin(train_df[id_column])]
+        num_tokens_df_dev = num_tokens_df[num_tokens_df[id_column].isin(dev_df[id_column])]
+        num_tokens_df_test = num_tokens_df[num_tokens_df[id_column].isin(test_df[id_column])]
+
+        stats["token_stats"] = {
+            "train": {
+                "total": num_tokens_df_train['num_tokens'].sum(),
+                "mean": int(round(num_tokens_df_train['num_tokens'].mean(), 0)),
+                "std": int(round(num_tokens_df_train['num_tokens'].std(), 0)),
+                "min": int(round(num_tokens_df_train['num_tokens'].min(), 0)),
+                "25p": int(round(num_tokens_df_train['num_tokens'].quantile(0.25), 0)),
+                "median": int(round(num_tokens_df_train['num_tokens'].quantile(0.50), 0)),
+                "75p": int(round(num_tokens_df_train['num_tokens'].quantile(0.75), 0)),
+                "max": int(round(num_tokens_df_train['num_tokens'].max(), 0))
+            },
+            "dev": {
+                "total": int(round(num_tokens_df_dev['num_tokens'].sum(), 0)),
+                "mean": int(round(num_tokens_df_dev['num_tokens'].mean(), 0)),
+                "std": int(round(num_tokens_df_dev['num_tokens'].std(), 0)),
+                "min": int(round(num_tokens_df_dev['num_tokens'].min(), 0)),
+                "25p": int(round(num_tokens_df_dev['num_tokens'].quantile(0.25), 0)),
+                "median": int(round(num_tokens_df_dev['num_tokens'].quantile(0.50), 0)),
+                "75p": int(round(num_tokens_df_dev['num_tokens'].quantile(0.75), 0)),
+                "max": int(round(num_tokens_df_dev['num_tokens'].max(), 0))
+            },
+            "test": {
+                "total": int(round(num_tokens_df_test['num_tokens'].sum(), 0)),
+                "mean": int(round(num_tokens_df_test['num_tokens'].mean(), 0)),
+                "std": int(round(num_tokens_df_test['num_tokens'].std(), 0)),
+                "min": int(round(num_tokens_df_test['num_tokens'].min(), 0)),
+                "25p": int(round(num_tokens_df_test['num_tokens'].quantile(0.25), 0)),
+                "median": int(round(num_tokens_df_test['num_tokens'].quantile(0.50), 0)),
+                "75p": int(round(num_tokens_df_test['num_tokens'].quantile(0.75), 0)),
+                "max": int(round(num_tokens_df_test['num_tokens'].max(), 0))
+            }
+        }
+
+        pe_df = self.get_private_entities_df()
+        pe_df_train = pe_df[pe_df[id_column].isin(train_df[id_column])]
+        pe_df_dev = pe_df[pe_df[id_column].isin(dev_df[id_column])]
+        pe_df_test = pe_df[pe_df[id_column].isin(test_df[id_column])]
+
+        count_columns = pe_df.columns.tolist()
+        count_columns = [
+            count_col 
+            for count_col in count_columns 
+            if count_col.startswith('pe_count_')
+        ]
+
+        stats["private_entity_stats"] = dict()
+        for count_col in count_columns:
+            stats["private_entity_stats"][count_col] = {
+                "train": {
+                    "total": int(round(pe_df_train[count_col].sum(), 0)),
+                    "min": int(round(pe_df_train[count_col].min(), 0)),
+                    "max": int(round(pe_df_train[count_col].max(), 0))
+                },
+                "dev": {
+                    "total": int(round(pe_df_dev[count_col].sum(), 0)),
+                    "min": int(round(pe_df_dev[count_col].min(), 0)),
+                    "max": int(round(pe_df_dev[count_col].max(), 0))
+                },
+                "test": {
+                    "total": int(round(pe_df_test[count_col].sum(), 0)),
+                    "min": int(round(pe_df_test[count_col].min(), 0)),
+                    "max": int(round(pe_df_test[count_col].max(), 0))
+                }
+            }
+
+        return json.loads(json.dumps(stats, default=lambda x: x.item()))

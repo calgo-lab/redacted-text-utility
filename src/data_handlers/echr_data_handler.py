@@ -250,6 +250,7 @@ class EchrDataHandler:
         """
         Retrieve the train, dev, and test dataframes for the specified fold.
 
+        :param filename: Name of the data file, default is "ECHR_Dataset.parquet".
         :param random_state: Random state for reproducibility.
         :param k: The fold number to retrieve (1-based index).
         :return: A DatasetDict containing the train, dev, and test datasets.
@@ -368,6 +369,8 @@ class EchrDataHandler:
         returns a dict with total tokens, entities, and per-label entity counts for each split.
 
         :param fold_datasetdict: The DatasetDict containing 'train', 'dev', 'test' datasets.
+        :param filename: Name of the data file, default is "ECHR_Dataset.parquet".
+        :param id_column: Name of the ID column in the DataFrame.
         :return: A dictionary with stats as keys and formatted strings as values
         """
         train_df = fold_datasetdict["train"].to_pandas()

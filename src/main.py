@@ -217,184 +217,59 @@ if __name__ == "__main__":
     logger.info(f"First row of mic_merged_pe_df_filtered:\n{json.dumps(first_row_dict, indent=2, ensure_ascii=False)}")
     """
 
-    ### Log specific row text for checking
+    ### Get k-fold DatasetDict for mic dataset and check - 
+    ### - if in a single fold the train, dev, test sets are mutually exclusive
+    ### - if across all folds the test sets are mutually exclusive
+    ### - if across all folds the train sets have at most 67% common itemids
     """
-    split_name: str = "validation"
-    row_id: int = 269
-    logger.info(f"df_dict['{split_name}'].row[{row_id}].text:\n{df_dict[split_name].iloc[row_id].text}")
-    """
-
-    """
-    raw_data_dir: Path = project_root / "data" / "raw" / "DATEXIS" / "med_intent_classification" / "data"
-    processed_data_dir: Path = project_root / "data" / "processed" / "DATEXIS" / "med_intent_classification"
-    processed_data_dir.mkdir(parents=True, exist_ok=True)
-    """
-
-    """
-    entity_prediction_service: EntityPredictionService = EntityPredictionService()
-    entity_set_id: str = "ontonotes5"
-    model_id: str = "ner-english-ontonotes-large"
-    """
-
-    ### Collect named entities for the all splits
-    """
-    for data_split in ["train", "validation", "test"]:
-        output_path = processed_data_dir / f"{data_split}-00000-of-00001_ne.parquet"
-        entity_prediction_service.collect_named_entities_for_dataframe(
-            entity_set_id=entity_set_id,
-            model_id=model_id,
-            source_df=df_dict[data_split],
-            source_column="text",
-            target_column=None,
-            target_df_export_path=output_path
-        )
-        ne_df = pd.read_parquet(output_path)
-        named_entities: List[Dict[str, Any]] = list()
-        for idx, row in ne_df.iterrows():
-            nes = json.loads(row["text_ne_ontonotes5_ner-english-ontonotes-large"])
-            [ne.update({"row_idx": idx}) for ne in nes]
-            named_entities.extend(nes)
-        with open(processed_data_dir / f"named_entities_{data_split}.json", "w", encoding="utf-8") as f:
-            json.dump(named_entities, f, indent=2, ensure_ascii=False)
-    """
-
-    ### Generate token treatment files for all splits
-    """
-    for data_split in ["train", "validation", "test"]:
-        ne_df = pd.read_parquet(processed_data_dir / f"{data_split}-00000-of-00001_ne.parquet")
-        ne_column = "text_ne_ontonotes5_ner-english-ontonotes-large"
-        pes, epes = TokenTreatmentUtils.filter_named_entities_for_dataframe(ne_df, ne_column)
-        excluded_date_tokens = [ne['token'] for ne in epes if ne['label'] == 'DATE']
-
-        with open(processed_data_dir / f"excluded_date_tokens_{data_split}.txt", "w", encoding="utf-8") as f:
-            f.write("\n".join(excluded_date_tokens))
-
-        with open(processed_data_dir / f"private_entity_tokens_{data_split}.txt", "w", encoding="utf-8") as f:
-            f.write("\n".join(entity['token'] for entity in pes))
-
-        with open(processed_data_dir / f"private_entities_{data_split}.json", "w", encoding="utf-8") as f:
-            json.dump(pes, f, indent=2, ensure_ascii=False)
-    """
-
-    ### Redact private entities in a specific row of a specific split for checking
-    """
-    split_name: str = "train"
-    ne_df = pd.read_parquet(processed_data_dir / f"{split_name}-00000-of-00001_ne.parquet")
-    ne_column = "text_ne_ontonotes5_ner-english-ontonotes-large"
-    row_idx: int = 3872
-    input_text = ne_df.iloc[row_idx].text
-    private_entities, _ = TokenTreatmentUtils.filter_named_entities(
-        json.loads(ne_df.iloc[row_idx][ne_column])
-    )
-    redacted_text = TokenTreatmentUtils.redact_private_entity_tokens_in_text(
-        input_text=input_text,
-        private_entities=private_entities,
-        replacement_strategy="semantic_label_mask"
-    )
-    logger.info(f"ne_df_{split_name}.row[{row_idx}].text:\n{input_text}\n")
-    logger.info(f"private_entities_{split_name}.row[{row_idx}]:\n{private_entities}\n")
-    logger.info(f"redacted_text_{split_name}.row[{row_idx}]:\n{redacted_text}\n")
-    """
-
-    ### Redact all splits and save to new dataframes
-    """ 
-    for data_split in ["train", "validation", "test"]:
-        output_path = processed_data_dir / f"{data_split}-00000-of-00001_ne_redacted.parquet"
-        ne_df = pd.read_parquet(processed_data_dir / f"{data_split}-00000-of-00001_ne.parquet")
-        ne_column = "text_ne_ontonotes5_ner-english-ontonotes-large"
-        exported_df_path = TokenTreatmentUtils.redact_private_entity_tokens_in_text_for_dataframe(
-            ne_df=ne_df,
-            text_column="text",
-            ne_column=ne_column,
-            target_df_export_path=output_path,
-            replacement_strategies=[
-                "semantic_label_mask",
-                "random_mask",
-                "generic_mask"
-            ]
-        )
-        logger.info(f"Redacted dataframe for split '{data_split}' exported to: {exported_df_path}")
-    """
-
-    ### Log specific row redacted text for checking
-    """
-    split_name: str = "train"
-    ne_df = pd.read_parquet(processed_data_dir / f"{split_name}-00000-of-00001_ne_redacted.parquet")
-    row_idx: int = 2106
-    original_text = ne_df.iloc[row_idx]["text"]
-    redacted_text = ne_df.iloc[row_idx]["text_redacted_with_generic_mask"]
-    logger.info(f"pe_redacted_df_{split_name}.row[{row_idx}].original_text:\n{original_text}\n")
-    logger.info(f"pe_redacted_df_{split_name}.row[{row_idx}].redacted_text:\n{redacted_text}\n")
-    """
-
-    ### Filter test set rows with redacted text and analyze intent distribution
-    """
-    processed_data_dir: Path = project_root / "data" / "processed" / "DATEXIS" / "med_intent_classification"
-    split_name: str = "test"
-    test_ne_df = pd.read_parquet(processed_data_dir / f"{split_name}-00000-of-00001_ne_redacted.parquet")
+    for k in range(1, 6):
+        mic_dataset_dict = mic_data_handler.get_train_dev_test_datasetdict(k=k)
+        train_ids: Set[str] = set(mic_dataset_dict["train"]["itemid"])
+        dev_ids: Set[str] = set(mic_dataset_dict["dev"]["itemid"])
+        test_ids: Set[str] = set(mic_dataset_dict["test"]["itemid"])
+        assert train_ids.isdisjoint(dev_ids), f"Train and Dev sets are not mutually exclusive for fold {k}"
+        assert train_ids.isdisjoint(test_ids), f"Train and Test sets are not mutually exclusive for fold {k}"
+        assert dev_ids.isdisjoint(test_ids), f"Dev and Test sets are not mutually exclusive for fold {k}"
     
-    filtered_test_ne_df = test_ne_df[
-        (test_ne_df["text_redacted_with_semantic_label_mask"].notnull()) &
-        (test_ne_df["text_redacted_with_semantic_label_mask"] != "")
-    ]
-    logger.info(f"Number of rows in filtered_test_ne_df : {filtered_test_ne_df.shape[0]}")
+    for k1, k2 in [(1,2), (1,3), (1,4), (1,5), (2,3), (2,4), (2,5), (3,4), (3,5), (4,5)]:
+        mic_dataset_dict_k1 = mic_data_handler.get_train_dev_test_datasetdict(k=k1)
+        mic_dataset_dict_k2 = mic_data_handler.get_train_dev_test_datasetdict(k=k2)
+        test_ids_k1: Set[str] = set(mic_dataset_dict_k1["dev"]["itemid"])
+        test_ids_k2: Set[str] = set(mic_dataset_dict_k2["dev"]["itemid"])
+        assert test_ids_k1.isdisjoint(test_ids_k2), f"Test sets are not mutually exclusive between fold {k1} and fold {k2}"
+    
+    for k1, k2 in [(1,2), (1,3), (1,4), (1,5), (2,3), (2,4), (2,5), (3,4), (3,5), (4,5)]:
+        mic_dataset_dict_k1 = mic_data_handler.get_train_dev_test_datasetdict(k=k1)
+        mic_dataset_dict_k2 = mic_data_handler.get_train_dev_test_datasetdict(k=k2)
+        train_ids_k1: Set[str] = set(mic_dataset_dict_k1["train"]["itemid"])
+        train_ids_k2: Set[str] = set(mic_dataset_dict_k2["train"]["itemid"])
+        common_ids = train_ids_k1.intersection(train_ids_k2)
+        common_percentage = (len(common_ids) / min(len(train_ids_k1), len(train_ids_k2))) * 100
+        assert common_percentage <= 67.0, f"Common percentage of itemids between train sets of fold {k1} and fold {k2} exceeds 67%: {common_percentage}%"
+    """
 
-    filtered_test_intents = list()
-    for intents in filtered_test_ne_df['intents']:
-        filtered_test_intents.extend(intents.tolist())
-    
-    unique_filtered_test_intents: Set[str] = set(filtered_test_intents)
-    filtered_test_intents_counts: Dict[str, int] = dict()
-    for intent in unique_filtered_test_intents:
-        filtered_test_intents_counts[intent] = filtered_test_intents.count(intent)
-    
-    logger.info(f"Frequency of filtered test intents ({len(filtered_test_intents_counts)}): \n{json.dumps(filtered_test_intents_counts, indent=2)}")
+    ### Check number of unique intents in mic dataset train, dev, test sets across all folds
     """
-    
-    ### Calulate statistics on private entities per split
+    for k in range(1, 6):
+        mic_dataset_dict = mic_data_handler.get_train_dev_test_datasetdict(k=k)
+        for split_name in ["train", "dev", "test"]:
+            dataset_split = mic_dataset_dict[split_name]
+            unique_intents: Set[str] = set()
+            for intents_list in dataset_split["intents"]:
+                unique_intents.update(intents_list)
+            logger.info(f"Fold {k} - {split_name} set has {len(unique_intents)} unique intents.")
     """
-    pe_stats: Dict[str, Dict[str, Any]] = dict()
-    for data_split in ["train", "validation", "test"]:
-        
-        raw_data_file: str = f"{data_split}-00000-of-00001.parquet"
-        raw_df: pd.DataFrame = pd.read_parquet(raw_data_dir / raw_data_file)
-        total_rows: int = raw_df.shape[0]
-        
-        with open(processed_data_dir / f"private_entities_{data_split}.json", "r", encoding="utf-8") as f:
-            private_entities: List[Dict[str, Any]] = json.load(f)
-        
-        total_private_entities: int = len(private_entities)
-        
-        total_rows_with_private_entities: int = len(set(pe['row_idx'] for pe in private_entities))
-        
-        private_entities_by_label: Dict[str, int] = dict()
-        for pe in private_entities:
-            label = pe['label']
-            private_entities_by_label[label] = private_entities_by_label.get(label, 0) + 1
-        
-        valid_labels: Set[str] = {"PERSON", "DATE", "GPE", "ORG"}
-        for label in valid_labels:
-            if label not in private_entities_by_label:
-                private_entities_by_label[label] = 0
-        
-        private_entities_by_label = dict(
-            sorted(
-                private_entities_by_label.items(), key=lambda item: item[1], reverse=True
-            )
-        )
-        
-        pe_stats[raw_data_file] = {
-            "T-Rows": total_rows,
-            "T-Rows-PE": total_rows_with_private_entities,
-            "T-PE": total_private_entities,
-            **{f"{label}": count for label, count in private_entities_by_label.items()}
-        }
 
-    pe_stats_df = pd.DataFrame.from_dict(pe_stats, orient="index")
-    pe_stats_df.index.name = "Data File"
-    logger.info(f"\n{pe_stats_df.to_markdown()}")
+    ### Get fold stats for mic dataset for provided k
     """
-    
+    k = 1
+    kth_datasetdict = mic_data_handler.get_train_dev_test_datasetdict(k=k)
+    fold_stats = mic_data_handler.get_fold_stats(kth_datasetdict)
+    logger.info(f"mic dataset k={k} fold stats:\n{json.dumps(fold_stats, indent=2)}")
+    """
+
+
+    ### ECHR Dataset Analysis
     """
     echr_data_handler: EchrDataHandler = EchrDataHandler(project_root)
     
