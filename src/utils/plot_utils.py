@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
@@ -127,6 +127,99 @@ class PlotUtils:
         return pd.DataFrame(out, index=df.index)
     
     @staticmethod
+    def plot_mic_mltc_classifier_performance(performance_df: pd.DataFrame,
+                                             model_names: List[str],
+                                             redaction_strategies: List[str],
+                                             model_bg_colors: Dict[str, str],
+                                             strategy_styles: Dict[str, Dict[str, Any]],
+                                             figsize=(7, 4)) -> plt.Figure:
+
+        n_strategies = len(redaction_strategies)
+        strategy_offsets = np.linspace(-0.2, 0.2, n_strategies)
+
+        fig, ax = plt.subplots(figsize=figsize)
+        plt.rcParams['hatch.linewidth'] = 2.5
+
+        df_expanded = PlotUtils.expand_mean_std_columns(performance_df)
+
+        x_positions = list()
+        x = 0
+        for model_name in model_names:
+
+            ax.axvspan(
+                x - 0.5,
+                x + 0.5,
+                facecolor=model_bg_colors[model_name],
+                alpha=0.33,
+                edgecolor=model_bg_colors[model_name],
+                hatch='///',
+                linewidth=0,
+                zorder=0
+            )
+
+            for s_idx, strategy in enumerate(redaction_strategies):
+                style = strategy_styles[strategy]
+
+                mean = df_expanded.loc[strategy, f"{model_name}_mean"]
+                std = df_expanded.loc[strategy, f"{model_name}_std"]
+
+                ax.errorbar(
+                    x + strategy_offsets[s_idx],
+                    mean,
+                    yerr=std,
+                    fmt=style["marker"],
+                    color=style["color"],
+                    ecolor=style["color"],
+                    elinewidth=1.2,
+                    capsize=3,
+                    markersize=5,
+                    linewidth=1,
+                    zorder=3
+                )
+
+            x_positions.append(x)
+            x += 1
+
+        ax.set_xticks(x_positions)
+        ax.set_xticklabels(model_names)
+
+        ax.set_ylabel("Macro F1-score", labelpad=15)
+        ax.set_ylim(0.55, 0.80)
+
+        ax.yaxis.set_major_locator(MultipleLocator(0.05))
+        ax.yaxis.set_minor_locator(MultipleLocator(0.01))
+
+        ax.grid(axis="y", which="major", linestyle=":", linewidth=1.0, alpha=0.8)
+        ax.grid(axis="y", which="minor", linestyle=":", linewidth=0.6, alpha=0.5)
+        ax.tick_params(axis="y", which="minor", length=0)
+
+        ax.set_xlim(-0.5, x - 0.5)
+        ax.set_title("Macro F1-score by Model and Redaction Strategy")
+
+        legend_elements = [
+            Line2D(
+                [0], [0],
+                marker=style["marker"],
+                color=style["color"],
+                label=strategy,
+                linestyle="-"
+            )
+            for strategy, style in strategy_styles.items()
+        ]
+
+        strategy_legend = ax.legend(
+            handles=legend_elements,
+            title="Redaction Strategy",
+            loc="upper right",
+            frameon=True
+        )
+
+        ax.add_artist(strategy_legend)
+
+        plt.tight_layout()
+        return fig, ax
+    
+    @staticmethod
     def plot_echr_tc_classifier_performance_type_one(model_dfs,
                                                      model_names,
                                                      percentile_labels,
@@ -139,6 +232,7 @@ class PlotUtils:
         strategy_offsets = np.linspace(-0.2, 0.2, n_strategies)
 
         fig, ax = plt.subplots(figsize=figsize)
+        plt.rcParams['hatch.linewidth'] = 2.5
 
         x = 0
         region_boundaries = list()
@@ -154,8 +248,11 @@ class PlotUtils:
                 ax.axvspan(
                     x - 0.5,
                     x + 0.5,
-                    color=model_bg_colors[model_name],
-                    alpha=0.18,
+                    facecolor=model_bg_colors[model_name],
+                    alpha=0.33,
+                    edgecolor=model_bg_colors[model_name],
+                    hatch='///',
+                    linewidth=0,
                     zorder=0
                 )
 
@@ -209,7 +306,7 @@ class PlotUtils:
             which="major",
             linestyle=":",
             linewidth=1.0,
-            alpha=0.7
+            alpha=0.8
         )
 
         ax.grid(
@@ -217,7 +314,7 @@ class PlotUtils:
             which="minor",
             linestyle=":",
             linewidth=0.6,
-            alpha=0.35
+            alpha=0.5
         )
 
         ax.tick_params(axis="y", which="minor", length=0)
@@ -244,8 +341,9 @@ class PlotUtils:
         model_legend_elements = [
             Patch(
                 facecolor=model_bg_colors[model],
-                edgecolor="none",
-                alpha=0.4,
+                alpha=0.40,
+                edgecolor=model_bg_colors[model],
+                hatch='///',
                 label=model
             )
             for model in model_names

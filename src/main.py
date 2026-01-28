@@ -329,6 +329,75 @@ if __name__ == "__main__":
     logger.info(f"Performance metrics summary table:\n{table_report.to_markdown()}")
     """
 
+    ### Plot macro F1-score by entity percentiles for all models and redaction strategies
+    """
+    table_report = ReportUtils.get_performance_metrics_summary_table(
+        metrics_dir=project_root / "metrics" / "DATEXIS" / "med_intent_classification" / "mltc",
+        row_dimension='redaction_strategy',
+        row_values_order=['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask'],
+        column_dimension='model_name',
+        column_values_order=['xlm-roberta-large', 'bert-large-cased', 'microsoft--BiomedNLP-BiomedBERT-base-uncased-abstract'],
+        class_or_stat='macro avg',
+        hierarchy=['model_name', 'redaction_strategy', 'metric_type'],
+        fixed_dimensions={'metric_type': 'f1-score'},
+        model_name_aliases={
+            'xlm-roberta-large': 'xlm-roberta-large',
+            'bert-large-cased': 'bert-large-cased',
+            'microsoft--BiomedNLP-BiomedBERT-base-uncased-abstract': 'pubmedbert-base-uncased'
+        },
+        redaction_strategy_aliases={
+            'unredacted': 'No Redaction',
+            'semantic_label_mask': 'Semantic Label Masking',
+            'random_mask': 'Random Masking',
+            'generic_mask': 'Generic Masking'
+        }
+    )
+    strategy_styles = {
+        "No Redaction": {
+            "color": "olivedrab",
+            "marker": "o"
+        },
+        "Semantic Label Masking": {
+            "color": "firebrick",
+            "marker": "o"
+        },
+        "Random Masking": {
+            "color": "cornflowerblue",
+            "marker": "o"
+        },
+        "Generic Masking": {
+            "color": "darkgoldenrod",
+            "marker": "o"
+        }
+    }
+    
+    fig, ax = PlotUtils.plot_mic_mltc_classifier_performance(
+        performance_df=table_report,
+        model_names=[
+            "xlm-roberta-large",
+            "bert-large-cased",
+            "pubmedbert-base-uncased"
+        ],
+        redaction_strategies=list(strategy_styles.keys()),
+        model_bg_colors={
+            "xlm-roberta-large": "#cea8bb",
+            "bert-large-cased": "#75a190",
+            "pubmedbert-base-uncased": "#c9bf89"
+        },
+        strategy_styles=strategy_styles,
+        figsize=(7, 4)
+    )
+
+    figure_dir = project_root / "plots" / "DATEXIS" / "med_intent_classification" / "mltc"
+    figure_dir.mkdir(parents=True, exist_ok=True)
+
+    fig.savefig(
+        figure_dir / "macro_f1_score_by_model_and_redaction_strategy.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+    """
+
 
     ### ECHR Dataset Analysis
     """
@@ -773,9 +842,9 @@ if __name__ == "__main__":
         },
         redaction_strategies=list(strategy_styles.keys()),
         model_bg_colors={
-            "xlm-roberta-large": "peachpuff",
-            "bert-large-cased": "palegreen",
-            "electra-large-discriminator": "lightpink"
+            "xlm-roberta-large": "#cea8bb",
+            "bert-large-cased": "#75a190",
+            "electra-large-discriminator": "#c9bf89"
         },
         strategy_styles=strategy_styles
     )
@@ -787,7 +856,7 @@ if __name__ == "__main__":
         figure_dir / "macro_f1_models_vs_entity_percentiles_redaction_strategies.png",
         dpi=300,
         bbox_inches="tight"
-    ) 
+    )
     """
 
     ### Plot macro F1-score comparison between No Redaction and other redaction strategies

@@ -245,6 +245,9 @@ The following table shows <b>average performance across all folds with standard 
 | Random Masking         |       0.72 ± 0.04 |      0.66 ± 0.04 |             0.62 ± 0.04 |
 | Generic Masking        |       0.72 ± 0.04 |      0.69 ± 0.01 |             0.62 ± 0.04 |
 
+<img src="plots/DATEXIS/med_intent_classification/mltc/macro_f1_score_by_model_and_redaction_strategy.png" width="80%" />
+
+<br/>
 
 ## European Court of Human Rights Dataset ([AUEB-NLP](https://huggingface.co/AUEB-NLP))
 
