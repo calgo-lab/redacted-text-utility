@@ -2,22 +2,26 @@
 
 This repository contains codebase for redacting sensitive information from 
 text documents to check how different redaction process affects the utility 
-of those documents when used for evaluation in various downstream models.
+of those documents when used for evaluation in various downstream tasks.
 
 ## Medical Intent Classification Dataset ([DATEXIS](https://huggingface.co/DATEXIS))
 
 Available at:
 https://huggingface.co/datasets/DATEXIS/med_intent_classification
 
-### Preview
+### Downstream Task
+Medical Intent Classification is a <b>multi-label text classification</b> task where 
+given a doctor-patient conversation, the goal is to predict one or more medical 
+intents/labels associated with that text.
+
+### Preview & EDA
 | text  | intents |
 |-------|---------|
 | you do have a little bit of periphe- peripheral neuropathy . um , there is a medication we can use if they get really bad , but you're already on so many medications . | ["Discussion", "Medication", "Reassessment"] |
 | and where would you say the tingling and numbness is ? | ["Acute Symptoms"] |
 | doctor: alright thanks good seeing you thanks for coming in to them | ["Chitchat"] |
-<br/>
 
-<b>List of all intent labels:</b>
+#### List of all intent labels:
 |||||
 |---|---|---|---|
 | 1. Acute Assessment | 6. Drug History | 11. Medication | 16. Radiology Examination |
@@ -26,7 +30,8 @@ https://huggingface.co/datasets/DATEXIS/med_intent_classification
 | 4. Diagnostic Testing | 9. Greetings | 14. Personal History | 19. Therapeutic History |
 | 5. Discussion | 10. Lab Examination | 15. Physical Examination | 20. Vegetative History |
 
-### Exploratory Data Analysis
+<br>
+
 There are 3 separate data files [train](data/raw/DATEXIS/med_intent_classification/data/train-00000-of-00001.parquet), [validation](data/raw/DATEXIS/med_intent_classification/data/validation-00000-of-00001.parquet) and [test](data/raw/DATEXIS/med_intent_classification/data/test-00000-of-00001.parquet) splits in parquet format.
 For the purpose of cross-validation setup, these files are merged together [here](data/processed/DATEXIS/med_intent_classification/mic_merged.parquet) and later will 
 be split into different train/dev/test sets with rolling ignoring the original splits.
@@ -36,12 +41,7 @@ The following plots show the distribution of number of tokens in the texts and n
 <img src="plots/DATEXIS/med_intent_classification/eda/mic_merged_num_tokens_distribution.jpg" alt="Number of Tokens Distribution" width="45%"/>&nbsp;&nbsp;
 <img src="plots/DATEXIS/med_intent_classification/eda/mic_intent_distribution_bar_chart.jpg" alt="Number of Intents Distribution" width="45%"/>&nbsp;&nbsp;
 
-### Downstream Task
-Medical Intent Classification is a <b>multi-label text classification</b> task where 
-given a medical text, the goal is to predict one or more medical 
-intents/labels associated with that text.
-
-### Redaction Model and Entity Statistics
+### Redaction Model, Entity Statistics and Masking Strategies
 As the texts are in English, an English NER model (based on 
 xlm-roberta-large) fine-tuned on OntoNotes 5.0 from HuggingFace is used for detecting entities to redact:
 https://huggingface.co/flair/ner-english-ontonotes-large
@@ -63,7 +63,10 @@ Following are the statistics of total found (<b>P</b>)rivate (<b>E</b>)ntities i
 |-----------:|-------------:|---------:|-------:|-----:|----:|----:|
 |       5292 |          525 |      847 |    619 |  195 |  17 |  16 |
 
-To redact the private entities from the texts, three different redaction strategies are applied: (1) Semantic Label Masking, (2) Random Masking and (3) Generic Masking.
+To redact the private entities from the texts, three different redaction strategies are applied:
+1. Semantic Label Masking
+2. Random Masking
+3. Generic Masking
 
 
 Example:
@@ -89,32 +92,86 @@ Text redacted with Generic Masking:
 miss XXXX is here for evaluation of facial pain this is a XXXX male
 ```
 
+### Sample Selection and Cross-validation Setup
+To align with our experimental target of checking the utility of redacted 
+texts, we ignore the original train/dev/test splits. Instead, we merge all the 
+samples together and then at first divide them into two groups: 
+1. samples with at least one private entity
+2. samples without any private entity
+
+Then we perform 5-fold cross-validation for both splits separately while for 
+train and dev sets we merge the two groups back together for each fold but for 
+test samples we only include samples with at least one private entity.
+
+This 
+ensures that the test samples for each fold have at least one private entity 
+to redact while also maintaining a balanced distribution of samples with and 
+without private entities in the train and dev sets. For the 5-fold 
+cross-validation setup with rolling the train(60%)/dev(20%)/test(20%) raitios 
+are maintained.
+
+#### Fold-wise Statistics
+
+| Stat/Label           | Fold 1                                 | Fold 2                                   | Fold 3                                   | Fold 4                                   | Fold 5                                   |
+|-----------------------|------------------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|
+| Total Item           | Train: 3,176<br>Dev: 1,058<br>Test: 105         | Train: 3,175<br>Dev: 1,058<br>Test: 105         | Train: 3,174<br>Dev: 1,059<br>Test: 105         | Train: 3,175<br>Dev: 1,059<br>Test: 105         | Train: 3,176<br>Dev: 1,058<br>Test: 105         |
+| Intents Present      | Train: 20/20<br>Dev: 20/20<br>Test: 19/20 | Train: 20/20<br>Dev: 20/20<br>Test: 19/20 | Train: 20/20<br>Dev: 20/20<br>Test: 19/20  | Train: 20/20<br>Dev: 20/20<br>Test: 18/20  | Train: 20/20<br>Dev: 20/20<br>Test: 18/20  |
+| Total Token          | Train: 113,906<br>Dev: 42,182<br>Test: 5,156 | Train: 117,290<br>Dev: 38,729<br>Test: 5,749 | Train: 118,701<br>Dev: 38,798<br>Test: 5,878  | Train: 119,709<br>Dev: 37,318<br>Test: 5,676  | Train: 114,845<br>Dev: 37,790<br>Test: 7,905  |
+| Total Private Entity        | Train: 508<br>Dev: 174<br>Test: 165      | Train: 499<br>Dev: 165<br>Test: 183      | Train: 496<br>Dev: 183<br>Test: 168      | Train: 522<br>Dev: 168<br>Test: 157      | Train: 516<br>Dev: 157<br>Test: 174      |
+| DATE        | Train: 118<br>Dev: 44<br>Test: 33      | Train: 116<br>Dev: 33<br>Test: 46      | Train: 111<br>Dev: 46<br>Test: 38      | Train: 123<br>Dev: 38<br>Test: 34      | Train: 117<br>Dev: 34<br>Test: 44      |
+| GPE        | Train: 15<br>Dev: 2<br>Test: 0      | Train: 10<br>Dev: 0<br>Test: 7      | Train: 8<br>Dev: 7<br>Test: 2      | Train: 9<br>Dev: 2<br>Test: 6      | Train: 9<br>Dev: 6<br>Test: 2      |
+| ORG        | Train: 6<br>Dev: 4<br>Test: 6      | Train: 7<br>Dev: 6<br>Test: 3      | Train: 12<br>Dev: 3<br>Test: 1      | Train: 13<br>Dev: 1<br>Test: 2      | Train: 10<br>Dev: 2<br>Test: 4      |
+| PERSON        | Train: 369<br>Dev: 124<br>Test: 126      | Train: 366<br>Dev: 126<br>Test: 127      | Train: 365<br>Dev: 127<br>Test: 127      | Train: 377<br>Dev: 127<br>Test: 115      | Train: 380<br>Dev: 115<br>Test: 124      |
 
 
-### Task Model and Fine-tuning Details
-The transformers based 🤗 [microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract](https://huggingface.co/microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract) model, 
-which is pre-traind from scratch using abstracts from PubMed, is fine-tuned 
-for the multi-label text classification downstream task on the Medical Intent 
-Classification dataset.
+### Selected PLMs and Frameworks
 
-Hyperparameters:
+Three separate transformers based pre-trained language models are fine-tuned for the Multi-Label Text Classification task on the Medical Intent Classification dataset using Flair framework:
 
-| HP                 |       Value |
-|--------------------|------------:|
-| learning_rate      | 2e-5        |
-| batch_size         | 8           |
-| max_epochs         | 5           |
-| weight_decay       | 0.01        |
-| lr_scheduler    | LinearScheduler<br>  warmup_steps: 500 |
+1. 🤗 [xlm-roberta-large](https://huggingface.co/FacebookAI/xlm-roberta-large) (<b>aka</b> xlm-roberta-large)
+2. 🤗 [google-bert/bert-large-cased](https://huggingface.co/google-bert/bert-large-cased) (<b>aka</b> bert-large-cased)
+3. 🤗 [microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract](https://huggingface.co/microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract) (<b>aka</b> pubmedbert-base-uncased)
 
-The fine-tuning is performed using PyTorch Lightning and HuggingFace 
-Transformers libraries and is repeated for 2 different random seeds: 
-42 and 1312.
+### System Setup and Fine-tuning Parameters
 
-Fine-tuning script: [src/infrastructure/frameworks/task_model/task_bert.py](src/infrastructure/frameworks/task_model/task_bert.py)
+The experiments were performed on a system with following configuration:
+
+| Package     | Version     |
+|-------------|------------:|
+| datasets    | 4.0.0       |
+| flair       | 0.15.1      |
+| pyarrow     | 20.0.0      |
+| spacy       | 3.8.7       |
+| tokenizers  | 0.21.4      |
+| torch       | 2.7.1+cu128 |
+| transformers| 4.49.0      |
+
+(for estimating token/word counts spaCy's [en_core_web_sm](https://spacy.io/models/en#en_core_web_sm) model has been used)
+>
+and the following hyperparameters were used for fine-tuning all the three models:
+
+| HP              |       Value |
+|-----------------|------------:|
+| learning_rate   | 5e-05       |
+| mini_batch_size | 8           |
+| max_epochs      | 25          |
+| lr_scheduler    | LinearScheduler<br>  warmup_fraction: '0.1' |
+
+Fine-tuning scripts: 
+1. For [xlm-roberta-large & bert-large-cased](src/training_scripts/mltc/fine_tune_multi_label_text_classifier_with_transformer_model.py)
+2. For [pubmedbert-base-uncased](src/training_scripts/mltc/fine_tune_multi_label_text_classifier_with_biomedbert_base.py)
+
+Evaluation Notebook: [notebooks/evaluate_mic_mltc.ipynb](notebooks/evaluate_mic_mltc.ipynb)
 
 
-### Results
+Metrics Directory: [metrics/DATEXIS/med_intent_classification/mltc/](metrics/DATEXIS/med_intent_classification/mltc/)
+
+### Weights and Biases
+All experiments are logged to Weights and Biases and can be found at:
+
+https://wandb.ai/calgo-lab/redacted-text-utility/workspace
+
+### OLD Results
 
 The following table shows performance (macro-average) of the fine-tuned 
 PubMedBERT based text classifier on the test samples  for different redaction 
@@ -146,24 +203,17 @@ a binary label (column - "binary_judgement") indicating whether any human
 rights article or protocol of European Convention of Human Rights has been 
 violated (1) or not (0).
 
-### Preview
-| itemid | text  | binary_judgement |
-|--------|-------|------------------|
-| 001-4817 | The applicant is a British national, born in 1945 and living in Rome. The facts of the case, as submitted by the parties, may be summarised as follows. The applicant's ... | 0 |
-| 001-89307 | 7. The applicant, Mrs Danutė Balsytė-Lideikienė, is a Lithuanian national, who was born in 1947. At present she lives in Lithuania. 8. The applicant is the founder and ... | 1 |
-
 ### Downstream Task - 1: Binary Violation Prediction
 Binary Violation Prediction is a binary classification task where given the 
 facts of a case, the goal is to predict whether any human rights article or 
 protocol of European Convention of Human Rights has been violated (1) or 
 not (0).
 
-### Preprocessing and Sample Selection
-The adoptated dataset contains some cases with very large texts (more than
-5.5k tokens). Such cases are excluded from the experiments to avoid
-memory issues during model training. So the samples with tokens count between 
-512 and 10x512 are selected for the experiments that ensures every text 
-contains a few private entities to redact while also avoiding memory issues.
+### Preview & EDA
+| itemid | text  | binary_judgement |
+|--------|-------|------------------|
+| 001-4817 | The applicant is a British national, born in 1945 and living in Rome. The facts of the case, as submitted by the parties, may be summarised as follows. The applicant's ... | 0 |
+| 001-89307 | 7. The applicant, Mrs Danutė Balsytė-Lideikienė, is a Lithuanian national, who was born in 1947. At present she lives in Lithuania. 8. The applicant is the founder and ... | 1 |
 
 The following table and histogram shows the distribution of number of tokens in the text column for the ECHR dataset without any sampling -
 
@@ -173,17 +223,28 @@ The following table and histogram shows the distribution of number of tokens in 
 
 ![ECHR_Dataset_num_tokens_distribution](plots/glnmario/ECHR/eda/ECHR_Dataset_num_tokens_distribution.jpg)
 
+### Redaction Model & Masking Strategies
+As the texts are in English, the same English NER model (based on 
+xlm-roberta-large) fine-tuned on OntoNotes 5.0 earlier used for Medical 
+Intent Classification dataset, is used for redaction.
+
+The private entities of same types: DATE, GPE, ORG and PERSON are masked or redacted. The same filtering of unusual DATE and PERSON entities is also applied here. And finally the same three masking strategies are used to redact the 
+private entities from test samples as used for Medical Intent Classification dataset.
+
+### Sample Selection and Cross-validation Setup
+The adoptated dataset contains some cases with very large texts (more than
+5.5k tokens). Such cases are excluded from the experiments to avoid
+memory issues during model training. So the samples with tokens count between 
+512 and 10x512 are selected for the experiments that ensures every text 
+contains a few private entities to redact while also avoiding memory issues.
+
+
+
 After sampling (selecting samples with tokens count between 512 and 10x512), the total number of samples are reduced to 8435 (~73.5%).
 
 In the next step, with theses samples a 5-fold cross validation split is performed - to create 5 separate train(60%)/dev(20%)/test(20%) sets with rolling.
 
-### Redaction Model
-As the texts are in English, the same English NER model (based on 
-xlm-roberta-large) fine-tuned on OntoNotes 5.0 earlier used for Medical 
-Intent Classification dataset, is used for redaction and the private 
-entities of same types: DATE, GPE, ORG and PERSON are masked or redacted.
-
-### Fold-wise Statistics
+#### Fold-wise Statistics
 
 | Stat/Label           | Fold 1                                 | Fold 2                                   | Fold 3                                   | Fold 4                                   | Fold 5                                   |
 |-----------------------|------------------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|
@@ -197,7 +258,7 @@ entities of same types: DATE, GPE, ORG and PERSON are masked or redacted.
 | ORG        | Train: 160,821<br>Dev: 53,362<br>Test: 54,271      | Train: 159,558<br>Dev: 54,271<br>Test: 54,625      | Train: 159,577<br>Dev: 54,625<br>Test: 54,252      | Train: 162,258<br>Dev: 54,252<br>Test: 51,944      | Train: 163,148<br>Dev: 51,944<br>Test: 53,362      |
 | PERSON        | Train: 63,845<br>Dev: 21,167<br>Test: 21,016      | Train: 63,345<br>Dev: 21,016<br>Test: 21,667      | Train: 63,073<br>Dev: 21,667<br>Test: 21,288      | Train: 63,850<br>Dev: 21,288<br>Test: 20,890      | Train: 63,971<br>Dev: 20,890<br>Test: 21,167      |
 
-### Selected PLMs and frameworks
+### Selected PLMs
 
 Three separate transformers based pre-trained language models are fine-tuned for the Text Classification task on the ECHR dataset using Flair framework (TextClassifier from flair.models and TransformerDocumentEmbeddings from flair.embeddings with allow_long_sentences=True and cls_pooling="mean"):
 
@@ -206,25 +267,11 @@ Three separate transformers based pre-trained language models are fine-tuned for
 2. 🤗 [google-bert/bert-large-cased](https://huggingface.co/google-bert/bert-large-cased) (<b>aka</b> bert-large-cased)
 3. 🤗 [google/electra-large-discriminator](https://huggingface.co/google/electra-large-discriminator) (<b>aka</b> electra-large-discriminator)
 
-### Weights and Biases
-All experiments are logged to Weights and Biases and can be found at:
+### Fine-tuning Parameters
 
-https://wandb.ai/calgo-lab/redacted-text-utility/workspace
+The experiments were performed on a system with similar configuration as used for Medical Intent Classification downstream model fine-tuning.
 
-### System setup and fine-tuning parameters
-
-The experiments were performed on a system with following configuration:
-
-| Package     | Version     |
-|-------------|------------:|
-| datasets    | 4.0.0       |
-| flair       | 0.15.1      |
-| pyarrow     | 20.0.0      |
-| tokenizers  | 0.21.4      |
-| torch       | 2.7.1+cu128 |
-| transformers| 4.49.0      |
-
-and the following hyperparameters were used for fine-tuning all the three models:
+Following hyperparameters were used for fine-tuning all the three models:
 
 | HP              |       Value |
 |-----------------|------------:|
@@ -236,17 +283,22 @@ and the following hyperparameters were used for fine-tuning all the three models
 Fine-tuning script: [src/training_scripts/tc/fine_tune_text_classifier_with_transformer_model.py](src/training_scripts/tc/fine_tune_text_classifier_with_transformer_model.py)
 
 
-Evaluation Notebook: [notebooks/Evaluate_Text_Classifier_with_Redacted_Text.ipynb](notebooks/Evaluate_Text_Classifier_with_Redacted_Text.ipynb)
+Evaluation Notebook: [notebooks/evaluate_echr_tc.ipynb](notebooks/evaluate_echr_tc.ipynb)
 
 
-Metrics Directory: [metrics/echr/tc/](metrics/echr/tc/)
+Metrics Directory: [metrics/glnmario/ECHR/tc/](metrics/glnmario/ECHR/tc/)
+
+### Weights and Biases
+All experiments are logged to Weights and Biases and can be found at:
+
+https://wandb.ai/calgo-lab/redacted-text-utility/workspace
 
 ### Results
 
 <b>(*) Bold values in the tables below indicate decrease of ≥ 0.02 point in performance metric 
 compared to the No Redaction counterpart for that fold and model.</b>
 
-The following tables show fold-wise performance, for differently redacted same 
+The following tables show <b>fold-wise performance</b>, for differently redacted same 
 test samples, of fine-tuned text classifiers based on different transformers 
 models on the ECHR dataset for Binary Violation Prediction task:
 
@@ -286,7 +338,7 @@ models on the ECHR dataset for Binary Violation Prediction task:
 
 <br/>
 
-The following table shows average performance across all folds with standard deviation, for differently redacted same test samples, of fine-tuned text classifiers based on different transformers models on the ECHR dataset for Binary Violation Prediction task:
+The following table shows <b>average performance across all folds with standard deviation</b>, for differently redacted same test samples, of fine-tuned text classifiers based on different transformers models on the ECHR dataset for Binary Violation Prediction task:
 
 <b>Metric</b>: Macro F1-score
 
@@ -322,7 +374,7 @@ The following table shows average performance across all folds with standard dev
 
 <br/>
 
-The following tables show average performance across all folds with standard deviation, for differently redacted same test samples, of fine-tuned text classifiers based on different transformers models on the ECHR dataset for Binary Violation Prediction task, where test samples are segmented by the number of entities in them in the specific <b>entity count percentile range</b>:
+The following tables show <b>average performance across all folds with standard deviation</b>, for differently redacted same test samples, of fine-tuned text classifiers based on different transformers models on the ECHR dataset for Binary Violation Prediction task, where test samples are segmented by the number of entities in them in the specific <b>entity count percentile range</b>:
 
 <b>Model</b>: xlm-roberta-large <br>
 <b>Metric</b>: Macro F1-score

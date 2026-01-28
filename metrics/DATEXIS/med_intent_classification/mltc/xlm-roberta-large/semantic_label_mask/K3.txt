@@ -1,0 +1,33 @@
+
+Results:
+- F-score (micro) 0.8108
+- F-score (macro) 0.7532
+- Accuracy 0.6476
+
+By class:
+                       precision    recall  f1-score   support
+
+            Greetings     0.9524    0.8696    0.9091        46
+       Acute_Symptoms     0.8214    0.8519    0.8364        27
+     Personal_History     0.8421    0.6667    0.7442        24
+             Chitchat     0.8667    0.8125    0.8387        16
+           Discussion     0.6429    0.7500    0.6923        12
+     Acute_Assessment     0.8182    0.8182    0.8182        11
+           Medication     0.9000    0.9000    0.9000        10
+ Physical_Examination     0.7273    1.0000    0.8421         8
+             Referral     0.4444    1.0000    0.6154         4
+Radiology_Examination     0.8000    1.0000    0.8889         4
+   Diagnostic_Testing     0.7500    0.7500    0.7500         4
+         Reassessment     1.0000    0.4000    0.5714         5
+            Follow-up     0.6667    0.5000    0.5714         4
+         Drug_History     1.0000    1.0000    1.0000         3
+  Therapeutic_History     1.0000    0.3333    0.5000         3
+     Other_Treatments     0.3333    1.0000    0.5000         1
+        Other_Socials     1.0000    0.5000    0.6667         2
+      Lab_Examination     1.0000    0.5000    0.6667         2
+       Family_History     1.0000    1.0000    1.0000         1
+
+            micro avg     0.8197    0.8021    0.8108       187
+            macro avg     0.8192    0.7712    0.7532       187
+         weighted avg     0.8480    0.8021    0.8104       187
+          samples avg     0.8404    0.8309    0.8240       187
