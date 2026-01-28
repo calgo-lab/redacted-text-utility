@@ -21,7 +21,9 @@ intents/labels associated with that text.
 | and where would you say the tingling and numbness is ? | ["Acute Symptoms"] |
 | doctor: alright thanks good seeing you thanks for coming in to them | ["Chitchat"] |
 
-#### List of all intent labels:
+<br/>
+
+<b>List of all intent labels:</b>
 |||||
 |---|---|---|---|
 | 1. Acute Assessment | 6. Drug History | 11. Medication | 16. Radiology Examination |
@@ -110,7 +112,8 @@ without private entities in the train and dev sets. For the 5-fold
 cross-validation setup with rolling the train(60%)/dev(20%)/test(20%) raitios 
 are maintained.
 
-#### Fold-wise Statistics
+
+<b>Fold-wise Statistics</b>
 
 | Stat/Label           | Fold 1                                 | Fold 2                                   | Fold 3                                   | Fold 4                                   | Fold 5                                   |
 |-----------------------|------------------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|
@@ -184,6 +187,65 @@ strategies:
 | Random Masking         | 0.1902   | 0.3808    | 0.1413 | 0.8139 |
 | Generic Masking        | 0.1899   | 0.3806    | 0.1410 | 0.8129 |
 
+### Results
+
+<b>(*) Bold values in the tables below indicate difference of ≥ 0.05 point in 
+performance metric compared to the No Redaction counterpart for that fold and 
+model.
+</b>
+
+The following tables show <b>fold-wise performance</b>, for differently 
+redacted same test samples, of fine-tuned multi-label text classifiers based 
+on different transformers models:
+
+<b>Model</b>: xlm-roberta-large <br>
+<b>Metric</b>: Macro F1-score
+
+| Redaction Strategy     |   Fold 1 |   Fold 2 |   Fold 3 |   Fold 4 |   Fold 5 |
+|:-----------------------|---------:|---------:|---------:|---------:|---------:|
+| <i>No Redaction</i>    |   <i>0.6993</i> |   <i>0.6664</i> |   <i>0.6753</i> |   <i>0.6797</i> |   <i>0.7499</i> |
+| Semantic Label Masking |   <b>0.7516</b> |   0.6916 |   <b>0.7532</b> |   0.6581 |   0.7879 |
+| Random Masking         |   0.7388 |   0.6780  |   <b>0.7495</b> |   0.6650  |   0.7535 |
+| Generic Masking        |   <b>0.7503</b> |   0.6511 |   <b>0.7265</b> |   0.7110  |   0.7469 |
+
+<br/>
+
+<b>Model</b>: bert-large-cased <br>
+<b>Metric</b>: Macro F1-score
+
+| Redaction Strategy     |   Fold 1 |   Fold 2 |   Fold 3 |   Fold 4 |   Fold 5 |
+|:-----------------------|---------:|---------:|---------:|---------:|---------:|
+| <i>No Redaction</i>    |   <i>0.6807</i> |   <i>0.6532</i> |   <i>0.6488</i> |   <i>0.7143</i> |   <i>0.6977</i> |
+| Semantic Label Masking |   0.6896 |   0.6562 |   0.6540  |   0.7301 |   0.6987 |
+| Random Masking         |   0.6479 |   <b>0.5898</b> |   0.6448 |   0.7026 |   0.6993 |
+| Generic Masking        |   0.6917 |   0.6822 |   0.6717 |   0.6962 |   0.7015 |
+
+<br/>
+
+<b>Model</b>: pubmedbert-base-uncased <br>
+<b>Metric</b>: Macro F1-score
+
+| Redaction Strategy     |   Fold 1 |   Fold 2 |   Fold 3 |   Fold 4 |   Fold 5 |
+|:-----------------------|---------:|---------:|---------:|---------:|---------:|
+| <i>No Redaction</i>    |   <i>0.5661</i> |   <i>0.5984</i> |   <i>0.6451</i> |   <i>0.6603</i> |   <i>0.6110</i> |
+| Semantic Label Masking |   0.5758 |   0.5771 |   0.6915 |   0.6472 |   0.6404 |
+| Random Masking         |   0.5765 |   0.5872 |   0.6785 |   0.6400   |   0.6042 |
+| Generic Masking        |   0.5865 |   0.5870 |   <b>0.6967</b> |   0.6458 |   0.5912 |
+
+<br/>
+
+The following table shows <b>average performance across all folds with standard deviation</b>:
+
+<b>Metric</b>: Macro F1-score
+
+| Redaction Strategy     | xlm-roberta-large | bert-large-cased | pubmedbert-base-uncased |
+|:-----------------------|------------------:|-----------------:|------------------------:|
+| No Redaction           |       0.69 ± 0.03 |      0.68 ± 0.03 |             0.62 ± 0.03 |
+| Semantic Label Masking |       0.73 ± 0.05 |      0.69 ± 0.03 |             0.63 ± 0.04 |
+| Random Masking         |       0.72 ± 0.04 |      0.66 ± 0.04 |             0.62 ± 0.04 |
+| Generic Masking        |       0.72 ± 0.04 |      0.69 ± 0.01 |             0.62 ± 0.04 |
+
+
 ## European Court of Human Rights Dataset ([AUEB-NLP](https://huggingface.co/AUEB-NLP))
 
 Available at: https://huggingface.co/datasets/glnmario/ECHR
@@ -238,13 +300,11 @@ memory issues during model training. So the samples with tokens count between
 512 and 10x512 are selected for the experiments that ensures every text 
 contains a few private entities to redact while also avoiding memory issues.
 
-
-
 After sampling (selecting samples with tokens count between 512 and 10x512), the total number of samples are reduced to 8435 (~73.5%).
 
 In the next step, with theses samples a 5-fold cross validation split is performed - to create 5 separate train(60%)/dev(20%)/test(20%) sets with rolling.
 
-#### Fold-wise Statistics
+<b>Fold-wise Statistics</b>
 
 | Stat/Label           | Fold 1                                 | Fold 2                                   | Fold 3                                   | Fold 4                                   | Fold 5                                   |
 |-----------------------|------------------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|
@@ -300,7 +360,7 @@ compared to the No Redaction counterpart for that fold and model.</b>
 
 The following tables show <b>fold-wise performance</b>, for differently redacted same 
 test samples, of fine-tuned text classifiers based on different transformers 
-models on the ECHR dataset for Binary Violation Prediction task:
+models:
 
 
 <b>Model</b>: xlm-roberta-large <br>
@@ -338,7 +398,7 @@ models on the ECHR dataset for Binary Violation Prediction task:
 
 <br/>
 
-The following table shows <b>average performance across all folds with standard deviation</b>, for differently redacted same test samples, of fine-tuned text classifiers based on different transformers models on the ECHR dataset for Binary Violation Prediction task:
+The following table shows <b>average performance across all folds with standard deviation</b>:
 
 <b>Metric</b>: Macro F1-score
 
@@ -374,7 +434,7 @@ The following table shows <b>average performance across all folds with standard 
 
 <br/>
 
-The following tables show <b>average performance across all folds with standard deviation</b>, for differently redacted same test samples, of fine-tuned text classifiers based on different transformers models on the ECHR dataset for Binary Violation Prediction task, where test samples are segmented by the number of entities in them in the specific <b>entity count percentile range</b>:
+The following tables show <b>average performance across all folds with standard deviation</b> where test samples are segmented by the number of entities in them in the specific <b>entity count percentile range</b>:
 
 <b>Model</b>: xlm-roberta-large <br>
 <b>Metric</b>: Macro F1-score

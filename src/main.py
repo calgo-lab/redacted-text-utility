@@ -268,6 +268,67 @@ if __name__ == "__main__":
     logger.info(f"mic dataset k={k} fold stats:\n{json.dumps(fold_stats, indent=2)}")
     """
 
+    ### Generate fold-wise performance metrics table with Macro F1-score for 
+    ### medical intent multi-label classification task for a specific model
+    """
+    reports = ReportUtils.get_performance_metrics_with_hierarchy(
+        metrics_dir=project_root / "metrics" / "DATEXIS" / "med_intent_classification" / "mltc"
+    )
+    model_name = "microsoft--BiomedNLP-BiomedBERT-base-uncased-abstract"
+    label_or_stat = "macro avg"
+    metric_index = 2
+    redaction_strategy_order = ['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask']
+    model_data = reports[model_name]
+    table_data = dict()
+    for strategy in redaction_strategy_order:
+        fold_scores = list()
+        for fold_num in range(0, 5):
+            f1_score = model_data[strategy][label_or_stat][fold_num][metric_index]
+            fold_scores.append(f1_score)
+        table_data[strategy] = fold_scores
+    
+    df_index_name_mapping = {
+        'unredacted': 'No Redaction',
+        'semantic_label_mask': 'Semantic Label Masking',
+        'random_mask': 'Random Masking',
+        'generic_mask': 'Generic Masking'
+    }
+    df = pd.DataFrame(table_data, index=[f'Fold {i}' for i in range(1, 6)]).T
+    df.index.name = 'Redaction Strategy'
+    df = df.rename(index=df_index_name_mapping)
+    df.columns = ['Fold 1', 'Fold 2', 'Fold 3', 'Fold 4', 'Fold 5']
+    markdown_table = f"Model: {model_name}\nMetric: Macro F1-score\n\n"
+    markdown_table += df.to_markdown()
+    logger.info(f"\n{markdown_table}")
+    """
+
+    ### Generate performance metrics summary table (redaction strategies vs models)
+    """
+    table_report = ReportUtils.get_performance_metrics_summary_table(
+        metrics_dir=project_root / "metrics" / "DATEXIS" / "med_intent_classification" / "mltc",
+        row_dimension='redaction_strategy',
+        row_values_order=['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask'],
+        column_dimension='model_name',
+        column_values_order=['xlm-roberta-large', 'bert-large-cased', 'microsoft--BiomedNLP-BiomedBERT-base-uncased-abstract'],
+        class_or_stat='macro avg',
+        hierarchy=['model_name', 'redaction_strategy', 'metric_type'],
+        fixed_dimensions={'metric_type': 'f1-score'},
+        model_name_aliases={
+            'xlm-roberta-large': 'xlm-roberta-large',
+            'bert-large-cased': 'bert-large-cased',
+            'microsoft--BiomedNLP-BiomedBERT-base-uncased-abstract': 'pubmedbert-base-uncased'
+        },
+        redaction_strategy_aliases={
+            'unredacted': 'No Redaction',
+            'semantic_label_mask': 'Semantic Label Masking',
+            'random_mask': 'Random Masking',
+            'generic_mask': 'Generic Masking'
+        }
+    )
+    table_report.index.name = "Redaction Strategy"
+    logger.info(f"Performance metrics summary table:\n{table_report.to_markdown()}")
+    """
+
 
     ### ECHR Dataset Analysis
     """
@@ -496,7 +557,7 @@ if __name__ == "__main__":
     
     ### Generate performance metrics summary table (redaction strategies vs models)
     """
-    table_report = ReportUtils.get_echr_tc_performance_metrics_summary_table(
+    table_report = ReportUtils.get_performance_metrics_summary_table(
         metrics_dir=project_root / "metrics" / "glnmario" / "ECHR" / "tc",
         row_dimension='redaction_strategy',
         row_values_order=['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask'],
@@ -625,7 +686,7 @@ if __name__ == "__main__":
 
     ### Generate performance metrics summary table (redaction strategies vs percentiles)
     """
-    table_report = ReportUtils.get_echr_tc_performance_metrics_summary_table(
+    table_report = ReportUtils.get_performance_metrics_summary_table(
         metrics_dir=project_root / "metrics" / "glnmario" / "ECHR" / "tc",
         row_dimension='redaction_strategy',
         row_values_order=['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask'],
@@ -653,7 +714,7 @@ if __name__ == "__main__":
     """
     table_reports = list()
     for model_name in ['xlm-roberta-large', 'bert-large-cased', 'google--electra-large-discriminator']:
-        table_report = ReportUtils.get_echr_tc_performance_metrics_summary_table(
+        table_report = ReportUtils.get_performance_metrics_summary_table(
             metrics_dir=project_root / "metrics" / "glnmario" / "ECHR" / "tc",
             row_dimension='redaction_strategy',
             row_values_order=['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask'],
@@ -736,7 +797,7 @@ if __name__ == "__main__":
     redaction_strategy = 'generic_mask'
     redaction_strategy_alias = 'Generic Masking'
     
-    model_performance = ReportUtils.get_echr_tc_performance_metrics_summary_table(
+    model_performance = ReportUtils.get_performance_metrics_summary_table(
         metrics_dir=project_root / "metrics" / "glnmario" / "ECHR" / "tc",
         row_dimension='redaction_strategy',
         row_values_order=['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask'],

@@ -208,16 +208,16 @@ class ReportUtils:
         return final_result
     
     @staticmethod
-    def get_echr_tc_performance_metrics_summary_table(metrics_dir: Path,
-                                                      row_dimension: str,
-                                                      row_values_order: List[str],
-                                                      column_dimension: str,
-                                                      column_values_order: List[str],
-                                                      class_or_stat: str,
-                                                      hierarchy: List[str],
-                                                      fixed_dimensions: Dict[str, str],
-                                                      model_name_aliases: Dict[str, str],
-                                                      redaction_strategy_aliases: Dict[str, str]) -> DataFrame:
+    def get_performance_metrics_summary_table(metrics_dir: Path,
+                                              row_dimension: str,
+                                              row_values_order: List[str],
+                                              column_dimension: str,
+                                              column_values_order: List[str],
+                                              class_or_stat: str,
+                                              hierarchy: List[str],
+                                              fixed_dimensions: Dict[str, str],
+                                              model_name_aliases: Dict[str, str],
+                                              redaction_strategy_aliases: Dict[str, str]) -> DataFrame:
         """
         Prepare a summary table with flexible dimensions for performance metrics.
         
