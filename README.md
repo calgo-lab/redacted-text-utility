@@ -175,63 +175,66 @@ https://wandb.ai/calgo-lab/redacted-text-utility/workspace
 
 ### Results
 
-<b>(*) Bold values in the tables below indicate difference of ≥ 0.05 point in 
+<b>(*) Bold values in the tables below indicate difference of ≥ 0.02 point in 
 performance metric compared to the No Redaction counterpart for that fold and 
 model.
 </b>
+
+Due to class imbalance of intents types in the dataset, Micro F1-score is 
+considered as the main performance metric for evaluation.
 
 The following tables show <b>fold-wise performance</b>, for differently 
 redacted same test samples, of fine-tuned multi-label text classifiers based 
 on different transformers models:
 
 <b>Model</b>: xlm-roberta-large <br>
-<b>Metric</b>: Macro F1-score
+<b>Metric</b>: Micro F1-score
 
 | Redaction Strategy     |   Fold 1 |   Fold 2 |   Fold 3 |   Fold 4 |   Fold 5 |
 |:-----------------------|---------:|---------:|---------:|---------:|---------:|
-| <i>No Redaction</i>    |   <i>0.6993</i> |   <i>0.6664</i> |   <i>0.6753</i> |   <i>0.6797</i> |   <i>0.7499</i> |
-| Semantic Label Masking |   <b>0.7516</b> |   0.6916 |   <b>0.7532</b> |   0.6581 |   0.7879 |
-| Random Masking         |   0.7388 |   0.6780  |   <b>0.7495</b> |   0.6650  |   0.7535 |
-| Generic Masking        |   <b>0.7503</b> |   0.6511 |   <b>0.7265</b> |   0.7110  |   0.7469 |
+| <i>No Redaction</i>    |   <i>0.8301</i> |   <i>0.8368</i> |   <i>0.8138</i> |   <i>0.7935</i> |   <i>0.8519</i> |
+| Semantic Label Masking |   0.8232 |   0.8289 |   0.8108 |   <b>0.7575</b> |   0.8545 |
+| Random Masking         |   0.8343 |   0.8232 |   0.8160 |   <b>0.7717</b> |   0.8526 |
+| Generic Masking        |   0.8324 |   <b>0.8000</b> |   0.8128 |   0.7781 |   0.8440 |
 
 <br/>
 
 <b>Model</b>: bert-large-cased <br>
-<b>Metric</b>: Macro F1-score
+<b>Metric</b>: Micro F1-score
 
 | Redaction Strategy     |   Fold 1 |   Fold 2 |   Fold 3 |   Fold 4 |   Fold 5 |
 |:-----------------------|---------:|---------:|---------:|---------:|---------:|
-| <i>No Redaction</i>    |   <i>0.6807</i> |   <i>0.6532</i> |   <i>0.6488</i> |   <i>0.7143</i> |   <i>0.6977</i> |
-| Semantic Label Masking |   0.6896 |   0.6562 |   0.6540  |   0.7301 |   0.6987 |
-| Random Masking         |   0.6479 |   <b>0.5898</b> |   0.6448 |   0.7026 |   0.6993 |
-| Generic Masking        |   0.6917 |   0.6822 |   0.6717 |   0.6962 |   0.7015 |
+| <i>No Redaction</i>    |   <i>0.8110</i> |   <i>0.8355</i> |   <i>0.8138</i> |   <i>0.7913</i> |   <i>0.8155</i> |
+| Semantic Label Masking |   0.8274 |   0.8373 |   0.8043 |   <b>0.8144</b> |   0.8138 |
+| Random Masking         |   0.8076 |   0.8217 |   0.7989 |   0.7978 |   0.8192 |
+| Generic Masking        |   0.8167 |   0.8285 |   0.8011 |   0.7978 |   0.8209 |
 
 <br/>
 
 <b>Model</b>: pubmedbert-base-uncased <br>
-<b>Metric</b>: Macro F1-score
+<b>Metric</b>: Micro F1-score
 
 | Redaction Strategy     |   Fold 1 |   Fold 2 |   Fold 3 |   Fold 4 |   Fold 5 |
 |:-----------------------|---------:|---------:|---------:|---------:|---------:|
-| <i>No Redaction</i>    |   <i>0.5661</i> |   <i>0.5984</i> |   <i>0.6451</i> |   <i>0.6603</i> |   <i>0.6110</i> |
-| Semantic Label Masking |   0.5758 |   0.5771 |   0.6915 |   0.6472 |   0.6404 |
-| Random Masking         |   0.5765 |   0.5872 |   0.6785 |   0.6400   |   0.6042 |
-| Generic Masking        |   0.5865 |   0.5870 |   <b>0.6967</b> |   0.6458 |   0.5912 |
+| <i>No Redaction</i>    |   <i>0.7692</i> |   <i>0.7969</i> |   <i>0.7967</i> |   <i>0.7627</i> |   <i>0.7846</i> |
+| Semantic Label Masking |   0.7586 |   0.7885 |   0.8034 |   0.7433 |   0.7778 |
+| Random Masking         |   0.7824 |   0.8000 |   0.8033 |   <b>0.7421</b> |   0.7706 |
+| Generic Masking        |   <b>0.7932</b> |   0.8000 |   0.8011 |   <b>0.7399</b> |   0.7767 |
 
 <br/>
 
 The following table shows <b>average performance across all folds with standard deviation</b>:
 
-<b>Metric</b>: Macro F1-score
+<b>Metric</b>: Micro F1-score
 
 | Redaction Strategy     | xlm-roberta-large | bert-large-cased | pubmedbert-base-uncased |
 |:-----------------------|------------------:|-----------------:|------------------------:|
-| No Redaction           |       0.69 ± 0.03 |      0.68 ± 0.03 |             0.62 ± 0.03 |
-| Semantic Label Masking |       0.73 ± 0.05 |      0.69 ± 0.03 |             0.63 ± 0.04 |
-| Random Masking         |       0.72 ± 0.04 |      0.66 ± 0.04 |             0.62 ± 0.04 |
-| Generic Masking        |       0.72 ± 0.04 |      0.69 ± 0.01 |             0.62 ± 0.04 |
+| <i>No Redaction</i>    |     <i>0.8252 ± 0.02</i> |    <i>0.8134 ± 0.01</i> |           <i>0.7820 ± 0.01</i> |          |
+| Semantic Label Masking |     0.8150 ± 0.03 |    0.8194 ± 0.01 |           0.7743 ± 0.02 |
+| Random Masking         |     0.8196 ± 0.03 |    0.8090 ± 0.01 |           0.7797 ± 0.02 |
+| Generic Masking        |     0.8135 ± 0.02 |    0.8130 ± 0.01 |           0.7822 ± 0.02 |
 
-<img src="plots/DATEXIS/med_intent_classification/mltc/macro_f1_score_by_model_and_redaction_strategy.png" width="95%" />
+<img src="plots/DATEXIS/med_intent_classification/mltc/micro_f1_score_by_model_and_redaction_strategy.png" width="95%" />
 
 <br/>
 

@@ -183,8 +183,8 @@ class PlotUtils:
         ax.set_xticks(x_positions)
         ax.set_xticklabels(model_names)
 
-        ax.set_ylabel("Macro F1-score", labelpad=15)
-        ax.set_ylim(0.55, 0.80)
+        ax.set_ylabel("Micro F1-score", labelpad=15)
+        ax.set_ylim(0.73, 0.87)
 
         ax.yaxis.set_major_locator(MultipleLocator(0.05))
         ax.yaxis.set_minor_locator(MultipleLocator(0.01))
@@ -194,7 +194,7 @@ class PlotUtils:
         ax.tick_params(axis="y", which="minor", length=0)
 
         ax.set_xlim(-0.5, x - 0.5)
-        ax.set_title("Macro F1-score by Model and Redaction Strategy")
+        ax.set_title("Micro F1-score by Model and Redaction Strategy", pad=15)
 
         legend_elements = [
             Line2D(

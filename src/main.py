@@ -268,14 +268,14 @@ if __name__ == "__main__":
     logger.info(f"mic dataset k={k} fold stats:\n{json.dumps(fold_stats, indent=2)}")
     """
 
-    ### Generate fold-wise performance metrics table with Macro F1-score for 
+    ### Generate fold-wise performance metrics table with Micro F1-score for 
     ### medical intent multi-label classification task for a specific model
     """
     reports = ReportUtils.get_performance_metrics_with_hierarchy(
         metrics_dir=project_root / "metrics" / "DATEXIS" / "med_intent_classification" / "mltc"
     )
-    model_name = "microsoft--BiomedNLP-BiomedBERT-base-uncased-abstract"
-    label_or_stat = "macro avg"
+    model_name = "xlm-roberta-large"
+    label_or_stat = "micro avg"
     metric_index = 2
     redaction_strategy_order = ['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask']
     model_data = reports[model_name]
@@ -297,7 +297,7 @@ if __name__ == "__main__":
     df.index.name = 'Redaction Strategy'
     df = df.rename(index=df_index_name_mapping)
     df.columns = ['Fold 1', 'Fold 2', 'Fold 3', 'Fold 4', 'Fold 5']
-    markdown_table = f"Model: {model_name}\nMetric: Macro F1-score\n\n"
+    markdown_table = f"Model: {model_name}\nMetric: Micro F1-score\n\n"
     markdown_table += df.to_markdown()
     logger.info(f"\n{markdown_table}")
     """
@@ -310,7 +310,7 @@ if __name__ == "__main__":
         row_values_order=['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask'],
         column_dimension='model_name',
         column_values_order=['xlm-roberta-large', 'bert-large-cased', 'microsoft--BiomedNLP-BiomedBERT-base-uncased-abstract'],
-        class_or_stat='macro avg',
+        class_or_stat='micro avg',
         hierarchy=['model_name', 'redaction_strategy', 'metric_type'],
         fixed_dimensions={'metric_type': 'f1-score'},
         model_name_aliases={
@@ -329,7 +329,7 @@ if __name__ == "__main__":
     logger.info(f"Performance metrics summary table:\n{table_report.to_markdown()}")
     """
 
-    ### Plot macro F1-score by entity percentiles for all models and redaction strategies
+    ### Plot micro F1-score by entity percentiles for all models and redaction strategies
     """
     table_report = ReportUtils.get_performance_metrics_summary_table(
         metrics_dir=project_root / "metrics" / "DATEXIS" / "med_intent_classification" / "mltc",
@@ -337,7 +337,7 @@ if __name__ == "__main__":
         row_values_order=['unredacted', 'semantic_label_mask', 'random_mask', 'generic_mask'],
         column_dimension='model_name',
         column_values_order=['xlm-roberta-large', 'bert-large-cased', 'microsoft--BiomedNLP-BiomedBERT-base-uncased-abstract'],
-        class_or_stat='macro avg',
+        class_or_stat='micro avg',
         hierarchy=['model_name', 'redaction_strategy', 'metric_type'],
         fixed_dimensions={'metric_type': 'f1-score'},
         model_name_aliases={
@@ -392,7 +392,7 @@ if __name__ == "__main__":
     figure_dir.mkdir(parents=True, exist_ok=True)
 
     fig.savefig(
-        figure_dir / "macro_f1_score_by_model_and_redaction_strategy.png",
+        figure_dir / "micro_f1_score_by_model_and_redaction_strategy.png",
         dpi=300,
         bbox_inches="tight"
     )
