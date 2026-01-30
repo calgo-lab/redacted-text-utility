@@ -231,8 +231,13 @@ class EvaluationUtils:
             redacted_df = input_df.copy()
             test_filename = 'test_no_redaction.txt'
 
+        evaluate_out_file = f'{test_filename.replace(".txt", ".tsv")}'
+        
         if (data_dir_path / test_filename).exists():
             (data_dir_path / test_filename).unlink()
+        
+        if (data_dir_path / evaluate_out_file).exists():
+            (data_dir_path / evaluate_out_file).unlink()
         
         text_column_to_use = (
             f'text_redacted_with_{replacement_strategy}' 
@@ -273,13 +278,11 @@ class EvaluationUtils:
 
         print(f'Check first row of test corpus:\n{corpus.test[0]}')
 
-        evaluate_out_file = f'{test_filename.replace(".txt", ".tsv")}'
         result: Result = classifier.evaluate(corpus.test,
                                              mini_batch_size=1,
                                              gold_label_type=class_column,
                                              out_path=data_dir_path / evaluate_out_file)
         
         (data_dir_path / test_filename).unlink()
-        (data_dir_path / evaluate_out_file).unlink()
 
         return result
