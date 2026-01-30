@@ -273,10 +273,13 @@ class EvaluationUtils:
 
         print(f'Check first row of test corpus:\n{corpus.test[0]}')
 
+        evaluate_out_file = f'{test_filename.replace(".txt", ".tsv")}'
         result: Result = classifier.evaluate(corpus.test,
                                              mini_batch_size=1,
-                                             gold_label_type=class_column)
-
+                                             gold_label_type=class_column,
+                                             out_path=data_dir_path / evaluate_out_file)
+        
         (data_dir_path / test_filename).unlink()
+        (data_dir_path / evaluate_out_file).unlink()
 
         return result

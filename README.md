@@ -101,14 +101,13 @@ samples together and then at first divide them into two groups:
 1. samples with at least one private entity
 2. samples without any private entity
 
-Then we perform 5-fold cross-validation for both splits separately while for 
+Then we perform 5-fold cross-validation for both groups separately while for 
 train and dev sets we merge the two groups back together for each fold but for 
 test samples we only include samples with at least one private entity.
 
-This 
-ensures that the test samples for each fold have at least one private entity 
-to redact while also maintaining a balanced distribution of samples with and 
-without private entities in the train and dev sets. For the 5-fold 
+This ensures that the test samples for each fold have at least one private 
+entity to redact while also maintaining a balanced distribution of samples 
+with and without private entities in the train and dev sets. For the 5-fold 
 cross-validation setup with rolling the train(60%)/dev(20%)/test(20%) raitios 
 are maintained.
 
@@ -173,19 +172,6 @@ Metrics Directory: [metrics/DATEXIS/med_intent_classification/mltc/](metrics/DAT
 All experiments are logged to Weights and Biases and can be found at:
 
 https://wandb.ai/calgo-lab/redacted-text-utility/workspace
-
-### OLD Results
-
-The following table shows performance (macro-average) of the fine-tuned 
-PubMedBERT based text classifier on the test samples  for different redaction 
-strategies:
-
-| Redaction Strategy     | F1-score | Precision | Recall |  AUROC |
-|------------------------|---------:|----------:|-------:|-------:|
-| <i>No Redaction</i>    | <i>0.1928</i>   | <i>0.4049</i>    | <i>0.1434</i> | <i>0.8137</i> |
-| Semantic Label Masking | 0.1901   | 0.3817    | 0.1411 | 0.8127 |
-| Random Masking         | 0.1902   | 0.3808    | 0.1413 | 0.8139 |
-| Generic Masking        | 0.1899   | 0.3806    | 0.1410 | 0.8129 |
 
 ### Results
 
